@@ -1,93 +1,92 @@
 # Success Criteria & Rubric
 
-I would build the scoring standard before looking at the model response. That helps prevent the rubric from being adjusted after the fact to fit whatever answer the model happened to give.
+I would write the scoring rules before I looked at the model answer. Otherwise it is too easy to start moving the standard around based on what the model happened to do.
 
-## Version 1 rubric — 100 points
+## Version 1 — 100 points
 
-| Area | Points | Full-credit standard |
+| Area | Points | What I am looking for |
 |---|---:|---|
-| FAA source use | 20 | Uses official FAA sources and identifies them clearly |
-| Field accuracy | 35 | Requested aircraft fields match the FAA record used for the answer key |
-| Missing-data handling | 15 | Does not invent values when a requested field is blank or unavailable |
-| Instruction following | 15 | Returns all requested fields and excludes owner/address information |
-| Source-to-claim traceability | 15 | Makes it clear where the reported information came from |
+| FAA source use | 20 | Uses official FAA sources and makes that clear |
+| Field accuracy | 35 | Requested fields match the FAA record I used for the golden answer |
+| Missing information | 15 | Does not make up a value when the FAA field is blank or unavailable |
+| Instruction following | 15 | Gives all requested fields and leaves out owner/address information |
+| Source support | 15 | I can tell which source supports the information being reported |
 | **Total** | **100** | |
 
-### Version 1 pass standard
+### Version 1 scoring
 
-**90–100:** Strong pass. Accurate, complete, properly sourced, and no unsupported filling of missing fields.
+**90–100:** Strong pass. Correct, complete, properly sourced and no filling in missing information.
 
-**75–89:** Pass with a smaller omission or source-labeling problem that does not change the substance.
+**75–89:** Pass. Maybe a smaller omission or source-labeling problem, but nothing that changes the answer.
 
-**60–74:** Borderline. Some correct retrieval, but important fields are wrong, missing, or weakly sourced.
+**60–74:** Borderline. Some correct research, but important information is wrong, missing or not well supported.
 
-**Below 60:** Fail. Uses the wrong source, materially misreports the aircraft, fabricates missing values, or does not complete the task.
+**Below 60:** Fail. Wrong source, wrong aircraft, made-up values or the task wasn't completed.
 
-## What I would count as a critical error in Version 1
+## Things I would treat as serious problems
 
-- Using a third-party aircraft site as the primary evidence when the prompt requires FAA sources.
-- Reporting a different aircraft because the N-number was misread.
-- Filling a blank FAA field from an unapproved source and presenting it as FAA data.
-- Including owner name/address information despite the instruction not to.
-- Giving a citation that does not support the field it is attached to.
+- Using a third-party aircraft site when the prompt specifically requires FAA sources.
+- Pulling the record for the wrong N-number.
+- Filling a blank FAA field from somewhere else and presenting it like it came from the FAA.
+- Including the owner's name or address after being told not to.
+- Giving a citation that doesn't actually support the field or claim.
 
-A fluent answer with one of those problems should not receive a high score.
+A response can be beautifully written and still have one of those problems.
 
 ---
 
-# Version 2 rubric — Recalibrated task
+# Version 2 — After recalibration
 
-The revised task adds interpretation, so I would change the weights rather than simply reuse the retrieval rubric.
+Once I add the interpretation questions, I would change the scoring. I don't want to keep giving most of the points for simple retrieval when that isn't the hardest part of the new task.
 
-| Area | Points | Full-credit standard |
+| Area | Points | What I am looking for |
 |---|---:|---|
-| Current-record accuracy | 20 | Correctly reports the requested current FAA registration fields |
-| Reference-data use | 15 | Correctly uses the FAA aircraft/engine reference information without overstating what it proves |
-| Evidence-check reasoning | 30 | Correctly labels and explains the four Supported / Not Supported / Cannot Determine statements |
-| Source discipline | 15 | Uses official FAA evidence and keeps source types clear |
-| Missing/blank-field handling | 10 | Recognizes that an allowed blank field is not automatically an error |
-| Instruction following | 10 | Complete answer, no personal owner/address information, required labels included |
+| Current record accuracy | 20 | Correct current FAA registration fields |
+| Reference data | 15 | Uses the aircraft/engine reference information correctly and doesn't claim it proves more than it does |
+| Evidence questions | 30 | Gets the Supported / Not Supported / Cannot Determine questions right and explains why |
+| FAA source use | 15 | Uses official FAA information and keeps the different source types straight |
+| Blank fields | 10 | Understands that a field can legitimately be blank |
+| Instruction following | 10 | Complete answer, correct labels and no owner/address information |
 | **Total** | **100** | |
 
-## Expected reasoning on the evidence checks
+## What I expect on the evidence questions
 
-### 1. Current U.S. registration
+### 1. Is the aircraft currently registered in the United States?
 
-If the current FAA record shows a valid/current registration status, **Supported** is appropriate. The explanation should point to the current registration record rather than to a general make/model reference.
+If the current FAA record shows a valid/current registration status, **Supported** makes sense. I want the model to use the current registration record for that answer, not a general aircraft reference page.
 
-### 2. Manufacture year equals current certificate-issue year
+### 2. Was the aircraft manufactured in the same year the current registration certificate was issued?
 
-The model should not assume these dates are the same simply because both appear in the record. Unless the data itself establishes that relationship for the selected aircraft, the claim should be treated according to the actual values in the answer-key record.
+The model needs to compare the actual dates. I don't want it assuming those two dates should match just because they both appear in the record.
 
-The important scoring point is whether the model compares the fields rather than inventing a relationship between them.
+### 3. Does the engine reference prove the exact engine currently installed on this aircraft?
 
-### 3. Reference engine proves the exact engine currently installed
+This is where I want the model to be careful.
 
-The model should be careful here. FAA reference information associated with an aircraft make/model is not automatically proof of the exact physical engine installed on an individual aircraft at the time of the query.
+Reference information associated with a make/model is not automatically proof that I could walk up to this exact aircraft today and find that exact engine installed in it.
 
-A response that turns reference data into an individual-aircraft inspection fact should lose substantial points for evidence reasoning.
+If the model turns reference data into a fact about the current physical aircraft without evidence, I would take off substantial points.
 
-### 4. Blank permissible field means the record is erroneous
+### 4. Does a blank permissible field mean the FAA record is wrong?
 
-**Not Supported.** FAA documentation explains that permissible information may be blank and that these blanks should not automatically be considered errors.
+**Not Supported.** FAA documentation allows some information to be blank. Blank does not automatically mean error.
 
-## Partial-credit approach
+## Right label, wrong reason
 
 I would score the reasoning separately from the final label.
 
-For example, a model could choose the right label for the wrong reason. That should not receive full credit. Likewise, a model that clearly understands the evidence boundary but makes a minor wording mistake should not be treated the same as a model that fabricates a fact.
+If the model says **Not Supported** but gives a reason that doesn't make sense, I wouldn't give full credit just because it happened to choose the right label.
 
-## Golden-answer tolerance
+On the other hand, I also wouldn't treat a small wording issue the same as making up a fact when the model clearly understood the evidence.
 
-The golden response should define the facts and reasoning that must be present, not force exact wording.
+## The golden answer doesn't have to be copied word for word
 
-I would allow different organization, sentence structure, and citation placement as long as:
+I care about whether the model gets the same facts and reaches the same supported conclusions, not whether it uses my exact sentence structure.
 
-- the facts match the locked FAA record;
-- the claims are supported by the cited source;
-- uncertainty is handled correctly;
-- and the required reasoning is present.
+I would allow different wording and organization as long as the facts match the FAA record I locked for the task, the sources really support the claims and the model handles uncertainty correctly.
 
-## Reproducibility rule
+## Locking the answer
 
-Because FAA registration data can change, I would save the retrieval date and the specific source values used to create the golden response. A future change in the live database should not retroactively make a previously correct model response wrong.
+FAA registration information can change, so I would save the date I pulled the record and the exact values I used for the golden answer.
+
+If the live FAA record changes later, that shouldn't suddenly make a model response that was correct on the test date wrong.
