@@ -1,6 +1,6 @@
-# Case Study 3 — Reviewer QA & Calibration
+# Case Study 4 — Reviewer QA & Calibration
 
-> **Portfolio note:** This is a reconstructed example designed to show how I approach reviewer QA and calibration without using proprietary submissions or project guidelines.
+> **Portfolio note:** This is a reconstructed example showing how I approach reviewer QA and calibration without using proprietary submissions or project guidelines.
 
 ## The situation
 
@@ -19,28 +19,30 @@ The model writes:
 > - Include receipts for expenses over $25.
 > - Late reports will be denied unless your manager approves an exception.
 
-Two evaluators score that answer very differently.
+Two evaluators score the answer very differently.
 
-One sees the invented denial rule as a major issue. The other thinks it is a reasonable interpretation of the deadline and only takes off a small amount.
+One sees the made-up denial rule as a major issue. The other thinks it is a reasonable interpretation of the deadline and only takes off a little.
 
-## Why I chose this example
+## Why I used this example
 
-This is the kind of disagreement that matters in reviewer QA because it is not just two people preferring different wording.
+This is the kind of reviewer disagreement I think is worth calibrating because it isn't just two people preferring different wording.
 
-The real question is whether the evaluator is allowed to give the model credit for something that seems plausible but is not in the source.
+The real question is whether a reviewer can give the model credit for something that seems logical but isn't actually in the source.
 
-When I review another evaluator's work, I am not asking, "Did they give the same score I would have given?" I am asking whether they applied the project's standard correctly and consistently.
+When I review another evaluator's work, I am not looking for them to give the exact score I would give every time. I want to know whether they used the project's standard correctly and consistently.
 
 Sometimes the reviewer is wrong. Sometimes the guideline leaves too much room for interpretation. Sometimes both things are true.
 
 ## Files
 
-- [`evaluator-disagreement.md`](evaluator-disagreement.md) — the two scores and rationales.
-- [`calibration-analysis.md`](calibration-analysis.md) — how I would work through the disagreement.
-- [`revised-guideline.md`](revised-guideline.md) — the guideline change I would make so the same issue is easier to score next time.
+- [`evaluator-disagreement.md`](evaluator-disagreement.md) — the two scores and why the reviewers disagreed.
+- [`calibration-analysis.md`](calibration-analysis.md) — how I would work through it.
+- [`revised-guideline.md`](revised-guideline.md) — what I would change in the guideline so the same issue is easier to score next time.
 
-## What I want calibration to accomplish
+## What I want calibration to do
 
-I do not expect reviewers to become robots or produce identical rationales.
+I don't expect reviewers to become robots or write identical rationales.
 
-The goal is to make sure they are using the same evaluation boundary. If two reviewers disagree because one is adding outside assumptions, that is different from a legitimate judgment call inside the rubric.
+I just want them working from the same line.
+
+If two reviewers disagree because one of them is filling in information from their own experience, that is different from two reviewers making a legitimate judgment call inside the rubric.
