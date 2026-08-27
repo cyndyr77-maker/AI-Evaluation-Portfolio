@@ -1,57 +1,59 @@
 # Calibration Analysis
 
-## First, isolate the disagreement
+## First, what are we actually disagreeing about?
 
 Both reviewers agree that the model got two important things right: the 30-day deadline and the receipt requirement.
 
-The disagreement is entirely about this line:
+The disagreement is this line:
 
 > "Late reports will be denied unless your manager approves an exception."
 
 The source says exceptions need manager approval. It never says a late report is automatically denied.
 
-That makes the calibration question fairly narrow: **Can a reviewer treat automatic denial as supported because it seems like a reasonable consequence of a deadline?**
+So the question for me is pretty simple: **Can I treat automatic denial as supported just because it seems like a reasonable consequence of a deadline?**
 
-My answer would be no for this task.
+For this task, no.
 
-## Why I would score it as a major issue
+## Why I would call it a major issue
 
-I would look at three things:
+I would ask three things:
 
-1. Is the new information stated as fact?
-2. Does it change what the source says?
+1. Is the new information stated like a fact?
+2. Does it change what the source actually says?
 3. Could someone act differently because of it?
 
-Here, the answer to all three is yes.
+Here, all three are yes.
 
-This is not just a slightly loose paraphrase. An employee could read the summary and believe the company has an automatic-denial rule that may not exist.
+This isn't just loose wording. An employee could read that summary and walk away believing the company has an automatic-denial rule that may not exist.
 
-I would calibrate the answer at **2/5 — Major issue**.
+I would calibrate it at **2/5 — Major issue**.
 
-## What happened with Evaluator 2
+## What Evaluator 2 did
 
-Evaluator 2 used a real-world assumption to fill in a gap in the source.
+Evaluator 2 filled in the gap with a real-world assumption.
 
-The assumption may be reasonable. That does not make it part of the policy.
+Maybe that assumption is reasonable. It still isn't in the policy.
 
-For a source-grounded task, I would not give the model factuality credit based on what a reviewer thinks probably happens in most companies.
+For a source-grounded task, I wouldn't give the model factuality credit because the reviewer thinks that is probably what most companies would do.
 
-## Is the problem the reviewer or the guideline?
+## Is it the reviewer or the guideline?
 
 I think it is both, but mostly the reviewer.
 
-The instruction already says not to add information that is not stated, so Evaluator 2 has gone outside the evaluation boundary.
+The instruction already says not to add information that isn't stated, so Evaluator 2 went outside the boundary of the task.
 
-However, if several reviewers made the same mistake, I would also improve the guideline. "Unsupported information" can be too broad if people are not sure how to handle reasonable inferences.
+But if I saw several reviewers make the same mistake, then I would also look at the guideline. "Unsupported information" can sound clear until people start deciding that a reasonable inference is close enough.
 
-I would add language that specifically distinguishes ordinary paraphrasing from a new rule, penalty, consequence, eligibility condition, or other statement that could change user behavior.
+At that point I would make the guideline more specific about new rules, penalties, consequences, eligibility requirements or anything else that could change what the user thinks they need to do.
 
 ## Feedback I would give the reviewer
 
-> The score is too high under the source-grounding requirement. The model states that late reports will be denied, but the source only gives a 30-day submission deadline and says exceptions require manager approval. Automatic denial is a new policy consequence. Do not give factuality credit because that consequence seems plausible in a real organization.
+> The score is too high under the source-grounding requirement. The model says late reports will be denied, but the source only gives a 30-day deadline and says exceptions require manager approval. Automatic denial is a new policy consequence. Don't give the model credit for it because it seems plausible in a real organization.
 
-That feedback tells the reviewer exactly what was misapplied and what to do differently next time.
+That tells the reviewer what I think they got wrong and what I want them to do differently next time.
 
-## The broader calibration point
+## The bigger calibration point
 
-Domain knowledge is useful for recognizing why an error matters. It should not be used to create support for a claim that the source never made.
+Domain knowledge is useful. It helps me understand why an error matters.
+
+But I can't use my own experience to create evidence for the model that wasn't in the task.
