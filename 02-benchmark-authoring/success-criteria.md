@@ -1,109 +1,93 @@
-# Success Criteria
+# Success Criteria & Rubric
 
-I would score this task across five areas. I want the rubric to be specific enough that two reviewers can disagree about a borderline answer and still have something concrete to point to.
+I would build the scoring standard before looking at the model response. That helps prevent the rubric from being adjusted after the fact to fit whatever answer the model happened to give.
 
-| Area | Points | Full-credit answer |
+## Version 1 rubric — 100 points
+
+| Area | Points | Full-credit standard |
 |---|---:|---|
-| Recommendation | 20 | Recommends Vendor B as the strongest choice based on what is currently confirmed |
-| Evidence use | 25 | Does not turn missing information into facts or assumptions |
-| Operational reasoning | 20 | Recognizes that schedule coverage matters, not just the number of seats |
-| Instruction following | 20 | Gives one recommendation, two reasons, one tradeoff, and one item to confirm |
-| Uncertainty handling | 15 | Clearly separates what is known from what still needs to be verified |
+| FAA source use | 20 | Uses official FAA sources and identifies them clearly |
+| Field accuracy | 35 | Requested aircraft fields match the FAA record used for the answer key |
+| Missing-data handling | 15 | Does not invent values when a requested field is blank or unavailable |
+| Instruction following | 15 | Returns all requested fields and excludes owner/address information |
+| Source-to-claim traceability | 15 | Makes it clear where the reported information came from |
 | **Total** | **100** | |
 
-## Overall score ranges
+### Version 1 pass standard
 
-**90–100 — Strong pass:** The answer gets the recommendation right, stays inside the evidence, and handles the remaining uncertainty cleanly.
+**90–100:** Strong pass. Accurate, complete, properly sourced, and no unsupported filling of missing fields.
 
-**75–89 — Pass:** Useful answer, but there is a smaller assumption, missing element, or weakness in the explanation.
+**75–89:** Pass with a smaller omission or source-labeling problem that does not change the substance.
 
-**60–74 — Borderline:** Some good reasoning, but a key operating issue is underweighted or an unknown is treated too confidently.
+**60–74:** Borderline. Some correct retrieval, but important fields are wrong, missing, or weakly sourced.
 
-**Below 60 — Fail:** The decision materially depends on invented facts, the schedule requirements are ignored, or the recommendation is not supported by the information given.
+**Below 60:** Fail. Uses the wrong source, materially misreports the aircraft, fabricates missing values, or does not complete the task.
 
-## 1. Recommendation — 20 points
+## What I would count as a critical error in Version 1
 
-- **20:** Vendor B is selected as the best preliminary choice.
-- **12–18:** B is selected, but the explanation is weak or focuses on the wrong details.
-- **5–11:** A or C is selected, but the response still recognizes some of the important uncertainty.
-- **0–4:** No usable recommendation or the choice is essentially unsupported.
+- Using a third-party aircraft site as the primary evidence when the prompt requires FAA sources.
+- Reporting a different aircraft because the N-number was misread.
+- Filling a blank FAA field from an unapproved source and presenting it as FAA data.
+- Including owner name/address information despite the instruction not to.
+- Giving a citation that does not support the field it is attached to.
 
-I call B the best **preliminary** choice deliberately. The task does not contain every contract term, so I would not expect the model to act as though the decision is final.
+A fluent answer with one of those problems should not receive a high score.
 
-## 2. Evidence use — 25 points
+---
 
-This is the most heavily weighted category because it is the main behavior I am testing.
+# Version 2 rubric — Recalibrated task
 
-A strong response separates:
+The revised task adds interpretation, so I would change the weights rather than simply reuse the retrieval rubric.
 
-- what the proposals actually say;
-- what they do not say;
-- and what would need to be confirmed.
+| Area | Points | Full-credit standard |
+|---|---:|---|
+| Current-record accuracy | 20 | Correctly reports the requested current FAA registration fields |
+| Reference-data use | 15 | Correctly uses the FAA aircraft/engine reference information without overstating what it proves |
+| Evidence-check reasoning | 30 | Correctly labels and explains the four Supported / Not Supported / Cannot Determine statements |
+| Source discipline | 15 | Uses official FAA evidence and keeps source types clear |
+| Missing/blank-field handling | 10 | Recognizes that an allowed blank field is not automatically an error |
+| Instruction following | 10 | Complete answer, no personal owner/address information, required labels included |
+| **Total** | **100** | |
 
-Examples of unsupported claims would include:
+## Expected reasoning on the evidence checks
 
-- saying A will charge a standby fee;
-- saying C cannot handle two departure waves;
-- assuming any vendor will negotiate;
-- inventing travel time;
-- or assuming gratuity is included when it is not listed.
+### 1. Current U.S. registration
 
-If an unsupported assumption materially changes the recommendation, I would give **10 points or fewer** here.
+If the current FAA record shows a valid/current registration status, **Supported** is appropriate. The explanation should point to the current registration record rather than to a general make/model reference.
 
-## 3. Operational reasoning — 20 points
+### 2. Manufacture year equals current certificate-issue year
 
-All three vendors list four 56-passenger coaches, so all three have enough seats on paper for 220 people.
+The model should not assume these dates are the same simply because both appear in the record. Unless the data itself establishes that relationship for the selected aircraft, the claim should be treated according to the actual values in the answer-key record.
 
-The better answer notices that seating capacity does not settle the question. The operating plan also has to cover:
+The important scoring point is whether the model compares the fields rather than inventing a relationship between them.
 
-- two separate outbound waves;
-- the return period from 9:30 to 10:15 PM;
-- and enough certainty about how the coaches will be available to execute that schedule.
+### 3. Reference engine proves the exact engine currently installed
 
-The model does not need transportation-industry language. It just needs to recognize the practical issue.
+The model should be careful here. FAA reference information associated with an aircraft make/model is not automatically proof of the exact physical engine installed on an individual aircraft at the time of the query.
 
-## 4. Instruction following — 20 points
+A response that turns reference data into an individual-aircraft inspection fact should lose substantial points for evidence reasoning.
 
-- Recommendation — **4**
-- Reason 1 — **5**
-- Reason 2 — **5**
-- Tradeoff — **3**
-- Item to confirm — **3**
+### 4. Blank permissible field means the record is erroneous
 
-For B, price is the obvious tradeoff. It is $1,400 more than A and $800 more than C.
+**Not Supported.** FAA documentation explains that permissible information may be blank and that these blanks should not automatically be considered errors.
 
-There can be more than one valid confirmation item. I care more about whether the item is material and unresolved than whether it matches one exact reference answer.
+## Partial-credit approach
 
-## 5. Uncertainty handling — 15 points
+I would score the reasoning separately from the final label.
 
-**15:** Makes a useful preliminary recommendation and clearly identifies something that still needs confirmation.
+For example, a model could choose the right label for the wrong reason. That should not receive full credit. Likewise, a model that clearly understands the evidence boundary but makes a minor wording mistake should not be treated the same as a model that fabricates a fact.
 
-**8–14:** Generally careful, but not all of the important unknowns are handled cleanly.
+## Golden-answer tolerance
 
-**1–7:** Acknowledges missing information but still writes as though an unsupported assumption is probably true.
+The golden response should define the facts and reasoning that must be present, not force exact wording.
 
-**0:** Treats missing information as resolved.
+I would allow different organization, sentence structure, and citation placement as long as:
 
-## Failures I would specifically watch for
+- the facts match the locked FAA record;
+- the claims are supported by the cited source;
+- uncertainty is handled correctly;
+- and the required reasoning is present.
 
-**Fabrication:** The model states an unstated schedule, fee, travel time, or policy as fact.
+## Reproducibility rule
 
-**Turning absence into a negative fact:** The proposal does not confirm a service, so the model says the vendor cannot provide it.
-
-**Price-only decision:** A is chosen simply because it is cheapest, without dealing with the missing operating details.
-
-**Over-refusal:** The model refuses to recommend anyone because some information is missing, even though the prompt asks for a preliminary choice and gives enough information to make one.
-
-## Before I would use this as a real benchmark item
-
-I would test it against multiple model outputs and multiple reviewers.
-
-I would want to see that:
-
-- stronger models recognize the evidence boundary;
-- weaker models fail in more than one predictable way;
-- reviewers agree on what counts as a material unsupported assumption;
-- the answer does not require hidden transportation knowledge;
-- and the task is difficult for the reason I intended, not because the wording is confusing.
-
-If almost every model passes immediately, I would probably need to strengthen the task. If good models fail because they cannot tell what I am asking, I would simplify it.
+Because FAA registration data can change, I would save the retrieval date and the specific source values used to create the golden response. A future change in the live database should not retroactively make a previously correct model response wrong.
