@@ -1,27 +1,27 @@
 # Case Study 3 — Multimodal Model Stumping
 
-> **Portfolio note:** This is a reconstruction of the type of video model-stumping work I have done. The original source video and proprietary project materials are not included. Where needed, scene details have been simplified while keeping the evaluation method and reasoning challenge intact.
+> **Portfolio note:** This is a reconstruction of video model-stumping work I have done. I am not using the original video or proprietary project materials, and I filled in or simplified some scene details where needed.
 
 ## The assignment
 
-In video model-stumping work, I was not just evaluating whether a model could describe what was on screen. I also built questions designed to test whether it could follow people and information across an entire clip and combine visual and spoken evidence correctly.
+For this work I wasn't just watching a video and asking the model something obvious like what color someone's dress was.
 
-One video centered on a bride interacting with several people. It worked well for this type of task because answering the harder questions required more than identifying a dress, object, or single frame.
+I had to build questions that could actually stump the model but still had a clear, fair answer in the video.
 
-The questions could require the model to:
+One of the videos centered on a bride interacting with several people. It was a good one for this because the harder questions required the model to use more than one part of the video and, in some cases, both what it could **see** and what it could **hear**.
 
-- identify the correct person visually;
-- follow that person across different moments in the video;
-- connect dialogue to the correct speaker;
-- keep track of distinct people even when appearances or context changed;
-- use information from more than one part of the clip;
-- and make an inference only when the video actually supported it.
+I could test whether the model:
 
-## Building the stump
+- identified the right person;
+- knew who was speaking;
+- followed the same person through different parts of the video;
+- kept different people straight when they left and came back;
+- connected dialogue to what was happening visually;
+- and made an inference only when the video actually gave enough information to support it.
 
-A simple question such as "What is the bride wearing?" would mainly test visual recognition. I wanted the task to require actual cross-video reasoning.
+## Building the bride stump
 
-One of the stronger questions was reconstructed as:
+One of the questions was:
 
 > **What is the last item spoken by the bride in the video?**
 
@@ -29,83 +29,99 @@ The golden answer was:
 
 > **Death**
 
-That looks like a very short answer, but getting there requires several steps. The model has to identify which person is the bride, determine which spoken lines belong to her, continue tracking her through the clip, and then identify her final spoken item rather than simply returning the last word heard anywhere in the video.
+It is a very short answer, but the model has to do several things to get there.
 
-## Why I considered this a valid stump
+First it has to identify the bride. Then it has to know which dialogue belongs to her. Then it has to keep following her through the video and figure out which of **her** spoken items is last.
 
-When I build or evaluate a stump, I do not consider "the model got it wrong" enough by itself.
+If it just gives me the last word spoken by anybody in the video, it didn't answer the question.
 
-The answer needs to be determinable from the source, and the failure should tell me something useful about the model.
+That is what made it useful as a stump. The final answer was simple. Getting to it wasn't.
 
-For this question I would check:
+## Making sure the stump itself is fair
 
-1. **Visual grounding:** Is the bride clearly identifiable from the video?
-2. **Speaker attribution:** Can the relevant dialogue reasonably be assigned to her?
-3. **Temporal reasoning:** Is it possible to determine which of her spoken items occurs last?
-4. **Answer uniqueness:** Does the evidence support one defensible golden answer?
+The model getting something wrong doesn't automatically mean I wrote a good stump.
 
-Only after those checks would I treat a different model answer as a model failure rather than a bad question.
+Before I treat it as a model failure, I have to make sure **I can defend the question and the golden answer**.
 
-## A harder reasoning question
+For the bride question I would check:
 
-Another question from this style of work asked the model to determine **which man was implied to be married to the bride**.
+- Can I clearly identify who the bride is?
+- Can I reasonably tell which lines she is speaking?
+- Can I determine which of those lines comes last?
+- Is there one defensible answer, or could two answers reasonably be right?
 
-This is a different kind of challenge. The answer is not necessarily supplied by one visual feature or one explicit sentence. The model has to combine the relationship implied by the dialogue or scene with the people it sees on screen and ground that inference to the correct man.
+Those checks are basically visual grounding, speaker attribution and temporal reasoning, but I think about them more simply: **Did it find the right person, connect the right speech to her and follow the sequence correctly?**
 
-A model can fail even if it correctly recognizes every individual person. The error may be in connecting the relationship evidence to the right visual subject.
+If the video itself is ambiguous, that is a problem with my task. I shouldn't call it a model stump just because the model guessed differently than I did.
 
-That distinction is important when diagnosing the failure. "Wrong person" is the outcome; **cross-modal grounding or relationship inference** may be the actual capability that failed.
+## Another question from the bride video
 
-## Identity tracking across the clip
+I also used a question about **which man was implied to be married to the bride**.
 
-I also used questions that required counting or tracking **distinct people across the full video**, rather than counting whoever happened to be visible in one frame.
+That tests something different.
 
-This becomes harder when a person leaves and returns, changes appearance, or appears in a different context. A model can accidentally count the same person twice or treat two people as one.
+The model may recognize every person correctly and still get the answer wrong because it has to connect what is being said or implied in the scene to the correct man on screen.
 
-That type of question tests entity persistence over time rather than simple object counting.
+So if it picks the wrong person, I want to know why.
 
-A related video-QA task I worked on used the wording:
+Did it lose track of who was who? Did it understand the dialogue but attach it to the wrong person? Or did it make a relationship assumption that the video didn't actually support?
+
+That is the difference between just recording "wrong answer" and actually analyzing the failure.
+
+## Tracking people across the whole video
+
+I also worked with questions where the model had to count **distinct people across the full video**, not just count whoever was visible at one moment.
+
+For example:
 
 > **Over the full video, how many distinct people appear on screen at any point? Count each person only once, even if they leave and come back.**
 
-The ground truth in that task was **4 — 3 panelists and 1 interviewee**. The important part of the prompt was not the number itself; it was defining exactly what counted as a distinct person so the task could be scored consistently.
+The ground truth in one of those tasks was **4 — 3 panelists and 1 interviewee**.
 
-## What I analyze when the model misses
+The wording matters a lot here. If I only ask "How many people are in the video?" I have created my own ambiguity. Does that mean at one time? Across the whole video? Do I count someone twice if they leave and come back?
 
-For video stumps, I try to identify the point where the reasoning broke rather than stopping at correct/incorrect.
+By spelling out **distinct people across the full video**, I know what I am scoring and so does the model.
 
-A miss could come from:
+## When the model gets it wrong
 
-- **visual identification** — the model starts with the wrong person;
-- **speaker attribution** — it hears the dialogue but assigns it to someone else;
-- **temporal tracking** — it loses the person or event sequence later in the clip;
-- **entity persistence** — it double-counts someone who leaves and returns;
-- **cross-modal grounding** — it understands the spoken and visual information separately but connects them incorrectly;
-- **inference** — it makes a relationship or event inference that the video does not actually support;
-- **instruction following** — it answers a nearby question rather than the exact one asked.
+I try to figure out where it went wrong instead of stopping at the final answer.
 
-Those are different model behaviors, so I would not give all of them the same diagnostic label.
+With video, the problem could be that it:
 
-## Why prompt wording matters
+- started with the wrong person;
+- heard the dialogue but assigned it to somebody else;
+- lost track of someone later in the clip;
+- counted the same person twice after they left and came back;
+- understood the audio and visual information separately but connected them wrong;
+- made an inference the video didn't support;
+- or answered a slightly different question than the one I asked.
 
-Small wording changes can completely change what a video question measures.
+Those are different failures even if they all end with a wrong answer.
+
+## Why I paid so much attention to the prompt
+
+Small wording changes can make a video question either much better or much worse.
 
 For example:
 
 > "How many men are in the video?"
 
-is much less precise than:
+is much looser than:
 
 > "Across the full video, how many distinct men appear on screen? Count each man once even if he leaves and later reappears."
 
-The second version removes avoidable scoring ambiguity. If the model then counts incorrectly, I have much more confidence that I am testing identity tracking rather than testing whether the model interpreted my wording the same way I did.
+The second one gives me a much cleaner test.
 
-The same applies to the bride question. Asking for the **last item spoken by the bride** is intentionally different from asking for the last word spoken in the video.
+The same thing is happening with the bride question. **The last item spoken by the bride** is not the same question as **the last word spoken in the video**.
 
-## What this work required from me
+If I don't write that distinction clearly, I can't really blame the model for interpreting it differently.
 
-The task was not simply to come up with something the model could not answer.
+## What my part of the work was
 
-I had to understand the video closely enough to establish the ground truth, write a question with a defensible answer, anticipate alternative interpretations, test the model, and then determine whether a miss represented an actual model weakness or a problem with the prompt.
+Coming up with a question the model couldn't answer wasn't enough.
 
-That is the part of model stumping I find most important: a hard question is only useful when I can explain **what capability it tests and why the expected answer is fair**.
+I had to watch the video closely, establish the ground truth, write a prompt that had one defensible answer, think about other ways somebody could interpret it, test the model and then decide whether the miss was actually the model's fault.
+
+For me, a good stump isn't just hard.
+
+**It has to be hard for the right reason.**
