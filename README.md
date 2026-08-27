@@ -39,8 +39,8 @@ Two evaluators score the same output differently. I work through whether the dis
 ### [05 — Model Failure Analysis: Hallucination & Cheating](05-model-failure-analysis/)
 Three short failure patterns: a model inventing a fact, a citation that does not actually support the claim, and a model that technically reaches the right answer while cheating the capability the benchmark was supposed to test. I also show how I would change the success criteria when the rubric accidentally rewards the shortcut.
 
-### 06 — Multimodal Evaluation
-Planned: image and video evaluation covering prompt adherence, realism, artifacts, motion, object interaction, and temporal consistency.
+### [06 — Generative Video Evaluation & Iterative Prompt Testing](06-generative-video-evaluation/)
+An astronaut-folding-towels video example showing the full iteration loop: build the generation prompt, inspect the output, identify motion and object-interaction failures, rewrite the prompt, regenerate, and check whether the original problem was actually fixed. I also cover visual artifacts, anatomy, object persistence, lighting, reflections, and frame-to-frame consistency.
 
 ### 07 — Domain Expert Evaluation
 Planned: business operations and event-planning examples where a model response can sound completely reasonable while still creating an operational problem.
