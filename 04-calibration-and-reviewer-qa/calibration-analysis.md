@@ -1,80 +1,57 @@
 # Calibration Analysis
 
-## Step 1 — Identify the actual point of disagreement
+## First, isolate the disagreement
 
-Both evaluators agree that the model correctly captured two policy requirements:
+Both reviewers agree that the model got two important things right: the 30-day deadline and the receipt requirement.
 
-- reports are due within 30 days,
-- receipts are required at the stated threshold.
-
-The disagreement centers on one sentence:
+The disagreement is entirely about this line:
 
 > "Late reports will be denied unless your manager approves an exception."
 
-The source policy says manager approval is required for exceptions, but it never says late submissions are automatically denied.
+The source says exceptions need manager approval. It never says a late report is automatically denied.
 
-## Step 2 — Separate factual support from plausibility
+That makes the calibration question fairly narrow: **Can a reviewer treat automatic denial as supported because it seems like a reasonable consequence of a deadline?**
 
-Evaluator 2 treats automatic denial as a reasonable interpretation of a deadline.
+My answer would be no for this task.
 
-That may be plausible in some organizations, but plausibility is not the scoring standard. The model was explicitly instructed not to add information that is not stated.
+## Why I would score it as a major issue
 
-A reviewer should therefore ask:
+I would look at three things:
 
-**Can this consequence be traced to the source?**
+1. Is the new information stated as fact?
+2. Does it change what the source says?
+3. Could someone act differently because of it?
 
-The answer is no.
+Here, the answer to all three is yes.
 
-## Step 3 — Determine severity
+This is not just a slightly loose paraphrase. An employee could read the summary and believe the company has an automatic-denial rule that may not exist.
 
-Not every unsupported statement deserves the same penalty.
+I would calibrate the answer at **2/5 — Major issue**.
 
-A useful severity test is:
+## What happened with Evaluator 2
 
-1. Is the added information presented as fact?
-2. Could a user reasonably act on it?
-3. Does it change the meaning of the source?
+Evaluator 2 used a real-world assumption to fill in a gap in the source.
 
-Here, all three conditions are met.
+The assumption may be reasonable. That does not make it part of the policy.
 
-The model does not merely add harmless wording. It invents a consequence that could change employee behavior.
+For a source-grounded task, I would not give the model factuality credit based on what a reviewer thinks probably happens in most companies.
 
-## Calibrated score
+## Is the problem the reviewer or the guideline?
 
-**2/5 — Major issue**
+I think it is both, but mostly the reviewer.
 
-Evaluator 1 is closer to the intended standard.
+The instruction already says not to add information that is not stated, so Evaluator 2 has gone outside the evaluation boundary.
 
-Evaluator 2's score should be corrected because the rationale explicitly relies on an assumption outside the source.
+However, if several reviewers made the same mistake, I would also improve the guideline. "Unsupported information" can be too broad if people are not sure how to handle reasonable inferences.
 
-## Was this evaluator error or rubric ambiguity?
+I would add language that specifically distinguishes ordinary paraphrasing from a new rule, penalty, consequence, eligibility condition, or other statement that could change user behavior.
 
-**Both, but not equally.**
+## Feedback I would give the reviewer
 
-### Evaluator error
+> The score is too high under the source-grounding requirement. The model states that late reports will be denied, but the source only gives a 30-day submission deadline and says exceptions require manager approval. Automatic denial is a new policy consequence. Do not give factuality credit because that consequence seems plausible in a real organization.
 
-Evaluator 2 improperly rewarded an unsupported interpretation because it seemed reasonable.
+That feedback tells the reviewer exactly what was misapplied and what to do differently next time.
 
-### Guideline weakness
+## The broader calibration point
 
-If the original guideline only says "do not add unsupported information," some reviewers may still disagree over whether an implied consequence counts as unsupported.
-
-The guideline should therefore distinguish between:
-
-- harmless paraphrase,
-- reasonable inference,
-- and newly introduced policy consequences.
-
-That clarification reduces future inconsistency.
-
-## Reviewer QA outcome
-
-The goal of QA is not to tell Evaluator 2, "your opinion is wrong."
-
-The useful feedback is more specific:
-
-> The score is too high because the evaluation standard requires source-grounded content. The model introduces automatic denial as a policy consequence, but the source never states that consequence. Do not award factuality credit based on what seems likely in a real organization.
-
-## Calibration principle
-
-**Domain knowledge can help identify why a claim matters. It should not be used to create evidence that is missing from the source.**
+Domain knowledge is useful for recognizing why an error matters. It should not be used to create support for a claim that the source never made.
