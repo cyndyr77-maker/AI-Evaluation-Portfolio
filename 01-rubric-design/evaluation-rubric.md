@@ -1,173 +1,127 @@
 # Evaluation Rubric
 
-## Scoring approach
+I would score this on a **100-point scale**, but I would not treat all mistakes as equal. Getting the recommendation wrong because of a hard budget constraint is more important than being slightly wordy.
 
-The response is scored on a **100-point scale**. Criteria are evaluated independently so that strong writing does not compensate for a substantive decision error.
+## Score breakdown
 
-A score of **85–100** indicates a strong response that is decision-ready with only minor issues. **70–84** indicates a generally useful response with one or more material weaknesses. **50–69** indicates substantial problems that reduce reliability. **Below 50** indicates that the answer fails the task in a significant way.
-
-## Weighted criteria
-
-| Criterion | Weight | Full-credit standard |
+| Area | Points | What I am looking for |
 |---|---:|---|
-| Recommendation quality | 25 | Selects Proposal B and ties the choice directly to the stated operational priorities. |
-| Constraint handling | 20 | Correctly treats the $95,000 event budget, separate guestroom spend, parking requirement, and compact meeting-space requirement. |
-| Evidence discipline | 15 | Uses only information supplied in the prompt and clearly identifies unknowns rather than filling them in. |
-| Required response elements | 15 | Provides one recommendation, two supporting reasons, one meaningful tradeoff, and one verification item. |
-| Prioritization / business judgment | 15 | Gives appropriate weight to attendee flow, room adjacency, parking, and budget instead of overvaluing guestrooms or lowest price alone. |
-| Executive communication | 10 | Concise, clear, direct, and free of unnecessary detail or hedging. |
+| Recommendation | 25 | Proposal B, supported by the actual priorities in the prompt |
+| Constraint handling | 20 | Correct use of the budget, guestrooms, room layout, and parking requirements |
+| Evidence / assumptions | 15 | No invented facts used to make the decision |
+| Instruction following | 15 | One recommendation, two reasons, one tradeoff, and a useful item to confirm |
+| Business judgment | 15 | Gives the most weight to the factors that affect whether the event will work well |
+| Communication | 10 | Clear, concise, and appropriate for senior leadership |
 | **Total** | **100** | |
 
----
+## 1. Recommendation — 25 points
 
-## 1. Recommendation quality — 25 points
+**25:** Recommends Proposal B and connects the decision to the stated requirements.
 
-### 25 points
-Recommends **Proposal B** and explains why it is the strongest fit based on the information provided.
+**18–24:** Recommends B, but the reasoning is incomplete or focuses too much on a secondary issue.
 
-### 18–24 points
-Recommends Proposal B but the reasoning is incomplete, weakly prioritized, or partly dependent on secondary factors.
+**8–17:** Recommends A or C but shows some understanding of the important constraints.
 
-### 8–17 points
-Chooses another proposal but demonstrates some valid reasoning and acknowledges the strongest constraints. This is still a material decision error because the prompt provides sufficient information to identify B as the best fit.
+**0–7:** The recommendation is mostly unsupported, ignores major requirements, or depends on facts that were not provided.
 
-### 0–7 points
-Recommendation conflicts with the stated constraints, lacks reasoning, or is based primarily on invented information.
-
-**Critical note:** A polished recommendation for Proposal C does not earn high marks if it ignores that C is already $12,000 over the event budget before parking.
-
----
+A response does not get a high score just because the recommendation is explained confidently. Proposal C, for example, is already $12,000 over the event budget before parking. If the model recommends C without dealing with that, the decision has a major problem no matter how good the writing is.
 
 ## 2. Constraint handling — 20 points
 
-Award up to 5 points for each correctly handled constraint:
+I would give up to 5 points for each of these:
 
-1. **Event budget:** understands that the $95,000 cap applies to venue, F&B, AV, parking, and service charges.
-2. **Guestrooms:** does not count the separately paid 45-room block against the $95,000 event budget.
-3. **Meeting-space adjacency:** recognizes that a compact room cluster is an explicit operational priority.
-4. **Parking:** recognizes the need for convenient parking with in-and-out access and distinguishes known parking information from details still requiring confirmation.
+- **Event budget:** The model understands what the $95,000 has to cover.
+- **Guestrooms:** It does not incorrectly add the separately paid room block to the event budget.
+- **Meeting-space layout:** It recognizes that keeping the rooms together is an actual operating requirement, not just a preference.
+- **Parking:** It recognizes the need for convenient parking and in-and-out access, while separating what is confirmed from what still needs to be checked.
 
-### Partial credit
-If a constraint is mentioned but interpreted incorrectly, award **1–3 points** depending on severity. Merely repeating a constraint without using it in the recommendation does not receive full credit.
+Mentioning a constraint is not enough for full credit. The response has to use it correctly in the decision.
 
----
+## 3. Evidence and unsupported assumptions — 15 points
 
-## 3. Evidence discipline — 15 points
+**15:** Everything used to support the recommendation comes from the prompt. Unknowns stay unknown.
 
-### 15 points
-Makes no unsupported claims. Unknowns are framed as items to verify.
+**10–14:** One small assumption, but it does not change the recommendation.
 
-### 10–14 points
-Contains one low-impact assumption that does not materially affect the recommendation.
+**5–9:** A material assumption or several smaller unsupported claims.
 
-### 5–9 points
-Contains one material unsupported claim or several smaller assumptions.
+**0–4:** Invented pricing, amenities, availability, concessions, or other details are doing real work in the recommendation.
 
-### 0–4 points
-Relies on invented prices, amenities, availability, room capacities, concessions, or other facts to justify the recommendation.
-
-### Unsupported-claim rule
-Statements such as the following should be penalized unless supplied by the prompt:
+Examples I would flag:
 
 - "Proposal B includes upgraded AV."
 - "Proposal A charges $25 per car."
 - "Proposal C will probably waive the overage."
 - "The hotel can guarantee all 45 guestrooms."
 
-The evaluator should not reward an assumption simply because it is plausible.
+Any of those might be possible. That is not the same thing as being supported.
 
----
+## 4. Instruction following — 15 points
 
-## 4. Required response elements — 15 points
+- Clear recommendation — **3 points**
+- Two distinct reasons — **5 points**
+- Real tradeoff — **3 points**
+- Useful item to confirm before contracting — **4 points**
 
-Award points as follows:
+For B, the most obvious tradeoff is that it costs **$8,000 more than A**.
 
-- One clear recommendation — **3 points**
-- Two distinct supporting reasons — **5 points**
-- One meaningful tradeoff — **3 points**
-- One item to verify before contracting — **4 points**
+For the confirmation item, I would accept more than one answer. For example, confirming the final all-in event cost or confirming that complimentary parking includes re-entry would both be reasonable. I would not require the model to guess information the prompt never gives.
 
-### Definition of a meaningful tradeoff
-The tradeoff must identify a real disadvantage of the recommended option. For Proposal B, the clearest stated tradeoff is that it costs **$8,000 more than Proposal A**.
+## 5. Business judgment — 15 points
 
-A generic statement such as "Every venue has pros and cons" earns no credit.
+**15:** The response understands why attendee flow, room proximity, parking, and budget matter more here than getting the lowest price or the nicest guestrooms.
 
-### Definition of a useful verification item
-The item should address a material unresolved point, such as confirming that Proposal B's total event charges remain within the $95,000 cap after applicable service charges, or confirming that complimentary parking includes the required in-and-out access.
+**10–14:** Mostly right priorities, but the operational impact is not fully explained.
 
----
+**5–9:** Treats all factors as equally important or gives too much weight to a secondary issue.
 
-## 5. Prioritization / business judgment — 15 points
+**0–4:** The recommendation is driven by something that clearly conflicts with the user's stated priorities.
 
-### 15 points
-Correctly prioritizes operational fit over lowest price or guestroom appeal. Connects the compact meeting-space cluster and parking to the actual attendee-use case.
+This category is where domain knowledge helps. A room being technically available is not the same thing as the room arrangement working well for the event.
 
-### 10–14 points
-Identifies the right priorities but does not fully explain their operational importance.
+## 6. Communication — 10 points
 
-### 5–9 points
-Treats all factors as roughly equal or overweights a secondary factor.
+**10:** Direct, clear, concise, and easy to act on.
 
-### 0–4 points
-Bases the recommendation primarily on the lowest price, strongest guestrooms, aesthetics, or another factor that conflicts with the stated objectives.
+**7–9:** Good overall but somewhat wordy or repetitive.
 
----
+**4–6:** Understandable, but the main point is buried or poorly prioritized.
 
-## 6. Executive communication — 10 points
+**0–3:** Vague or difficult to follow.
 
-### 10 points
-Concise, specific, professional, and easy to act on.
+I score this separately because strong writing should get credit, even when the underlying decision is wrong. It just should not be allowed to hide the decision error.
 
-### 7–9 points
-Clear but slightly wordy, repetitive, or overformatted.
+## Score caps for major failures
 
-### 4–6 points
-Understandable but poorly prioritized or unnecessarily detailed.
+There are a few mistakes I would treat as serious enough to limit the overall score:
 
-### 0–3 points
-Vague, difficult to follow, or not appropriate for the requested executive audience.
-
----
-
-# Failure conditions
-
-The following failures should cap the overall score even if the prose is otherwise strong.
-
-| Failure | Score cap |
+| Major failure | Maximum overall score |
 |---|---:|
-| Recommends Proposal C without addressing that it exceeds the event budget | 55 |
-| Counts the separately paid guestrooms against the $95,000 event budget and uses that error to drive the decision | 60 |
-| Invents material pricing or amenities that determine the recommendation | 60 |
-| Provides no actual recommendation | 50 |
-| Recommends a venue based primarily on a criterion the prompt explicitly makes secondary | 65 |
+| Recommends C without addressing the fact that it is already over budget | 55 |
+| Treats the separately paid guestrooms as part of the $95,000 budget and bases the decision on that mistake | 60 |
+| Invents material pricing or amenities that drive the recommendation | 60 |
+| Does not make a recommendation at all | 50 |
+| Makes a secondary preference the main decision factor despite the prompt | 65 |
 
-These caps prevent surface-level writing quality from masking a fundamental evaluation failure.
+The reason for using caps is simple: otherwise a response can collect enough points for formatting, tone, and partial observations to look much stronger than it really is.
 
-# Missing-data handling
+## Missing information
 
-The prompt intentionally does not provide every contracting detail. The correct behavior is **not** to infer the missing information.
+The task intentionally leaves some contracting details out. I would not expect the model to fill them in.
 
-If a model needs an unknown fact to finalize the decision, it should identify that fact as a verification item. For example:
+A good response might say:
 
-> Confirm Proposal B's final all-in event total, including service charges, and confirm that complimentary parking permits same-day re-entry.
+> Confirm Proposal B's final all-in event total, including applicable service charges, and verify that the complimentary parking allows same-day re-entry.
 
-The response should not be penalized for failing to calculate an all-in total that cannot be calculated from the supplied information.
+That is better than pretending those answers are already known.
 
-# Ambiguity handling
+## Calibration note
 
-If an evaluator believes more than one verification item is reasonable, that should not create a scoring disagreement as long as the selected item is:
+One place reviewers could disagree is the difference between the **recommendation** score and the **business judgment** score.
 
-1. unresolved by the prompt,
-2. material to the decision, and
-3. something that can realistically be confirmed before contracting.
+I would keep them separate:
 
-Evaluators should score the **quality of the verification item**, not whether it matches one preferred wording.
+- Recommendation asks whether the model reached the right decision and supported it.
+- Business judgment asks whether it weighted the competing factors appropriately.
 
-# Calibration note
-
-The most likely scoring disagreement in this task is between **recommendation quality** and **prioritization/business judgment**. To avoid double-penalizing the same flaw:
-
-- Recommendation quality scores whether the model reached the correct decision and supported it.
-- Prioritization scores how well the model weighted the competing factors when reaching that decision.
-
-A wrong recommendation may lose points in both categories, but evaluators should not automatically assign zero in both. The reasoning must be assessed separately.
+A wrong recommendation can lose points in both places, but I would still look at the reasoning rather than automatically giving zero in both categories.
