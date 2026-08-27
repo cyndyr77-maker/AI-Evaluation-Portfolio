@@ -1,71 +1,62 @@
 # Revised Guideline
 
-## Problem identified during calibration
+## What needed clarification
 
-Reviewers interpreted the phrase **"unsupported information"** differently.
+The phrase **"do not add unsupported information"** was not enough by itself to keep the reviewers aligned.
 
-One reviewer treated a plausible consequence as acceptable even though it was not present in the source. That created inconsistent scoring.
+One reviewer treated an unstated consequence as acceptable because it seemed like a logical result of the policy. I would make the guideline more specific so reviewers have a clearer test next time.
 
-## Revised guideline language
+## Revised source-grounding rule
 
-### Source-grounding rule
+When the model is summarizing or transforming supplied source material, factual claims need to be traceable to that material unless the task specifically allows outside knowledge or inference.
 
-When a task requires the model to summarize or transform supplied source material, factual claims must remain traceable to that material unless the task explicitly permits outside knowledge or inference.
+Do not treat a statement as supported just because it is common, likely, or reasonable in a similar real-world situation.
 
-Do **not** treat a statement as supported simply because it is common, plausible, or likely in a similar real-world setting.
+## Pay particular attention to invented consequences
 
-### Consequence rule
+I would use a stronger penalty when the model adds a rule, penalty, entitlement, approval requirement, eligibility condition, deadline consequence, or similar information that could change what the user thinks they are required or allowed to do.
 
-Apply a stronger penalty when the model invents a rule, penalty, entitlement, approval, deadline consequence, eligibility condition, or other statement that could change what a user believes they are required or allowed to do.
+For example:
 
-### Inference rule
+**Source:** Expense reports must be submitted within 30 calendar days.
 
-A reasonable inference is not automatically equivalent to a supported fact.
+**Fine:** Submit expense reports within 30 days.
 
-If an inference is necessary to complete the task:
+**Not supported:** Expense reports submitted after 30 days will automatically be denied.
 
-- it should be clearly framed as an inference,
-- it must not contradict the source,
-- and it should not be presented as an explicit policy requirement unless the source supports that requirement.
+The second version adds an actual consequence that the source never states.
 
-## Severity anchors
+## How to handle inference
+
+An inference is not automatically wrong, but it should not quietly become a source fact.
+
+If the task allows inference, I would expect it to be:
+
+- clearly identified as an inference when necessary;
+- consistent with the source;
+- and not presented as an explicit policy requirement unless the source supports it.
+
+## Severity guide
 
 ### No issue
-
-The response paraphrases the source without changing meaning.
-
-**Example:**
-
-Source: "Expense reports must be submitted within 30 calendar days."
-
-Acceptable summary: "Submit expense reports within 30 days."
+The model paraphrases the source without changing its meaning.
 
 ### Minor issue
-
-The response adds low-impact wording that is not directly stated but does not materially change what the user would understand or do.
+The model adds low-impact wording that is not directly stated but does not materially change what the user would understand or do.
 
 ### Major issue
+The model adds unsupported information that changes an obligation, consequence, approval requirement, eligibility condition, financial implication, safety implication, or another decision-relevant part of the source.
 
-The response adds unsupported information that changes an obligation, consequence, approval requirement, eligibility condition, financial implication, safety implication, or other decision-relevant meaning.
+## Questions I would use when a case is borderline
 
-**Example:**
+1. **Where is the claim supported?** Can I point to it in the source?
+2. **Does it change the meaning?**
+3. **Could a user act differently because of it?**
+4. **Is the model presenting it as fact, or clearly labeling it as inference?**
 
-Unsupported summary: "Late expense reports will be automatically denied."
+Those questions give reviewers something more useful than deciding whether an addition simply "feels significant."
 
-If the source only states a submission deadline, automatic denial is a new policy consequence.
-
-## Reviewer decision test
-
-When unsure whether an addition is material, ask:
-
-1. **Traceability:** Where in the source is this supported?
-2. **Meaning:** Does the addition change the meaning of the source?
-3. **Actionability:** Could a user make a different decision because of it?
-4. **Presentation:** Is the model stating the addition as fact or clearly labeling it as inference?
-
-The more strongly the answer points toward changed user behavior without source support, the more severe the issue.
-
-## Feedback template for reviewer QA
+## Example QA feedback
 
 > **Issue:** The score does not fully apply the source-grounding requirement.
 >
@@ -73,15 +64,6 @@ The more strongly the answer points toward changed user behavior without source 
 >
 > **Why it matters:** The added claim changes `[policy meaning / user action / consequence]`.
 >
-> **Calibration:** Treat this as `[severity]` under the unsupported-information guideline. Do not credit the claim based on outside assumptions or general plausibility.
+> **Calibration:** Treat this as `[severity]`. Do not give the claim credit based on outside assumptions or general plausibility.
 
-## Why this revision improves calibration
-
-The revised language gives reviewers an observable test instead of asking them to decide whether an unsupported addition merely "feels significant."
-
-It also separates two concepts that are often blurred in evaluation work:
-
-- **plausibility**, and
-- **evidence support**.
-
-A statement can be highly plausible and still fail a source-grounded task.
+The goal of the revision is not to remove reviewer judgment. It is to make the boundary clearer so reviewers are exercising judgment against the same standard.
