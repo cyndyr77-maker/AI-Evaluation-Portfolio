@@ -1,32 +1,88 @@
-# Reference Response
+# Golden / Reference Response
 
-> I would recommend **Vendor B at this stage**. It is the only proposal that clearly confirms both outbound departure waves and the full 9:30–10:15 PM return window, so there is less uncertainty around whether the schedule can actually be executed. It also confirms that the coaches remain on-site and that gratuity is included.
->
-> The tradeoff is cost. B is $1,400 more than Vendor A and $800 more than Vendor C.
->
-> Before contracting, I would confirm the final all-in price and any cancellation, overtime, or change-order terms that are not included in the preliminary proposal.
+For a research benchmark like this, I would not write the golden answer from memory or from a general web search. I would research it independently from the same authoritative source family required by the task and lock the evidence used for scoring.
 
-## Why I would use this as the reference
+## How I would build the golden response
 
-I am not looking for models to copy this wording. I am using it to show what a full-credit answer needs to accomplish.
+### 1. Select the aircraft record
 
-The answer chooses B because B has the most complete confirmed operating plan. It does not claim that A is incapable of doing the job or that C cannot support two waves. Those things are not known from the proposals.
+Choose a public FAA aircraft record that gives enough information to make the task scoreable without requiring personal owner information.
 
-It also does not avoid the decision just because there are still contract details to confirm. The user asked for a recommendation **at this stage**, so the response makes one and then identifies what still needs to be checked.
+I would record:
 
-The cost comparison is supported directly by the numbers in the prompt:
+- N-number
+- serial number
+- manufacturer
+- model
+- manufacture year if available
+- registration status
+- certificate expiration date if available
+- aircraft reference code/data needed for the task
+- engine reference information needed for the task
+- date the FAA information was retrieved
 
-- B is **$1,400 more than A**.
-- B is **$800 more than C**.
+### 2. Verify the field definitions
 
-## Other answers could still get full credit
+I would check the FAA database documentation rather than assuming that a field name means what I think it means.
 
-I would not require the same final confirmation item.
+That matters in the recalibrated task because the model is being tested on whether it understands the limits of the data, not just whether it can repeat the values.
 
-For example, a response could reasonably say to confirm:
+### 3. Write the reference answer from the locked evidence
 
-- whether A can cover the required return schedule without another charge;
-- whether C can support both outbound waves;
-- or whether B has any additional fees not shown in the preliminary quote.
+The answer would follow this structure:
 
-The wording can vary. The important part is that the model does not pretend an unresolved detail has already been answered.
+## Part A — Current aircraft record
+
+| Field | Golden value |
+|---|---|
+| N-number | `[locked FAA value]` |
+| Manufacturer | `[locked FAA value]` |
+| Model | `[locked FAA value]` |
+| Serial number | `[locked FAA value]` |
+| Year manufactured | `[locked FAA value or Not available]` |
+| Registration status | `[locked FAA value]` |
+| Certificate expiration | `[locked FAA value or Not available]` |
+
+## Part B — FAA reference information
+
+Report the relevant aircraft and engine reference values exactly as supported by the FAA reference data used for the benchmark.
+
+I would be careful with the wording here. The reference file can support a statement about the reference data associated with a make/model. I would not automatically rewrite that as "this individual aircraft currently has this exact engine installed" unless the evidence used in the task actually proves that.
+
+## Part C — Evidence check
+
+### Statement 1: The aircraft is currently registered in the United States.
+
+**Expected label:** Based on the locked current registration record.
+
+The golden rationale should point directly to the registration status/current record.
+
+### Statement 2: The aircraft was manufactured in the same year its current registration certificate was issued.
+
+**Expected label:** Determined by comparing the actual locked values.
+
+The key is that the model must compare the fields. It should not assume registration date and manufacture year are related.
+
+### Statement 3: The engine reference proves the exact engine currently installed on this individual aircraft.
+
+**Expected label:** **Cannot Determine from the FAA data used** unless the selected evidence specifically establishes the installed engine.
+
+The reference information should not be stretched beyond what it supports.
+
+### Statement 4: A blank permissible field means the FAA record is erroneous.
+
+**Expected label:** **Not Supported.**
+
+FAA documentation explains that permissible fields may be blank and should not automatically be considered errors.
+
+## Why I am not putting a live N-number and current values into this portfolio file
+
+FAA registration information is updated regularly. A live aircraft record could change after the benchmark is published, which would make the visible golden answer look stale even though the evaluation process was correct when it was created.
+
+In an actual benchmark workflow I would lock the record and retrieval date internally. For the portfolio, the important part is showing how I build and validate the answer key rather than turning the page into a permanently maintained aircraft lookup.
+
+## What counts as an acceptable model answer
+
+The model does not need to match the golden response word for word.
+
+I would score whether it retrieved the same facts from the approved source, interpreted the fields correctly, reached the same evidence-based conclusions, and clearly identified anything the FAA data could not establish.
