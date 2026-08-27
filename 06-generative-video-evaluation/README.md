@@ -1,221 +1,130 @@
 # Case Study 6 — Generative Video Evaluation & Iterative Prompt Testing
 
-> **Portfolio note:** This is a reconstruction of the type of generative-video evaluation work I have done. The original project video and proprietary instructions are not included, but the workflow and failure patterns reflect the work itself.
+> **Portfolio note:** This is a reconstruction of generative-video work I have done. I am not using the original project video or proprietary instructions, but the process and the types of issues are real.
 
 ## The assignment
 
-This type of work was different from watching a finished video and deciding whether I liked it.
+For this work I wasn't handed a finished video and asked whether it was good or bad. I had to build the prompt, generate the video, watch it closely, figure out what wasn't working, change the prompt and try again.
 
-I had to **build the video prompt, generate the video, inspect the output closely, identify what was wrong, change the prompt, generate it again, and then evaluate the new version to see whether the changes actually fixed the problem.**
+Then I had to watch the new version and see if I actually fixed it.
 
-Sometimes they did. Sometimes the new video solved one issue and created another. Sometimes the same problem was still there in a slightly different form.
+Sometimes I did. Sometimes I fixed one thing and something else went wrong. And sometimes I made the prompt more specific and the model still did basically the same weird thing again.
 
-One example I worked on involved an **astronaut folding towels in a neon-lit laundromat at 2:00 AM**.
+One of my videos was an **astronaut folding towels in a neon-lit laundromat at 2:00 AM**.
 
-It sounds like a strange scene, but it was useful for evaluation because it combined a visually distinctive setting with a very ordinary physical action. Folding a towel requires the model to maintain the astronaut's hands, the towel, the counter, and the sequence of movement consistently over time.
+It sounds random, but it was actually a good video to work with because folding a towel is a simple action that people know how it should look. If the hands move strangely, the towel changes shape for no reason or the astronaut keeps picking it up and putting it down, you notice it.
 
-That gave me a lot more to evaluate than whether the video simply contained an astronaut and a laundromat.
+## First version
 
----
-
-## Step 1 — Build the video
-
-The starting prompt established the main scene:
+The basic idea was:
 
 > An astronaut folds towels in a neon-lit laundromat at 2:00 AM.
 
-The generated video captured the basic idea, but matching the nouns in the prompt was only the first check.
+The first video had the right subject and setting, so at a quick glance it followed the prompt.
 
-I watched the action itself.
+But when I watched the actual folding, it didn't look natural. The astronaut did an extra pickup/repositioning movement with the towel instead of just picking it up and folding it. It looked like the model wasn't sure what the hands and towel were supposed to do next.
 
-The astronaut's interaction with the towel was not natural. There was an unnecessary pickup/repositioning sequence instead of one continuous folding motion. The object handling felt generated rather than physically intentional.
+That was the issue I wanted to fix.
 
-That became the first failure I needed to address.
+## Going back to the prompt
 
-## Step 2 — Identify the actual problem
+I didn't want to just say "make the folding more realistic." That is too vague and doesn't tell the model what went wrong.
 
-I try not to write feedback like:
+I needed to be more specific about the action. The astronaut should pick the towel up once, keep control of it, fold it in one continuous motion and put it down when the fold is finished. I also wanted the hands to stay consistent and the towel not to jump around or reset while it was being handled.
 
-> The towel folding looks weird.
+I tightened the prompt to something along these lines:
 
-That does not give me much to work with on the next generation.
+> An astronaut stands at a laundromat counter at 2:00 AM and folds a towel in one continuous, natural motion. The astronaut picks up the towel once, keeps both hands in contact with it as needed, folds it deliberately and places the completed towel down once. No repeated pickups, dropped or reset objects, extra hand movements or sudden repositioning. Keep the camera stationary and the neon lighting and reflections consistent throughout the shot.
 
-I break the problem down more specifically:
+I wasn't adding detail just to make the prompt longer. The changes were there because of things I saw in the first video.
 
-- the astronaut should maintain continuous contact with the towel during the fold;
-- the hands should move deliberately rather than resetting position;
-- the towel should stay stable on the work surface except where the hands are actively moving it;
-- the action should progress naturally from pickup to fold rather than repeating or reversing part of the motion;
-- objects should not jump position between frames;
-- the astronaut's hands and fingers should remain anatomically consistent;
-- and the scene should not introduce camera or lighting changes that distract from the action.
+## Second version
 
-That analysis gives me something concrete to change in the prompt.
+The next video was better, but it still wasn't right.
 
----
+At around the two-second mark, the astronaut still did a redundant pickup/drop or repositioning movement with the towel.
 
-## Step 3 — Revise the prompt
+That is the kind of thing I would flag. The second version improved, but **better and fixed are not the same thing**.
 
-For the next generation, I tightened the motion and continuity requirements.
+If the problem I was trying to correct was unnatural object interaction and I can still see it, I don't mark it fixed because the rest of the video looks better.
 
-A reconstructed version of the revised direction would be:
+At that point I would go back again and make the action even more explicit, or change the way I described the start and end position of the towel so there was less room for the model to create that extra movement.
 
-> An astronaut stands at a laundromat counter at 2:00 AM and folds a towel in one continuous, natural motion. The astronaut picks up the towel once, keeps both hands in stable contact with it as needed, folds it deliberately, and places the completed towel down once. Avoid repeated pickups, dropped or reset objects, extra hand motions, or sudden repositioning. Keep the camera stationary. Maintain consistent neon lighting and reflections throughout the shot.
+## What else I was looking at
 
-The point of the revision was not just to add more words.
+I wasn't only watching the towel.
 
-Each added instruction responded to something I had actually seen in the first output.
+I would watch the video a few times because I usually notice different things on different passes. First I might watch the overall action. Then I would watch the astronaut's hands and the towel. Then I would look at the background, lighting and everything else going on in the frame.
 
----
+Some of the things I was looking for were:
 
-## Step 4 — Generate again and check whether it worked
+- Does the astronaut actually do what I asked?
+- Do the hands look normal throughout the video, or do fingers change, fuse together or disappear?
+- Does the towel stay the same towel, or does it suddenly change shape, jump, duplicate or move when nobody is touching it?
+- Does the folding motion make physical sense from beginning to end?
+- Does the astronaut make extra movements that a person wouldn't normally make?
+- Do parts of the suit, hands or towel merge into each other?
+- Do washing machines or other things in the background change shape?
+- Does text suddenly change or become unreadable?
+- Do the neon lights or reflections flicker or change for no reason?
+- Does the camera suddenly move when it is supposed to stay still?
+- Does anything appear or disappear for a few frames?
 
-The second generation was better in some ways, but the evaluation did not stop there.
+A single frame can look completely fine and the video can still have a problem. A hand might only distort for a second. A towel can look normal before and after a fold but do something physically impossible in between. Something in the background can change while I am paying attention to the main action.
 
-Around the two-second mark, the astronaut still performed a redundant pickup/drop or repositioning movement with the towel.
+That is why I don't only watch once.
 
-So although the revised prompt improved the intended action, it had **not fully solved the object-interaction problem**.
+## How I made changes
 
-I would not mark that as fixed just because the second video looked better overall.
+The process was basically:
 
-This is an important part of iterative evaluation: I compare the new output against the specific failure I was trying to correct.
+**Build it → watch it → find the problem → change the prompt → build it again → watch it again**
 
-If the failure is still present, even briefly, I record that.
+And sometimes do that again.
 
----
+I tried to make each prompt change connect to something I actually saw:
 
-## What I checked beyond prompt adherence
-
-A generated video can technically contain every requested element and still have a lot wrong with it.
-
-For this type of evaluation I look across several areas.
-
-### Prompt adherence
-
-- Is the subject correct?
-- Is the setting correct?
-- Is the requested action actually happening?
-- Are important scene details present?
-
-### Motion and physics
-
-- Does the body move naturally?
-- Do the hands interact with the object in a believable way?
-- Does the towel respond to movement consistently?
-- Does the action have a logical beginning, middle, and end?
-- Are there unnecessary repeated movements or resets?
-
-### Object persistence
-
-- Does the towel remain the same object throughout the shot?
-- Does its shape change only in ways the folding action would explain?
-- Does it jump, disappear, duplicate, or move without physical cause?
-
-### Human/anatomical artifacts
-
-Hands are an obvious place to look, but not the only one.
-
-I check for things such as:
-
-- changing finger count;
-- fused or distorted hands;
-- arms bending unnaturally;
-- body parts briefly merging with clothing or objects;
-- inconsistent proportions;
-- or contact between the hand and object that does not make physical sense.
-
-### Temporal consistency
-
-A frame can look fine by itself and still be part of a bad video.
-
-I watch for:
-
-- objects changing between frames;
-- clothing or suit details appearing and disappearing;
-- background machines changing shape;
-- reflections behaving inconsistently;
-- lighting flicker;
-- sudden camera movement;
-- and continuity breaks in the action.
-
-### Visual artifacts
-
-I also inspect the full frame rather than focusing only on the astronaut.
-
-Possible issues include:
-
-- warped objects;
-- text changing or becoming unreadable;
-- duplicated background elements;
-- unnatural reflections;
-- flickering neon;
-- edge distortion around moving subjects;
-- texture instability;
-- or objects briefly appearing where they should not be.
-
----
-
-## Why I do multiple passes
-
-The first viewing tells me whether the video basically works.
-
-The next passes are where I catch the problems.
-
-I may watch once for the main action, again for hands and object interaction, again for the background and lighting, and again for continuity across the full clip.
-
-That matters because focusing on the towel can make it easy to miss a washing machine changing shape in the background. Focusing on the astronaut's hands can make it easy to miss a lighting flicker or reflection that appears for only a few frames.
-
-For short generated videos, frame-to-frame consistency can matter as much as the overall composition.
-
----
-
-## The iteration loop
-
-The workflow was essentially:
-
-**Build → Generate → Watch → Identify the failure → Rewrite → Generate again → Rewatch → Compare → Repeat if needed**
-
-The important part is that the prompt changes come from the observed failure.
-
-For example:
-
-| What I see | What I change |
+| What I saw | What I changed |
 |---|---|
-| Towel is picked up multiple times | Specify one pickup and one placement |
-| Hands reset or jump position | Require continuous deliberate hand movement |
-| Towel shifts without being touched | Require stable object contact and positioning |
-| Camera movement makes the action harder to judge | Specify a stationary camera |
-| Neon lighting/reflections flicker | Require consistent lighting and reflections |
-| Extra movement appears after the fold | Define the end state of the action |
+| Towel picked up more than once | Say one pickup and one placement |
+| Hands jump or reset | Ask for one continuous hand movement |
+| Towel moves without being touched | Be more specific about hand contact and towel position |
+| Camera moves and makes the action harder to follow | Keep the camera stationary |
+| Neon lights or reflections flicker | Ask for consistent lighting and reflections |
+| Astronaut keeps moving after the towel is folded | Be clear about where the action ends |
 
-This keeps the iteration targeted instead of making the prompt longer at random.
+That worked better for me than just piling more description into the prompt and hoping the next generation would improve.
 
----
+## Visual artifacts mattered too
 
-## Knowing when the video still fails
+Even when the main action improved, I still had to look for visual artifacts.
 
-One thing I learned quickly is that **"better" and "fixed" are not the same thing**.
+Hands are an obvious one with generated video, but I also watched for warped objects, strange edges around the astronaut, duplicated items, background objects changing, textures moving, reflections that didn't match the scene and objects appearing for a few frames and then disappearing.
 
-If the first video has a major towel interaction problem and the second video only has a brief version of it, the second generation is an improvement. But if the evaluation criterion requires natural continuous object interaction, the issue is still present.
+I also paid attention to whether the astronaut stayed visually consistent. If part of the suit changes halfway through the clip or the proportions shift, that is still a problem even if the towel folding is correct.
 
-I try to describe both things accurately:
+This is where watching the whole frame matters. If I am only checking whether the astronaut folded the towel, I can miss a pretty obvious generation issue somewhere else.
 
-> The second generation improved overall motion continuity, but a redundant pickup/drop remains around the two-second mark, so the object-interaction issue is reduced but not resolved.
+## What I would write in the evaluation
 
-That is more useful than either saying the whole video failed or giving it a pass because it looked noticeably better.
+I tried to be specific about what improved and what didn't.
 
----
+For the second astronaut video, my feedback would be closer to:
 
-## What this shows about my evaluation work
+> The folding motion is more consistent than the first generation, but there is still an unnecessary pickup/drop around the two-second mark. The object interaction improved but the original issue is not fully resolved.
 
-This work combines prompt writing with visual QA.
+That tells someone what actually happened. Saying "the video is better" doesn't really help, and saying the whole video is bad ignores the improvement.
 
-I am not only asking whether the model followed the prompt. I am looking at **how the generated scene behaves over time**, identifying specific artifacts and motion failures, and then using those observations to make the next test more precise.
+## The part of this work I think matters most
 
-The process can take several iterations because generative video does not always fail the same way twice.
+Prompt writing and evaluation were connected. I wasn't writing a prompt, generating something and moving on.
 
-For me, the useful question after each generation is:
+I had to look closely enough at the video to figure out **why** it wasn't working and then decide what I could change in the prompt to try to correct it.
+
+And after I changed it, I still had to go back and check my own work.
+
+The question I kept coming back to was pretty simple:
 
 > **Did the change I made actually fix the thing I was trying to fix?**
 
-If the answer is no, I go back to the output, identify what is still happening, and adjust again rather than assuming a more detailed prompt automatically produced a better result.
+If it didn't, I went back again.
