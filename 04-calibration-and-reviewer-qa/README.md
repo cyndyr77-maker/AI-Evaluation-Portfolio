@@ -16,7 +16,7 @@ The source says:
 The model writes:
 
 > - Submit expense reports within 30 days.
-> - Include receipts for expenses over $25.
+> - Include receipts for expenses of $25 or more.
 > - Late reports will be denied unless your manager approves an exception.
 
 Two evaluators score the answer very differently.
