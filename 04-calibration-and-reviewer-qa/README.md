@@ -1,4 +1,4 @@
-# Case Study 3 — Reviewer QA & Calibration
+# Case Study 4 — Reviewer QA & Calibration
 
 > **Portfolio reconstruction:** This exercise was created to demonstrate reviewer-level QA and calibration methods used in professional AI evaluation work. It does not reproduce proprietary submissions, guidelines, or client content.
 
