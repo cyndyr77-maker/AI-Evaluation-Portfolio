@@ -1,212 +1,160 @@
 # Case Study 5 — Model Failure Analysis: Hallucination & Cheating
 
-> **Portfolio note:** These are reconstructed examples based on failure patterns I have evaluated. They do not reproduce proprietary prompts, outputs, or project data.
+> **Portfolio note:** These are reconstructed examples based on failure patterns I have evaluated. I am not using proprietary prompts, outputs or project data.
 
-## What I mean when I say the model "cheated"
+## What I mean when I say the model cheated
 
-I use that phrase pretty literally when I am evaluating.
+I use the word **cheated** a lot when I explain model failures.
 
-Sometimes a model gives the wrong answer. That is easy to spot. The more interesting failures are when the model produces something that **looks like it completed the task but found a shortcut around what the task was actually testing**.
+Sometimes the model is just wrong. Those are usually pretty easy to identify. The harder ones are when I look at the answer and think, *technically you did what I asked, but you cheated to get there.*
 
-I call that cheating.
+The model found a shortcut, guessed the right answer, used information in a way it wasn't supposed to or met the wording of the task without actually doing what I was trying to test.
 
-Depending on the project, it may also be described as shortcutting, specification gaming, or reward hacking. But when I am reviewing an output, my first reaction is usually simpler: *the model technically checked the box, but it cheated the task.*
+There are more technical terms for this, including shortcutting, specification gaming and reward hacking. I usually just call it cheating because that is what it looks like when I am evaluating it.
 
-This case shows three versions of that problem.
+Here are three examples of the kinds of failures I mean.
 
 ---
 
-## Example 1 — The model makes up a fact
+## Example 1 — The model makes something up
 
-### Task
+The model is given a short company policy and told to answer using only that policy.
 
-The model is given a short company policy and asked to answer an employee question using only that policy.
+The policy says:
 
-The source says:
-
-- employees may carry over up to five unused vacation days into the next calendar year;
+- employees can carry over up to five unused vacation days into the next calendar year;
 - manager approval is required for more than five consecutive vacation days;
 - unused days above the carryover limit expire at year-end.
 
 The employee asks:
 
-> Can I be paid for vacation days I do not use?
+> Can I be paid for vacation days I don't use?
 
-### Model answer
+The model answers:
 
 > No. The company does not pay out unused vacation time. You may carry over up to five days, and any remaining balance will expire at the end of the year.
 
-### What I would flag
+At first it sounds fine because part of the answer is right. The five-day carryover and year-end expiration are both in the policy.
 
-Most of the answer sounds grounded because the model correctly repeats the five-day carryover rule and year-end expiration.
+But the policy never says whether unused vacation can be paid out.
 
-But the source never says whether unused vacation can be paid out.
+The model basically turned **"I don't know from the information I have"** into **"no."**
 
-The model has converted **"the policy does not tell me"** into **"no."**
+I would flag that as a hallucinated fact and a major issue. It directly answers the employee's question with information the model doesn't have, and someone could make a financial decision based on it.
 
-That is a hallucinated policy fact.
+The better answer is simply that the supplied policy doesn't address payout and the employee would need to check the full policy or ask HR.
 
-### How I would classify it
-
-**Failure type:** Unsupported factual claim / hallucination  
-**Severity:** Major
-
-It is major because the invented information directly answers the employee's question and could affect a financial decision.
-
-A better response would say that the supplied policy does not address payout and that the employee would need to check the full policy or ask HR.
-
-This is also why I do not score factuality based on whether something *sounds like a normal company policy*. Plausible is not the same as supported.
+This is one of those cases where I don't care if the answer sounds like a normal company policy. It may be completely plausible. It still isn't in the source.
 
 ---
 
-## Example 2 — It has a citation, but the citation does not prove the claim
+## Example 2 — The model has a source, but the source doesn't actually prove what it said
 
-### Task
+This is another one I watch for because a citation can make an answer look much better than it is.
 
-The model is asked to research a factual question and support the answer with an authoritative source.
-
-Assume the question is:
+Say the model is asked:
 
 > According to the supplied government source, did the program begin in 2018, and how many organizations participated in its first year?
 
-The source confirms that the program was **announced in 2018**, but the first operational year was **2019**. It also says that **12 organizations participated in the 2019 launch**.
+The source says the program was **announced in 2018**, but the first operational year was **2019**. It also says **12 organizations participated in the 2019 launch**.
 
-### Model answer
+The model answers:
 
 > The program began in 2018 with 12 participating organizations. [Government source]
 
-### Why this can slip through
+It has a source. It even pulled two real facts from that source.
 
-The answer has a citation. The citation is authoritative. Both numbers appear somewhere in the source.
+But the sentence is still wrong.
 
-That can make the response look well supported if the reviewer only checks whether a source was provided.
+The 2018 date belongs to the announcement. The 12 organizations belong to the 2019 launch. The model took two true things and put them together in a way the source doesn't support.
 
-But the source does **not** support the combined claim.
+I would flag that as source misuse/evidence mismatch and a major issue.
 
-2018 is the announcement year. The 12 organizations belong to the 2019 operational launch.
-
-The model has taken two true details and connected them incorrectly.
-
-### How I would classify it
-
-**Failure type:** Source misuse / evidence mismatch  
-**Severity:** Major
-
-I would not label the whole thing a simple hallucination because the model did find real facts. The failure is in the relationship it created between them.
-
-For source-based evaluation, I check whether the citation supports the **specific sentence being claimed**, not just whether the cited page contains similar words, dates, or numbers.
+When I check citations, I don't just look to see whether the page contains the same date or number. I want to know whether the source actually supports **the claim the model made**.
 
 ---
 
-## Example 3 — The model cheats the task
+## Example 3 — The model gets the answer right but cheats
 
-This is the failure type I find more interesting.
+This is probably the more interesting one to me.
 
-### What the benchmark is supposed to test
+Say I build a benchmark to see whether the model can compare two records. It is supposed to check three specific fields in both records, figure out which record meets all three conditions and explain why.
 
-Suppose I am testing whether a model can compare information from two source records and determine which record satisfies a set of conditions.
+The correct answer is Record B.
 
-The task requires the model to:
-
-1. inspect both records;
-2. verify three specific fields;
-3. identify the qualifying record;
-4. and explain the decision using those fields.
-
-The expected answer is Record B.
-
-### The weak success criterion
-
-Imagine the rubric initially says:
+My first success criterion says:
 
 > Pass if the model identifies Record B and provides an explanation.
 
-That sounds reasonable until the model does this:
+Then the model says:
 
 > Record B is the correct answer because it is the record that best matches the requested conditions.
 
-Technically:
+So now I have a problem.
 
-- it chose B;
-- it provided an explanation;
-- and the answer is correct.
+It picked B. It gave me a sentence explaining its answer. Technically it met my success criterion.
 
-I would still say **the model cheated**.
+But I have no idea if it actually compared the three fields. It could have guessed. It could have noticed some other clue. It could have taken a shortcut I didn't intend.
 
-### Why I would not give it the pass
+I would call that **cheating the task**.
 
-The benchmark is supposed to test whether the model can verify and compare the three required fields.
+And in this case I can't only blame the model. My success criterion made it possible.
 
-The response gives me no evidence that it did that. It may have guessed, used a shortcut, relied on another clue in the data, or simply produced the expected label.
+## Fixing the task after the model cheats
 
-If I score only the final answer, I am not actually measuring the capability I intended to measure.
+I would change the success criterion to something more like:
 
-This is where evaluation becomes partly an evaluation of the **task design itself**.
+> The response must identify Record B and correctly state the three required comparison fields for both records before reaching the conclusion. A correct final answer without the required comparison does not receive full credit.
 
-If my rubric allows that response to pass, the rubric needs work.
+Now I can actually see whether the model did the thing I was testing.
 
-### How I would fix the success criteria
+Then I run it again.
 
-I would change the criterion from:
+If it gets the right answer and shows the field comparison, great. If it finds another shortcut, I look at what it did and decide whether I need to adjust the task again.
 
-> Pass if the model identifies Record B and provides an explanation.
-
-To something observable:
-
-> The response must identify Record B **and correctly state the value of each of the three required comparison fields for both records before reaching the conclusion**. A correct final selection without the required field-level comparison does not receive full credit.
-
-Now the model has to demonstrate the behavior I actually wanted to test.
-
-### What I would look for on the next run
-
-After revising the criterion, I would rerun the task and check whether the model:
-
-- retrieves the correct fields;
-- keeps the two records separate;
-- applies all three conditions;
-- reaches the correct answer;
-- and does not use an unintended shortcut.
-
-If it still finds a way around the task, I would inspect that behavior before simply making the prompt longer or more complicated.
-
-The goal is not to trap the model forever. The goal is to make sure a pass actually means something.
+I don't make the prompt harder just because I want the model to fail. I make changes when the current version isn't really testing what I thought it was testing.
 
 ---
 
-## Correct answer vs. valid pass
+## A right answer isn't always a pass
 
-This distinction comes up a lot in evaluation work.
+This came up enough in evaluation work that I stopped looking at correct/incorrect as the whole story.
 
-A model can have:
+A model can give me:
 
-- the **wrong answer for a good reason**;
-- the **right answer for the wrong reason**;
-- the **right answer with unsupported evidence**;
-- or the **right answer because it found a shortcut the benchmark did not intend to allow**.
+- a wrong answer;
+- a right answer for the wrong reason;
+- a right answer with made-up support;
+- a right answer with a citation that doesn't support it;
+- or a right answer because it found a way around the task.
 
-Those are not the same failure.
+Those aren't all the same thing.
 
-For example, if a task is testing multi-source reasoning and the model lands on the correct answer without demonstrating the required comparison, I do not automatically treat that as proof that the model performed the reasoning successfully.
+If I am testing multi-source reasoning and the model happens to land on the right final answer without doing the comparison, I don't automatically say it passed the reasoning test.
 
-That is one reason I prefer success criteria that describe **observable evidence of the target behavior**, rather than only describing the expected final answer.
+That is why I like success criteria that make the model show enough of the required behavior for me to evaluate it.
 
-## How I approach failure analysis
+## How I usually work through a failure
 
-When I find a problem, I usually work backward:
+I don't have one complicated formula for it. I normally start asking questions.
 
-1. **What exactly did the model claim or do?**
-2. **What evidence was actually available?**
-3. **Where did the answer stop being supported?**
-4. **Was the failure factual, instructional, reasoning-related, multimodal, or caused by a shortcut?**
-5. **Did the rubric catch it?**
-6. **If not, is the problem with the model, the rubric, the prompt, or some combination of them?**
+**What did the model actually say?**  
+**Where did that information come from?**  
+**Does the source really support it?**  
+**Did it follow what I asked, or did it find a shortcut?**  
+**Is the answer wrong, or is the reasoning/evidence wrong?**  
+**Did my rubric catch the problem?**
 
-That last question matters. If the model can repeatedly "cheat" and still earn a pass, I do not just keep blaming the model. I tighten the evaluation so that the score reflects the capability we actually care about.
+And if my rubric didn't catch it, I have to look at my own task too.
 
-## Why I include this in my portfolio
+If a model can keep cheating and still get a passing score, then I haven't written the evaluation tightly enough yet.
 
-A lot of evaluation work is easy to describe as checking whether an answer is right or wrong.
+## Why I wanted this in the portfolio
 
-In practice, the harder part is recognizing when **right-looking output is hiding the wrong behavior**.
+Checking whether a model is obviously wrong is part of the work, but it isn't the part I find hardest.
 
-That is where hallucination checks, source verification, rubric design, model stumping, and calibration start to overlap. The final answer matters, but so does whether the evidence supports it and whether the model actually did the thing the task was built to test.
+The harder part is when the answer looks right.
+
+That is when I have to slow down and figure out whether the facts are really supported, whether the citation proves what the model says, whether it actually followed the instruction and whether it did the reasoning I was trying to test.
+
+Sometimes the answer is wrong. Sometimes the model cheated. And sometimes the model shows me that **my task needs to be better**.
