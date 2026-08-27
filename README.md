@@ -1,63 +1,79 @@
 # AI Evaluation Portfolio
 
-I work in AI evaluation and training across text, image, audio, and video. My work has ranged from annotation and response evaluation to rubric development, benchmark/task authoring, golden responses, reviewer QA, calibration, and model-failure analysis.
+My AI work has progressed from annotation and response evaluation into reviewer QA, rubric-based evaluation, benchmark and task development, golden responses, calibration and model-failure analysis across text, image, audio and video.
 
-I built this portfolio to show more of the judgment behind that work. Most AI evaluation cannot be explained very well by saying that I "rated responses" or "reviewed annotations." What matters is how the standard was applied: what the model was asked to do, what counted as a real failure, how missing information was handled, and whether another reviewer could reasonably reach the same result.
+What I like most about evaluation work is figuring out **why** something failed. A response can sound completely reasonable and still be unsupported. A model can get the right answer for the wrong reason. A video can follow the prompt but break physically for a few frames. And sometimes the model isn't the problem at all — the rubric or task needs to be better.
 
-The examples here are reconstructed for the portfolio. They are based on the types of evaluation work I have done, but they do not reproduce proprietary prompts, client information, model outputs, or project guidelines.
+This portfolio shows the judgment behind that work rather than only listing the types of projects I have completed.
 
-## What I focus on when I evaluate a model
+The examples are reconstructed from the types of work I have done. They do not reproduce proprietary prompts, client information, model outputs or project guidelines.
 
-A response can be well written and still be wrong. It can be factually correct and still miss the instruction. An image can match a prompt and still have unrealistic details. A video can look good overall but contain one action that breaks the physical continuity of the scene.
+## If you only look at three examples
 
-Those are different problems, and I try to score them as different problems rather than letting one overall impression drive the evaluation.
-
-Across the case studies, I look at things such as:
-
-- whether the model actually followed the instruction;
-- whether claims are supported by the information available;
-- how the model handles ambiguity or missing data;
-- whether a rubric has clear enough anchors to be applied consistently;
-- whether a failure is minor or changes the usefulness of the answer;
-- where reviewer disagreement is legitimate versus a calibration problem;
-- and, in domain-specific work, whether an answer is only plausible-sounding or would actually work in practice.
-
-## Case studies
-
-### [01 — Rubric Design & Model Evaluation](01-rubric-design/)
-A business scenario with several competing constraints. I build the rubric first, then use it to score two different model responses. The point of the exercise is to show how I separate writing quality from the quality of the actual decision.
+If you are short on time, I would start here:
 
 ### [02 — Benchmark Authoring & Recalibration](02-benchmark-authoring/)
-A research benchmark using public FAA aircraft data. It follows the prompt → success criteria/rubric → golden response → model test → recalibration workflow, including what I do when the model gets the first version right and the task needs a stronger edge case.
-
-### [03 — Multimodal Model Stumping](03-model-stumping/)
-A reconstructed video-stumping example centered on a bride and several other people. The questions require visual identification, speaker attribution, temporal tracking, identity persistence, and cross-modal reasoning rather than simple frame-level recognition. I also explain how I determine whether a miss is a legitimate model failure or a problem with the question itself.
+I build a research benchmark using public FAA aircraft data, define the success criteria, create the golden response and test the model. When the model gets the first version right, I look at whether the task is actually testing enough and recalibrate it rather than changing the standard just to make the model fail.
 
 ### [04 — Calibration & Reviewer QA](04-calibration-and-reviewer-qa/)
-Two evaluators score the same output differently. I work through whether the disagreement comes from reviewer error, an unclear guideline, or both, and then revise the guideline.
-
-### [05 — Model Failure Analysis: Hallucination & Cheating](05-model-failure-analysis/)
-Three short failure patterns: a model inventing a fact, a citation that does not actually support the claim, and a model that technically reaches the right answer while cheating the capability the benchmark was supposed to test. I also show how I would change the success criteria when the rubric accidentally rewards the shortcut.
-
-### [06 — Generative Video Evaluation & Iterative Prompt Testing](06-generative-video-evaluation/)
-An astronaut-folding-towels video example showing the full iteration loop: build the generation prompt, inspect the output, identify motion and object-interaction failures, rewrite the prompt, regenerate, and check whether the original problem was actually fixed. I also cover visual artifacts, anatomy, object persistence, lighting, reflections, and frame-to-frame consistency.
-
-### [07 — Domain Expert Evaluation: Does the Answer Actually Work?](07-domain-expert-evaluation/)
-Examples of how I use real business experience when evaluating AI output. The main example is a formula-based spreadsheet that looks finished but breaks when the assumptions change. I also cover executive presentations, large-scale event feasibility, business sequencing and whether documents are actually usable as working materials.
+Two evaluators score the same model output differently. I work through whether the disagreement comes from reviewer error, an unclear guideline or both, then tighten the guideline so the same issue is easier to score consistently the next time.
 
 ### [08 — ATC Transcription & Research-Based Verification](08-atc-transcription-research/)
-ATC work that started as transcription but required a lot of research to get the transcription right. I show how I used call signs, waypoints, STARs, airport diagrams, FAA information, historic flight data and the surrounding audio to verify unclear sections instead of guessing. I also touch on how that work progressed into reviewing other ATC submissions.
+ATC work that looked like transcription from the outside but required a lot of research to get right. I used call signs, waypoints, STARs, airport diagrams, FAA information, historic flight data and the surrounding audio to verify unclear sections rather than guessing. The work later progressed into reviewing other ATC submissions as well.
 
-## Background I bring to the work
+## What I bring to evaluation
 
-In addition to AI evaluation experience, I have approximately 30 years of corporate/business experience, including executive support, operations, business communication, prioritization, cross-functional coordination and building the documents, spreadsheets and presentations people actually use to run the work.
+I have worked across several parts of the evaluation process, so I don't only look at whether the final answer is right or wrong.
 
-Sixteen of those years included event management, eventually working on large-scale and global events with multimillion-dollar budgets. That experience is useful in domain-expert evaluation because I can spot the difference between an answer that uses the right terminology and one that would actually hold up in a real business situation.
+I look at things like:
 
-My AI evaluation work has included LLM response evaluation, preference ranking, rubric-based scoring, task and benchmark development, reference responses, hallucination and factuality review, reviewer QA, calibration, transcription QA, research-based audio verification, and multimodal image/video evaluation.
+- Did the model actually follow the instruction?
+- Is the answer supported by the information it was given?
+- Did it get the right answer for the right reason, or did it find a shortcut?
+- How did it handle missing or ambiguous information?
+- Is the rubric clear enough that another reviewer could apply it consistently?
+- If reviewers disagree, is one reviewer wrong or is the guideline part of the problem?
+- For image and video work, does the output stay visually and physically consistent over time?
+- For business output, would the spreadsheet, presentation, document or recommendation actually work if somebody used it?
 
-## One rule I come back to often
+I also bring about 30 years of corporate/business experience. Sixteen of those years included event management, eventually working on large-scale and global events with multimillion-dollar budgets. I have spent years building and using the spreadsheets, presentations, documents, budgets, trackers and executive communications that businesses actually run on.
 
-If the evidence is not there, I do not fill it in for the model.
+That experience helps when an AI output is technically complete but doesn't make sense in practice.
 
-Something can be plausible and still be unsupported. That distinction comes up repeatedly in evaluation work, especially when a model gives a confident, polished answer that goes beyond what the prompt or source actually establishes.
+## All case studies
+
+### [01 — Rubric Design & Model Evaluation](01-rubric-design/)
+A business scenario with several competing constraints. I build the rubric first and then score two different model responses, including one that sounds polished but makes a weak recommendation based on unsupported assumptions.
+
+### [02 — Benchmark Authoring & Recalibration](02-benchmark-authoring/)
+A research benchmark using public FAA aircraft data. It follows the prompt → success criteria/rubric → golden response → model test → recalibration process and shows what I do when the model gets the first version right.
+
+### [03 — Multimodal Model Stumping](03-model-stumping/)
+A reconstructed video-stumping example centered on a bride and several other people. I build questions that require the model to identify the right person, connect speech to the correct speaker, follow people across the video and use both visual and audio information without making the question itself ambiguous.
+
+### [04 — Calibration & Reviewer QA](04-calibration-and-reviewer-qa/)
+Two evaluators score the same output differently. I work through the disagreement, decide where the scoring went wrong and revise the guideline where it leaves too much room for interpretation.
+
+### [05 — Model Failure Analysis: Hallucination & Cheating](05-model-failure-analysis/)
+Three failure patterns: a model making up a fact, using a citation that doesn't actually support its claim and getting the right final answer by cheating the capability the benchmark was supposed to test.
+
+### [06 — Generative Video Evaluation & Iterative Prompt Testing](06-generative-video-evaluation/)
+An astronaut-folding-towels video showing the full iteration loop: build the prompt, generate the video, find the motion/object-interaction problem, rewrite the prompt, generate it again and check whether the original problem was actually fixed. I also look for visual artifacts and frame-to-frame consistency.
+
+### [07 — Domain Expert Evaluation: Does the Answer Actually Work?](07-domain-expert-evaluation/)
+Examples of how I use real business experience when evaluating AI output. The main example is a formula-based spreadsheet that looks finished but breaks when the assumptions change. I also cover executive presentations, large-scale event feasibility, business sequencing and working documents.
+
+### [08 — ATC Transcription & Research-Based Verification](08-atc-transcription-research/)
+ATC transcription that required research into call signs, flight numbers, waypoints, STARs, airport diagrams, FAA information, historic flight data and aviation terminology. I also show how that work progressed into reviewing other submissions and verifying corrections rather than relying on what sounded plausible.
+
+## The range of work represented here
+
+Across these examples I cover LLM response evaluation, preference and rubric-based scoring, benchmark/task development, golden responses, hallucination and factuality review, reviewer QA, calibration, model stumping, generative-video evaluation, transcription QA, research-based audio verification and domain-expert evaluation of business artifacts.
+
+I don't expect every model output to be perfect, and I don't try to find a failure just because I am evaluating one.
+
+The standard I keep coming back to is simpler:
+
+> **If the evidence isn't there, I don't fill it in for the model.**
+
+Something can be plausible and still be unsupported. And if the model keeps passing because my task or rubric leaves a shortcut open, then I need to look at my own evaluation too.
