@@ -27,8 +27,8 @@ Across the case studies, I look at things such as:
 ### [01 — Rubric Design & Model Evaluation](01-rubric-design/)
 A business scenario with several competing constraints. I build the rubric first, then use it to score two different model responses. The point of the exercise is to show how I separate writing quality from the quality of the actual decision.
 
-### [02 — Benchmark Authoring](02-benchmark-authoring/)
-A benchmark-style task built around incomplete information. This section includes the task, success criteria, reference response, a model failure, and the changes I would make after testing the item.
+### [02 — Benchmark Authoring & Recalibration](02-benchmark-authoring/)
+A research benchmark using public FAA aircraft data. It follows the prompt → success criteria/rubric → golden response → model test → recalibration workflow, including what I do when the model gets the first version right and the task needs a stronger edge case.
 
 ### 03 — Model Stumping & Edge Cases
 Planned: a realistic scenario where the difficulty comes from conflicting constraints and assumptions rather than from making the prompt unnecessarily complicated.
