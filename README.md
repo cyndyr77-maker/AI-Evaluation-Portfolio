@@ -42,14 +42,14 @@ Three short failure patterns: a model inventing a fact, a citation that does not
 ### [06 — Generative Video Evaluation & Iterative Prompt Testing](06-generative-video-evaluation/)
 An astronaut-folding-towels video example showing the full iteration loop: build the generation prompt, inspect the output, identify motion and object-interaction failures, rewrite the prompt, regenerate, and check whether the original problem was actually fixed. I also cover visual artifacts, anatomy, object persistence, lighting, reflections, and frame-to-frame consistency.
 
-### 07 — Domain Expert Evaluation
-Planned: business operations and event-planning examples where a model response can sound completely reasonable while still creating an operational problem.
+### [07 — Domain Expert Evaluation: Does the Answer Actually Work?](07-domain-expert-evaluation/)
+Examples of how I use real business experience when evaluating AI output. The main example is a formula-based spreadsheet that looks finished but breaks when the assumptions change. I also cover executive presentations, large-scale event feasibility, business sequencing and whether documents are actually usable as working materials.
 
 ## Background I bring to the work
 
-In addition to AI evaluation experience, I have approximately 30 years of corporate/business experience, including executive support, operations, business communication, prioritization, and cross-functional coordination. I also have extensive practical event-planning knowledge.
+In addition to AI evaluation experience, I have approximately 30 years of corporate/business experience, including executive support, operations, business communication, prioritization, cross-functional coordination and building the documents, spreadsheets and presentations people actually use to run the work.
 
-That background is especially useful in domain-expert evaluation. It helps me spot the difference between an answer that uses the right terminology and one that would actually hold up in a real business situation.
+Sixteen of those years included event management, eventually working on large-scale and global events with multimillion-dollar budgets. That experience is useful in domain-expert evaluation because I can spot the difference between an answer that uses the right terminology and one that would actually hold up in a real business situation.
 
 My AI evaluation work has included LLM response evaluation, preference ranking, rubric-based scoring, task and benchmark development, reference responses, hallucination and factuality review, reviewer QA, calibration, transcription QA, and multimodal image/video evaluation.
 
