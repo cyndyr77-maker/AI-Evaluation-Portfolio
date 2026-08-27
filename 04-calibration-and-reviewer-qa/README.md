@@ -1,44 +1,46 @@
-# Case Study 4 — Reviewer QA & Calibration
+# Case Study 3 — Reviewer QA & Calibration
 
-> **Portfolio reconstruction:** This exercise was created to demonstrate reviewer-level QA and calibration methods used in professional AI evaluation work. It does not reproduce proprietary submissions, guidelines, or client content.
+> **Portfolio note:** This is a reconstructed example designed to show how I approach reviewer QA and calibration without using proprietary submissions or project guidelines.
 
-## What this case study demonstrates
+## The situation
 
-Reviewer QA is not simply checking whether another evaluator gave the same score I would have given.
+A model is asked to turn a short expense policy into three employee-facing bullets.
 
-The real question is:
+The source says:
 
-**Did the evaluator apply the standard correctly, consistently, and without introducing personal assumptions?**
+- expense reports are due within 30 calendar days;
+- receipts are required for individual expenses of $25 or more;
+- manager approval is required for exceptions;
+- and it does **not** say that late reports are automatically denied.
 
-This case study shows two evaluators scoring the same model output differently. The disagreement is then analyzed to determine whether the problem comes from evaluator error, rubric ambiguity, or both.
-
-## Scenario
-
-A model is asked to summarize a short business policy into three bullets for employees.
-
-The source policy states:
-
-- expense reports must be submitted within 30 calendar days,
-- receipts are required for individual expenses of $25 or more,
-- manager approval is required for exceptions,
-- the policy does not state that late submissions will automatically be denied.
-
-The model response says:
+The model writes:
 
 > - Submit expense reports within 30 days.
 > - Include receipts for expenses over $25.
 > - Late reports will be denied unless your manager approves an exception.
 
-Two evaluators disagree sharply on the score.
+Two evaluators score that answer very differently.
 
-The response is concise and mostly aligned with the policy, but it introduces a consequence — automatic denial — that the source never states. The calibration problem is deciding how severe that unsupported addition should be.
+One sees the invented denial rule as a major issue. The other thinks it is a reasonable interpretation of the deadline and only takes off a small amount.
 
-## Files in this case study
+## Why I chose this example
 
-- [`evaluator-disagreement.md`](evaluator-disagreement.md) — the model output and two conflicting reviewer scores.
-- [`calibration-analysis.md`](calibration-analysis.md) — diagnosis of the disagreement and calibrated outcome.
-- [`revised-guideline.md`](revised-guideline.md) — guideline language added to reduce future scoring inconsistency.
+This is the kind of disagreement that matters in reviewer QA because it is not just two people preferring different wording.
 
-## Reviewer-QA principle
+The real question is whether the evaluator is allowed to give the model credit for something that seems plausible but is not in the source.
 
-Calibration should not erase legitimate judgment. It should identify where evaluators are using different standards and make the evaluation boundary explicit enough that future decisions are more consistent.
+When I review another evaluator's work, I am not asking, "Did they give the same score I would have given?" I am asking whether they applied the project's standard correctly and consistently.
+
+Sometimes the reviewer is wrong. Sometimes the guideline leaves too much room for interpretation. Sometimes both things are true.
+
+## Files
+
+- [`evaluator-disagreement.md`](evaluator-disagreement.md) — the two scores and rationales.
+- [`calibration-analysis.md`](calibration-analysis.md) — how I would work through the disagreement.
+- [`revised-guideline.md`](revised-guideline.md) — the guideline change I would make so the same issue is easier to score next time.
+
+## What I want calibration to accomplish
+
+I do not expect reviewers to become robots or produce identical rationales.
+
+The goal is to make sure they are using the same evaluation boundary. If two reviewers disagree because one is adding outside assumptions, that is different from a legitimate judgment call inside the rubric.
