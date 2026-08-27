@@ -1,45 +1,57 @@
 # Case Study 2 — Benchmark Authoring & Recalibration
 
-> **Portfolio note:** This is a clean-room reconstruction of the type of benchmark-authoring work I have done. The workflow reflects my actual experience with prompt development, success criteria, rubrics, golden responses, model testing, and recalibration, but the task itself is newly created from public FAA information.
+> **Portfolio note:** I rebuilt this example from public FAA information so I could show the type of benchmark work I have done without using an original proprietary task.
 
-## The type of work I wanted to show here
+## The type of work this is based on
 
-Some of my benchmark work involved prompts where the answer could not be produced from the prompt alone. The model had to research public sources, pull the right records, and use those records correctly.
+Some of my prompt-building work involved questions where the answer wasn't sitting in the prompt. I had to build a task that required the model to go out to an approved source, find the right information and use it correctly.
 
-For this portfolio example I used FAA aircraft data because it recreates that workflow well without exposing any proprietary task.
+I also had to decide what success looked like before testing the model, build the rubric, research the answer myself and create the golden response.
 
-The FAA publishes a releasable Aircraft Registration Database that includes the registration master file and aircraft reference data. The downloadable data is refreshed daily, and the FAA also provides Aircraft Inquiry tools for public searches.
+Then I ran the model.
 
-## The benchmark workflow
+And sometimes it got the answer right.
 
-This case follows the same basic process I used in task authoring:
+That didn't mean I changed the answer until the model failed. It meant I had to look at the task again and decide whether it was actually hard enough to test what I wanted it to test.
 
-1. Define what the model is being tested on.
-2. Write the prompt.
-3. Build success criteria and a scoring rubric before judging the output.
-4. Research the answer independently and create a golden/reference response.
-5. Run the model against the task.
-6. Score the response against the rubric.
-7. If the model gets the task right too easily, do not automatically call the benchmark finished. Look at whether the task needs to be recalibrated to expose a harder but still fair capability.
-8. Test the revised version again.
+For this portfolio example I used public FAA aircraft data because it lets me recreate that same process without using any proprietary material.
 
-That last step is important. In this kind of work, a model passing a task was sometimes the beginning of another round of authoring rather than the end of the task.
+## The basic workflow
 
-## What this example tests
+This is how I approached this kind of task:
 
-The first version asks the model to research an aircraft using FAA records and report specific fields with source support.
+1. Decide what I actually want to test.
+2. Build the prompt.
+3. Write the success criteria and rubric.
+4. Research the answer independently and build the golden response.
+5. Run the model.
+6. Score what it gives me against the rubric I already wrote.
+7. If it passes, look at whether that was a meaningful pass or whether the task was too straightforward.
+8. If needed, change the task and test it again.
 
-That version is intentionally straightforward. A capable model should be able to pass it.
+That last part happened enough that I think it is important to show. Getting the first version right wasn't always the end of the work.
 
-The second version adds an evidence-reconciliation problem: the model has to distinguish current registration information from reference information about the aircraft make/model and explain what can and cannot be concluded from each source. The difficulty comes from using the data correctly, not from obscure aviation trivia.
+## Why I used FAA data
+
+The FAA publishes aircraft registration data and supporting reference information, and it also has public Aircraft Inquiry tools.
+
+For the first version, I would give the model an N-number and ask it to pull specific fields from official FAA sources. That gives me a good baseline: can it find the right record, return the right information and leave something blank when the FAA data doesn't provide it?
+
+If the model handles that easily, I make the second version harder in a way that still makes sense.
+
+Instead of only asking it to retrieve fields, I ask it to decide what those fields actually prove. For example, reference information about an aircraft make/model doesn't automatically prove what exact engine is physically installed on one individual aircraft right now.
+
+That is where the task moves from **finding information** to **using the information correctly**.
 
 ## Files
 
-- [`benchmark-task.md`](benchmark-task.md) — the initial prompt and the recalibrated version.
-- [`success-criteria.md`](success-criteria.md) — the rubric and the rules I would use to score research quality, source use, and unsupported conclusions.
-- [`reference-response.md`](reference-response.md) — the golden-response approach and what I would verify before locking the answer key.
-- [`failure-analysis.md`](failure-analysis.md) — how I would handle an initial model pass, why I would recalibrate, and what I would look for in the second test.
+- [`benchmark-task.md`](benchmark-task.md) — the first prompt and the harder version.
+- [`success-criteria.md`](success-criteria.md) — what I would score and what counts as a real problem.
+- [`reference-response.md`](reference-response.md) — how I would research and lock the golden answer.
+- [`failure-analysis.md`](failure-analysis.md) — what I would do when the first model passes and what I look for after recalibration.
 
-## Public data used for the reconstruction
+## One thing I intentionally left out
 
-This example is built around the FAA Aircraft Registry and its public data/documentation. I intentionally avoid owner names, street addresses, or other personal information because those details are not needed to demonstrate the evaluation method.
+FAA registration data can include owner information. I don't need names or addresses to show this work, so I left them out of the portfolio example.
+
+The point is the benchmark-building process, not the identity of an aircraft owner.
