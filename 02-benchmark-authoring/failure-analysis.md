@@ -1,4 +1,4 @@
-# Failure Analysis & Task Refinement
+# Model Test, Failure Analysis & Task Refinement
 
 ## Model test output
 
@@ -6,125 +6,79 @@
 >
 > The tradeoff is that gratuity is not listed, so there may be an extra charge. Before signing, I would confirm the gratuity amount.
 
-## Score
+## My score
 
-| Criterion | Score | Max |
+| Area | Score | Max |
 |---|---:|---:|
 | Recommendation | 7 | 20 |
 | Evidence use | 8 | 25 |
 | Operational reasoning | 8 | 20 |
-| Required elements | 17 | 20 |
+| Instruction following | 17 | 20 |
 | Uncertainty handling | 5 | 15 |
 | **Total** | **45** | **100** |
 
 **Result: Fail**
 
----
+## Where the answer goes wrong
 
-# What failed
+At first glance, this is not a terrible response. It checks capacity, compares the price, gives a tradeoff, and identifies something to confirm.
 
-The response looks practical on the surface. It mentions capacity, savings, a tradeoff, and a contracting question. The core problem is that it resolves missing information in Vendor A's favor without evidence.
-
-The sentence below contains the central failure:
+The problem is this sentence:
 
 > "it is reasonable to assume the same coaches can handle both departure waves and return for pickup later in the evening"
 
-The prompt does not confirm how Vendor A intends to operate the vehicles between the outbound and return portions of the event.
+That is exactly the information the proposal did **not** confirm.
 
-## Failure category 1 — Unsupported assumption
+The model has taken an unknown and resolved it in A's favor. It then uses that assumption to justify choosing the cheapest vendor.
 
-The model converts an unresolved operating detail into a favorable assumption and then uses that assumption to support its recommendation.
+I would treat that as a material failure because the assumption changes the recommendation.
 
-This is more serious than a minor factual embellishment because it changes the decision.
+### It also focuses on the wrong unknown
 
-## Failure category 2 — Price-only optimization
+The model notices that gratuity is not listed. That is worth confirming, but it is not the most important missing detail.
 
-The answer gives strong weight to the $1,400 savings but does not adequately account for the fact that Vendor B is the only proposal that explicitly confirms both outbound waves and the complete return-service window.
+The bigger question is whether A's service plan actually covers the two outbound waves and the return schedule the group needs.
 
-## Failure category 3 — Incomplete uncertainty handling
+This is a good example of why simply saying "I would confirm X" does not automatically mean the model handled uncertainty well. It has to identify the uncertainty that matters to the decision.
 
-The answer notices that gratuity is missing but overlooks the more consequential missing information: how Vendor A will support the required operating schedule.
+## Why this matters in practice
 
-This demonstrates why simply identifying **an** unknown is not enough. The model must identify the unknown that matters most to the task.
+I am not saying Vendor A cannot do the job. It may be able to.
 
----
+The issue is that the proposal, as written, does not establish that yet. A model should not erase that distinction just because the cheaper option looks attractive.
 
-# Why the failure matters
+## How I refined the task
 
-In a real operating environment, a cheaper proposal can become the riskier option if the service plan is not actually confirmed.
-
-The issue is not that Vendor A is necessarily unable to perform the work. The issue is that the model **does not know that it can** based on the evidence provided.
-
-That distinction is the capability this benchmark is intended to measure.
-
----
-
-# Task refinement after testing
-
-## Initial version
-
-An earlier draft of the benchmark asked only:
+An earlier version of the prompt was basically:
 
 > Which vendor is best and why?
 
-That version was too open-ended. A model could produce a generic comparison without demonstrating whether it understood the evidence boundary.
+That was too loose. A model could write a generic vendor comparison and I would have a harder time telling whether it actually understood the evidence issue.
 
-## Refined version
-
-The final prompt adds:
+I tightened the final version by adding:
 
 > Base the recommendation only on the information provided.
 
-It also requires:
+I also required a recommendation, two reasons, a tradeoff, and one item to confirm.
 
-- one recommendation,
-- two reasons,
-- one tradeoff,
-- and one item that still needs confirmation.
+Those requirements give me more observable behavior to score. In particular, the confirmation item shows whether the model understands what is still unresolved.
 
-These changes make the intended capability easier to observe and score.
+I did **not** add more vendors or pages of contract details just to make the prompt harder. More complexity is not automatically a better benchmark. I want the difficulty to come from the reasoning problem I am testing.
 
-## Why the task was not made more complicated
+## How I would validate it
 
-A benchmark should not become difficult through unnecessary detail. Adding more vendors, longer proposals, or irrelevant contract terms could increase cognitive load without improving measurement of the target behavior.
+Before using this in a real benchmark set, I would run it against several models and look at the range of failures.
 
-The refined task keeps the challenge focused on one question:
+Useful variation might include models that:
 
-**Can the model make a useful recommendation without converting missing facts into convenient assumptions?**
+- choose B for the right reasons;
+- choose A mainly because of price;
+- choose C and incorrectly treat its missing schedule confirmation as either harmless or disqualifying;
+- refuse to choose anyone because information is incomplete;
+- or invent standard transportation practices.
 
----
+I would also have more than one reviewer score the same outputs.
 
-# Validation considerations
+If reviewers keep disagreeing, I would look at whether they are applying different assumptions or whether my rubric is not clear enough. If nearly every model gives the same correct answer immediately, I would question whether the item is actually challenging enough to be useful.
 
-Before treating this as a production benchmark item, I would validate it through repeated model and reviewer testing.
-
-## Model validation
-
-Test multiple model outputs to determine whether the item produces meaningful variation such as:
-
-- selecting Vendor B for evidence-based reasons,
-- selecting Vendor A based on price,
-- selecting Vendor C while treating missing schedule confirmation incorrectly,
-- refusing to recommend any vendor because information is incomplete,
-- inventing common transportation practices.
-
-If nearly every model passes for the same obvious reason, the item may not be sufficiently discriminating.
-
-If strong models fail because the wording is confusing rather than because of the intended reasoning challenge, the task should be revised.
-
-## Reviewer validation
-
-Have multiple evaluators independently score the same outputs and compare disagreements.
-
-Key calibration questions:
-
-- Do reviewers agree on what counts as a material unsupported assumption?
-- Do they distinguish "not confirmed" from "not available"?
-- Do they apply the same standard when an assumption seems plausible?
-- Are the scoring anchors specific enough to prevent writing quality from dominating the evaluation?
-
-## Benchmark-authoring principle
-
-A task is not finished when the prompt is written.
-
-It is finished when the intended capability is observable, the failure modes are meaningful, the scoring standard is usable, and testing shows that the item measures what it was designed to measure.
+For me, that testing is part of benchmark authoring. The task is not finished just because the prompt and reference answer exist.
