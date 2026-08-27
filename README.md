@@ -33,29 +33,29 @@ The case studies in this repository are built to make those distinctions explici
 
 ## Portfolio Structure
 
-### 01 — Rubric Design & Model Evaluation
-A flagship case study showing a realistic evaluation problem, scoring rubric, explicit anchors, partial-credit logic, model responses, scoring, and failure analysis.
+### [01 — Rubric Design & Model Evaluation](01-rubric-design/)
+**Completed.** Flagship case study showing a realistic evaluation problem, weighted scoring rubric, explicit anchors, partial-credit logic, failure conditions, two model responses, scored analysis, and calibration guidance.
 
-### 02 — Benchmark Authoring
-A full evaluation lifecycle: prompt, success criteria, rubric, reference response, model test, failure analysis, and task refinement.
+### [02 — Benchmark Authoring](02-benchmark-authoring/)
+**Completed.** Full benchmark lifecycle: capability definition, task prompt, success criteria, reference response, model test, failure analysis, task refinement, and validation considerations.
 
 ### 03 — Model Stumping & Edge Cases
-A realistic challenge scenario designed to expose instruction-following, assumption, prioritization, and reasoning failures.
+**In development.** A realistic challenge scenario designed to expose instruction-following, assumption, prioritization, and reasoning failures.
 
-### 04 — Calibration & Reviewer QA
-A reviewer disagreement case showing how calibration identifies evaluator error, rubric ambiguity, and guideline gaps.
+### [04 — Calibration & Reviewer QA](04-calibration-and-reviewer-qa/)
+**Completed.** Reviewer disagreement case showing how calibration separates evaluator error from guideline ambiguity and turns disagreement into clearer scoring guidance.
 
 ### 05 — Model Failure Analysis
-Focused examples of hallucination, unsupported assumptions, incomplete reasoning, and instruction-following failure.
+**In development.** Focused examples of hallucination, unsupported assumptions, incomplete reasoning, and instruction-following failure.
 
 ### 06 — Multimodal Evaluation
-Image and video evaluation focused on prompt adherence, realism, visual consistency, temporal consistency, motion, and artifact identification.
+**In development.** Image and video evaluation focused on prompt adherence, realism, visual consistency, temporal consistency, motion, and artifact identification.
 
 ### 07 — Domain Expert Evaluation
-Business operations and event-planning cases demonstrating the difference between plausible-sounding output and operationally sound output.
+**In development.** Business operations and event-planning cases demonstrating the difference between plausible-sounding output and operationally sound output.
 
 ### About
-Background on evaluation methodology, professional experience, and the principles used throughout the portfolio.
+**In development.** Background on evaluation methodology, professional experience, and the principles used throughout the portfolio.
 
 ## Confidentiality
 
