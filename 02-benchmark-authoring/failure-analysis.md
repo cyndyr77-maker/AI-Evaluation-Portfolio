@@ -1,12 +1,16 @@
 # Model Testing & Recalibration
 
-This example is a little different from a standard failure analysis because the **first model response passes**.
+This example is a little different because **the first model response passes**.
 
-That is intentional. It reflects an important part of benchmark authoring: sometimes the model gets the task right, and the next question is whether the task is still doing enough useful work.
+I wanted to include that because it happened in this type of work. Sometimes I built the prompt, success criteria, rubric and golden response, ran the model and it got it right.
 
-## Test 1 — Model passes
+There is nothing wrong with that. If it meets the criteria, it passes.
 
-Assume the model uses the FAA Aircraft Registry, returns the correct N-number, manufacturer, model, serial number, manufacture year, registration status, and expiration field, identifies the FAA source, leaves an unavailable field blank rather than inventing it, and does not include owner information.
+The next question is whether the task is really testing enough.
+
+## Test 1 — The model passes
+
+Say the model uses the FAA Aircraft Registry, pulls the correct N-number, manufacturer, model, serial number, manufacture year, registration status and expiration information. It identifies the FAA source, leaves an unavailable field blank instead of making something up and doesn't include owner information.
 
 ### Example score
 
@@ -14,87 +18,93 @@ Assume the model uses the FAA Aircraft Registry, returns the correct N-number, m
 |---|---:|---:|
 | FAA source use | 20 | 20 |
 | Field accuracy | 35 | 35 |
-| Missing-data handling | 15 | 15 |
+| Missing information | 15 | 15 |
 | Instruction following | 15 | 15 |
-| Source-to-claim traceability | 15 | 15 |
+| Source support | 15 | 15 |
 | **Total** | **100** | **100** |
 
 **Result: Pass**
 
-There is nothing to "find wrong" with the response just because I am building a benchmark. If it meets the criteria, it passes.
+I am not going to hunt for something to mark wrong just because I am supposed to be testing the model. It did the task.
 
 ## What I would do next
 
-I would look at the purpose of the task and the results across multiple model runs.
+One pass doesn't automatically mean the task is too easy.
 
-If one model passes once, that does not automatically mean the task is too easy.
+But if I run it across several capable models and they all pull the fields correctly without much trouble, I start asking what I am really measuring.
 
-If several capable models consistently retrieve the fields correctly with little variation, however, I would ask whether the item is mostly testing database lookup rather than the harder evaluation capability I want.
+At that point I may only be testing whether the model can do a database lookup.
 
-That is where I would recalibrate.
+If I wanted the benchmark to test more reasoning, I would recalibrate it.
 
-## Recalibration decision
+## Making the second version harder
 
-I would keep the FAA research requirement but add evidence interpretation.
+I would keep the FAA research piece but add questions about what the information actually proves.
 
-The revised task asks the model to separate:
+Now the model has to keep straight:
 
 - the current aircraft registration record;
-- FAA make/model and engine reference information;
-- and conclusions that the available data does or does not support.
+- the FAA make/model and engine reference information;
+- and the conclusions I can reasonably make from each one.
 
-I also add a blank-field edge case based on the FAA's own documentation. The FAA notes that some permissible data may be blank and that those blanks should not automatically be considered errors.
+I also added the blank-field issue because FAA documentation allows some permissible fields to be blank.
 
-That creates a better reasoning test without making the prompt artificially confusing.
+That gives me a harder test without making the prompt confusing just for the sake of making it hard.
 
 ---
 
-# Test 2 — Example failure after recalibration
+# Test 2 — Now I get a failure
 
-A model could retrieve all of the visible aircraft fields correctly and still fail the harder version with reasoning like this:
+The model could still pull all of the basic aircraft information correctly and then say something like:
 
 > The FAA reference record lists engine model X for this aircraft model, so the individual aircraft currently has engine model X installed. The blank supplemental field also appears to be a database error because a complete registration record should contain a value in every field.
 
-The response may look well researched because it uses the FAA and gets the basic aircraft identity right.
+At first glance, this looks pretty good. It used the FAA. It found the right aircraft. It sounds confident.
 
 I would still flag two problems.
 
-## Failure 1 — Reference data is overstated
+## Problem 1 — It went further than the source
 
-The model has moved from **reference information associated with an aircraft make/model** to a claim about the exact physical engine currently installed on one individual aircraft.
+The model took **reference information associated with an aircraft make/model** and turned it into a statement about the exact engine physically installed on one aircraft right now.
 
-Unless the source used in the task establishes that fact, the conclusion goes beyond the evidence.
+If my FAA source doesn't prove that, the model can't turn it into a fact.
 
-This is a more interesting failure than simply using the wrong website because the model has the right source but uses the source incorrectly.
+This is actually more interesting to me than the model using the wrong website. It found the right source and then used the source wrong.
 
-## Failure 2 — Blank field is treated as an error
+## Problem 2 — It decided a blank field must be an error
 
-The FAA's database documentation explains that some permissible fields may be blank. The model therefore should not declare the record erroneous just because one of those fields has no value.
+FAA documentation says some permissible fields can be blank.
 
-This tests whether the model actually read and applied the source documentation rather than assuming every blank is a data-quality problem.
+So the model shouldn't decide the database is wrong just because it expected a value to be there.
 
-## Example Version 2 score
+That tells me whether it actually used the documentation or just made an assumption about what a complete record should look like.
+
+## Example score on Version 2
 
 | Area | Score | Max |
 |---|---:|---:|
-| Current-record accuracy | 20 | 20 |
-| Reference-data use | 6 | 15 |
-| Evidence-check reasoning | 12 | 30 |
-| Source discipline | 15 | 15 |
-| Missing/blank-field handling | 2 | 10 |
+| Current record accuracy | 20 | 20 |
+| Reference data | 6 | 15 |
+| Evidence questions | 12 | 30 |
+| FAA source use | 15 | 15 |
+| Blank fields | 2 | 10 |
 | Instruction following | 10 | 10 |
 | **Total** | **65** | **100** |
 
-**Result: Borderline / does not meet the strong-pass standard**
+**Result: Borderline / not a strong pass**
 
-The important point is that I would not erase the work the model got right. It still receives full credit for current-record accuracy and source discipline. The failure is specifically in interpretation.
+I wouldn't wipe out everything the model got right. It still found the correct record and used the approved source. The problem is in what it concluded from that information.
 
-## What I would learn from the second test
+## What I learn from the second test
 
-If this type of error appears across models, the revised item is exposing the behavior I intended: the difference between **finding authoritative information** and **reasoning correctly about what that information proves**.
+If I start seeing this kind of error across models, then the harder version is doing what I wanted. It is separating **finding the information** from **understanding what the information actually proves**.
 
-If reviewers disagree about the engine-reference question, I would revisit the rubric and FAA field documentation before blaming the reviewers. The answer key needs to be just as defensible as the model score.
+If reviewers disagree with my engine-reference answer, I would go back to the FAA documentation and make sure the answer key is solid before deciding the reviewers are wrong. My golden answer has to be defensible too.
 
-If every model also passes Version 2, I could build another edge case. If nearly every model fails because the task requires undocumented aviation expertise, I have gone too far and would revise it back.
+And I can still recalibrate again.
 
-That back-and-forth is part of the work. Recalibration is not about making sure the model eventually fails. It is about getting the task to measure the capability I actually intended to test.
+If every model gets Version 2 right, maybe I need another fair edge case. If almost every model fails because I accidentally made the task depend on specialized aviation knowledge that isn't explained by the source, then I probably went too far.
+
+That back and forth is part of the work.
+
+**Recalibration isn't about making the model fail. It is about making sure the task is testing what I think it is testing.**
