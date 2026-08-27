@@ -1,174 +1,95 @@
 # Model Response Analysis
 
-This file applies the rubric in [`evaluation-rubric.md`](evaluation-rubric.md) to two contrasting model responses.
+Here I use the rubric on two different answers to the same venue task. I made the second answer intentionally polished because that is often where evaluation gets interesting: bad answers are not always badly written.
 
-The purpose is to show the difference between evaluating output by general impression and evaluating it against explicit criteria.
-
----
-
-# Model Response A
+## Model Response A
 
 > I recommend Proposal B. Although it is $8,000 more than Proposal A, it better matches the operating needs of the summit because the general session and all three breakouts are located together, which will reduce unnecessary movement for attendees who may leave and return during the day. It also includes complimentary parking, which directly supports the 40+ local attendees who will be driving.
 >
 > The main tradeoff is the higher cost compared with Proposal A. Before contracting, I would confirm that Proposal B's final event charges, including applicable service charges, remain within the $95,000 event budget and that the complimentary parking allows in-and-out access.
 
-## Score
+### Score
 
-| Criterion | Score | Max |
+| Area | Score | Max |
 |---|---:|---:|
-| Recommendation quality | 25 | 25 |
+| Recommendation | 25 | 25 |
 | Constraint handling | 20 | 20 |
-| Evidence discipline | 15 | 15 |
-| Required response elements | 15 | 15 |
-| Prioritization / business judgment | 15 | 15 |
-| Executive communication | 10 | 10 |
+| Evidence / assumptions | 15 | 15 |
+| Instruction following | 15 | 15 |
+| Business judgment | 15 | 15 |
+| Communication | 10 | 10 |
 | **Total** | **100** | **100** |
 
-## Evaluation
+### Why I would give it full credit
 
-### Recommendation quality — 25/25
+The answer gets to B for the right reasons. It does not just say that B is "best overall"; it connects the recommendation to the room layout and parking, which are two of the requirements that matter most for this event.
 
-The model selects Proposal B and ties the recommendation to two of the most important stated requirements: compact meeting space and parking.
+It also handles the unknowns correctly. The model does not pretend it knows the final service-charge total or exactly how the parking re-entry works. It tells the planner to confirm those items before signing.
 
-### Constraint handling — 20/20
+The response is short, but nothing important is missing. It has the recommendation, two reasons, the cost tradeoff, and a practical contracting check.
 
-The answer correctly uses the $95,000 event budget and does not incorrectly fold the separately paid guestrooms into that amount. It recognizes that room adjacency is operationally important and treats parking as both a benefit and an area where one detail still needs verification.
-
-### Evidence discipline — 15/15
-
-No missing prices or amenities are invented. The answer does not claim that the total cost is definitively within budget because the prompt does not provide enough detail to establish that. Instead, it identifies the all-in total as something to confirm.
-
-### Required response elements — 15/15
-
-The answer includes:
-
-- one recommendation,
-- two distinct reasons,
-- one meaningful tradeoff, and
-- a material verification item.
-
-The verification sentence contains two closely related contracting checks. This does not violate the task because they function as one pre-contract verification step and both are grounded in unresolved requirements.
-
-### Prioritization / business judgment — 15/15
-
-The response recognizes why the $8,000 premium may be justified. It does not treat lowest cost as the only objective. Instead, it links the layout and parking to how attendees will actually use the event.
-
-### Executive communication — 10/10
-
-The response is short, direct, and decision-oriented.
-
-## Overall assessment
-
-**Strong / decision-ready.**
-
-The response demonstrates that good evaluation output does not need to be long. It needs to select the right evidence, respect uncertainty, and connect the recommendation to the user's actual priorities.
+I would rather see an answer this short and well supported than a much longer comparison that introduces information the user never provided.
 
 ---
 
-# Model Response B
+## Model Response B
 
 > Proposal C is the best overall choice. Its stronger guestrooms will create a better executive experience, and since the company needs 45 rooms, the room quality should be the deciding factor. Although it is currently $12,000 over budget, hotels frequently negotiate for groups of this size, so the company should be able to bring the price down. Proposal C also likely has better parking and upgraded AV because it is the premium option.
 >
 > Proposal A would be my second choice because it saves $8,000 compared with Proposal B. Proposal B is difficult to justify when A provides the same basic meeting function for less money. I would ask Proposal C for a discount before signing.
 
-## Raw rubric score
+### Score
 
-| Criterion | Score | Max |
+| Area | Score | Max |
 |---|---:|---:|
-| Recommendation quality | 5 | 25 |
+| Recommendation | 5 | 25 |
 | Constraint handling | 7 | 20 |
-| Evidence discipline | 2 | 15 |
-| Required response elements | 8 | 15 |
-| Prioritization / business judgment | 3 | 15 |
-| Executive communication | 7 | 10 |
-| **Raw total** | **32** | **100** |
+| Evidence / assumptions | 2 | 15 |
+| Instruction following | 8 | 15 |
+| Business judgment | 3 | 15 |
+| Communication | 7 | 10 |
+| **Total** | **32** | **100** |
 
-No additional cap is needed because the raw score is already below the applicable failure-condition caps.
+The raw score is already below the score caps, so I would leave it at 32.
 
-## Evaluation
+### What I would flag
 
-### Recommendation quality — 5/25
+The biggest problem is not the writing. The writing is actually pretty good.
 
-The model recommends Proposal C even though the prompt states that C exceeds the event budget by $12,000 **before parking is added**. The response does not establish a supported path for resolving that conflict.
+The problem is that the answer builds its recommendation around things it does not know.
 
-### Constraint handling — 7/20
+It assumes:
 
-The model notices the 45 guestrooms but gives them inappropriate weight. The prompt explicitly states that guestrooms are paid separately from the event budget, so their quality should not override the meeting-space and event-budget requirements.
+- the hotel will negotiate away enough of the $12,000 overage to solve the budget problem;
+- Proposal C probably has better parking;
+- Proposal C has upgraded AV because it is the premium option.
 
-The response also fails to address the compact meeting-space requirement, one of the clearest operational priorities in the prompt.
+None of those facts are in the prompt.
 
-### Evidence discipline — 2/15
+The response also makes the guestrooms the deciding factor even though the room block is paid separately and the user has given much more specific requirements around the meeting space, parking, and event budget.
 
-This is the largest failure.
+There is another smaller issue in the way it compares A and B. Saying they provide the "same basic meeting function" ignores a difference that the user specifically cared about: B keeps the meeting rooms together and A does not.
 
-The response introduces multiple unsupported claims:
+### Why the score is low even though the answer sounds reasonable
 
-- that hotels "frequently negotiate" in a way that will solve this specific $12,000 overage,
-- that Proposal C "likely has better parking," and
-- that Proposal C has "upgraded AV" because it is the premium option.
+If I only read this for tone and fluency, it could pass as a professional recommendation. If someone acted on it, however, they could spend time pursuing a venue that is already over budget based on the model's assumption that a large discount will happen.
 
-None of those facts were provided. More importantly, the invented information materially affects the recommendation.
-
-### Required response elements — 8/15
-
-The model gives a recommendation and supporting reasons, but the reasons are not well grounded. It identifies the over-budget price as an issue, but it does not present a clear tradeoff in the requested format. Its verification item — asking for a discount — is less useful than confirming an unresolved factual requirement because the recommendation already depends on assuming that the discount will occur.
-
-### Prioritization / business judgment — 3/15
-
-The model makes guestroom quality the deciding factor even though the prompt's operational requirements focus on meeting-space adjacency, parking, and the event budget.
-
-It also treats Proposal A and Proposal B as providing essentially the same meeting function, ignoring the stated difference in room layout and complimentary parking.
-
-### Executive communication — 7/10
-
-The writing itself is clear and reasonably concise. This is intentionally scored separately from substantive quality. A well-written answer can still be unreliable.
-
-## Failure analysis
-
-### What failed
-
-The response chose an option that conflicts with a hard budget constraint and justified the decision using unsupported assumptions.
-
-### Why it failed
-
-The model appears to have substituted a familiar business narrative — premium hotels negotiate and premium properties have better amenities — for the evidence actually supplied in the task.
-
-### Why it matters
-
-If this response were used without review, a decision-maker could pursue a venue that is already over budget while overlooking the option that best matches the meeting's stated operational requirements.
-
-### How the rubric captures it
-
-The failure is not reduced to one vague "bad answer" judgment. It appears across separate dimensions:
-
-- low recommendation quality,
-- incomplete constraint handling,
-- severe evidence-discipline failure, and
-- poor prioritization.
-
-At the same time, the response still receives credit for readable executive communication. This preserves the distinction between **presentation quality** and **decision quality**.
+That is why I separate communication from the rest of the score. I still gave the answer 7/10 for writing. It just does not get to use good writing to make up for weak evidence and a bad decision.
 
 ---
 
-# Calibration example
+## A calibration issue I would expect
 
-Assume two reviewers initially score Model Response B differently:
+Suppose one reviewer gives Response B **32/100** and another gives it **48/100**.
 
-- **Evaluator 1:** 32/100
-- **Evaluator 2:** 48/100
+The second reviewer says that Proposal C is still a reasonable choice because "hotels negotiate all the time."
 
-Evaluator 2 argues that the recommendation is "reasonable because hotels negotiate all the time" and gives more credit for Proposal C.
+That is where I would stop the calibration discussion. Whether hotels sometimes negotiate is not the question. The task specifically says to use the information provided, and the prompt never says C will reduce its price.
 
-## Calibration analysis
+The reviewer can use domain knowledge to understand why an issue matters. The reviewer cannot use it to supply evidence that the model did not have.
 
-The disagreement is not primarily about the model response. It is about whether the evaluator is allowed to introduce outside assumptions.
+If this disagreement came up repeatedly, I would add a guideline note along these lines:
 
-The rubric resolves this directly: missing facts cannot be supplied by evaluator intuition merely because they are plausible. The task says to use only the information provided.
+> Score against the information in the task. Do not increase a score because an unsupported model claim seems plausible based on personal or professional experience.
 
-The calibrated score should therefore remain near Evaluator 1's score unless Evaluator 2 identifies rubric-based evidence for additional points.
-
-## Guideline clarification generated from the disagreement
-
-> **Evaluator assumptions:** Score only against information contained in the prompt and response. Do not increase a score because an unsupported model claim seems plausible based on personal or professional experience. Domain expertise may be used to recognize operational implications, but not to manufacture missing facts.
-
-This distinction is important in reviewer QA. Calibration is not about forcing reviewers to have identical opinions; it is about identifying which judgments are permitted by the evaluation standard.
+That gives reviewers a clearer boundary without trying to eliminate judgment altogether.
