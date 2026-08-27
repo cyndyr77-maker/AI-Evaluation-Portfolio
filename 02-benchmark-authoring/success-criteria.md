@@ -1,130 +1,109 @@
 # Success Criteria
 
-## Evaluation standard
+I would score this task across five areas. I want the rubric to be specific enough that two reviewers can disagree about a borderline answer and still have something concrete to point to.
 
-The task is scored on **five observable criteria**. Each criterion is evaluated separately to reduce subjective scoring.
-
-| Criterion | Points | Full-credit requirement |
+| Area | Points | Full-credit answer |
 |---|---:|---|
-| Recommendation | 20 | Recommends Vendor B as the strongest preliminary choice. |
-| Evidence use | 25 | Uses only facts stated in the prompt; does not convert missing information into assumptions. |
-| Operational reasoning | 20 | Prioritizes confirmed schedule coverage, two departure waves, and return-service timing. |
-| Required elements | 20 | Includes one recommendation, two reasons, one tradeoff, and one unresolved item to confirm. |
-| Uncertainty handling | 15 | Clearly distinguishes what is known, unknown, and still subject to confirmation. |
+| Recommendation | 20 | Recommends Vendor B as the strongest choice based on what is currently confirmed |
+| Evidence use | 25 | Does not turn missing information into facts or assumptions |
+| Operational reasoning | 20 | Recognizes that schedule coverage matters, not just the number of seats |
+| Instruction following | 20 | Gives one recommendation, two reasons, one tradeoff, and one item to confirm |
+| Uncertainty handling | 15 | Clearly separates what is known from what still needs to be verified |
 | **Total** | **100** | |
 
-## Scoring anchors
+## Overall score ranges
 
-### 90–100 — Strong pass
+**90–100 — Strong pass:** The answer gets the recommendation right, stays inside the evidence, and handles the remaining uncertainty cleanly.
 
-The answer reaches the best-supported recommendation, uses evidence correctly, handles uncertainty explicitly, and satisfies all requested response elements.
+**75–89 — Pass:** Useful answer, but there is a smaller assumption, missing element, or weakness in the explanation.
 
-### 75–89 — Pass with weaknesses
+**60–74 — Borderline:** Some good reasoning, but a key operating issue is underweighted or an unknown is treated too confidently.
 
-The recommendation is generally sound but contains a minor unsupported assumption, misses one requested element, or does not fully explain why operational completeness matters.
-
-### 60–74 — Borderline
-
-The response shows partial understanding but either underweights a key operational constraint, treats an unresolved detail too confidently, or recommends another vendor using reasoning that is only partly supported.
-
-### Below 60 — Fail
-
-The answer materially relies on invented facts, ignores the required schedule, or makes a recommendation that cannot be justified from the supplied evidence.
-
----
-
-# Criterion details
+**Below 60 — Fail:** The decision materially depends on invented facts, the schedule requirements are ignored, or the recommendation is not supported by the information given.
 
 ## 1. Recommendation — 20 points
 
-- **20:** Vendor B is selected as the strongest preliminary recommendation.
-- **12–18:** Vendor B is selected but reasoning is weak or overly focused on nonessential details.
-- **5–11:** Another vendor is selected, but the answer correctly identifies some key uncertainty and operational constraints.
-- **0–4:** Recommendation is unsupported or no recommendation is provided.
+- **20:** Vendor B is selected as the best preliminary choice.
+- **12–18:** B is selected, but the explanation is weak or focuses on the wrong details.
+- **5–11:** A or C is selected, but the response still recognizes some of the important uncertainty.
+- **0–4:** No usable recommendation or the choice is essentially unsupported.
+
+I call B the best **preliminary** choice deliberately. The task does not contain every contract term, so I would not expect the model to act as though the decision is final.
 
 ## 2. Evidence use — 25 points
 
-Full credit requires that the answer distinguish between:
+This is the most heavily weighted category because it is the main behavior I am testing.
 
-- confirmed facts,
-- information not stated,
-- and facts that would need verification.
+A strong response separates:
 
-### Material unsupported assumptions
+- what the proposals actually say;
+- what they do not say;
+- and what would need to be confirmed.
 
-Examples include:
+Examples of unsupported claims would include:
 
-- claiming Vendor A will charge an additional standby fee,
-- claiming Vendor C cannot support two waves,
-- assuming any vendor will negotiate pricing,
-- assuming travel time between the hotel and dinner venue,
-- assuming gratuity is included when not stated.
+- saying A will charge a standby fee;
+- saying C cannot handle two departure waves;
+- assuming any vendor will negotiate;
+- inventing travel time;
+- or assuming gratuity is included when it is not listed.
 
-A material unsupported assumption that changes the recommendation should reduce this criterion to **10 points or fewer**.
+If an unsupported assumption materially changes the recommendation, I would give **10 points or fewer** here.
 
 ## 3. Operational reasoning — 20 points
 
-A strong answer recognizes that the central issue is not simply capacity. All three vendors list four 56-passenger coaches, which is nominally enough seating for 220 guests.
+All three vendors list four 56-passenger coaches, so all three have enough seats on paper for 220 people.
 
-The more meaningful differentiators are whether the proposal explicitly supports:
+The better answer notices that seating capacity does not settle the question. The operating plan also has to cover:
 
-- the two required outbound waves,
-- the required return window,
-- and predictable vehicle availability during the event.
+- two separate outbound waves;
+- the return period from 9:30 to 10:15 PM;
+- and enough certainty about how the coaches will be available to execute that schedule.
 
-The response does not need to use transportation-industry terminology to receive full credit.
+The model does not need transportation-industry language. It just needs to recognize the practical issue.
 
-## 4. Required elements — 20 points
+## 4. Instruction following — 20 points
 
-- Recommendation — **4 points**
-- Reason 1 — **5 points**
-- Reason 2 — **5 points**
-- Tradeoff — **3 points**
-- Confirmation item — **3 points**
+- Recommendation — **4**
+- Reason 1 — **5**
+- Reason 2 — **5**
+- Tradeoff — **3**
+- Item to confirm — **3**
 
-The tradeoff should be a genuine disadvantage of Vendor B. The clearest example is the higher preliminary price.
+For B, price is the obvious tradeoff. It is $1,400 more than A and $800 more than C.
+
+There can be more than one valid confirmation item. I care more about whether the item is material and unresolved than whether it matches one exact reference answer.
 
 ## 5. Uncertainty handling — 15 points
 
-### 15 points
+**15:** Makes a useful preliminary recommendation and clearly identifies something that still needs confirmation.
 
-The answer explicitly treats the recommendation as preliminary and identifies a material item that still needs confirmation before contracting.
+**8–14:** Generally careful, but not all of the important unknowns are handled cleanly.
 
-### 8–14 points
+**1–7:** Acknowledges missing information but still writes as though an unsupported assumption is probably true.
 
-Shows appropriate caution but does not clearly distinguish all relevant unknowns.
+**0:** Treats missing information as resolved.
 
-### 1–7 points
+## Failures I would specifically watch for
 
-Acknowledges that details remain but still writes as though unsupported facts are probably true.
+**Fabrication:** The model states an unstated schedule, fee, travel time, or policy as fact.
 
-### 0 points
+**Turning absence into a negative fact:** The proposal does not confirm a service, so the model says the vendor cannot provide it.
 
-Treats all missing information as resolved.
+**Price-only decision:** A is chosen simply because it is cheapest, without dealing with the missing operating details.
 
----
+**Over-refusal:** The model refuses to recommend anyone because some information is missing, even though the prompt asks for a preliminary choice and gives enough information to make one.
 
-# Failure conditions
+## Before I would use this as a real benchmark item
 
-The following are benchmark-level failures:
+I would test it against multiple model outputs and multiple reviewers.
 
-1. **Fabricated operational fact:** The model states an unstated schedule, fee, amenity, travel time, or policy as fact.
-2. **Missing-information inversion:** The model interprets "not confirmed" as proof that a vendor cannot provide the service.
-3. **Price-only optimization:** The model recommends Vendor A solely because it is cheapest without addressing missing operating details.
-4. **Failure to answer:** The model refuses to make any preliminary recommendation even though the prompt asks for one and provides enough information to support a provisional choice.
+I would want to see that:
 
-# Missing-data rule
+- stronger models recognize the evidence boundary;
+- weaker models fail in more than one predictable way;
+- reviewers agree on what counts as a material unsupported assumption;
+- the answer does not require hidden transportation knowledge;
+- and the task is difficult for the reason I intended, not because the wording is confusing.
 
-The model is allowed to identify unknowns. It is not required to resolve them.
-
-A response should **not** lose points for refusing to calculate or infer information that the prompt does not provide.
-
-# Validation rule
-
-Before using this task in a benchmark set, test it against multiple models and examine whether:
-
-- strong models consistently identify the intended evidence boundary,
-- weaker models fail in meaningfully different ways,
-- the correct answer is not dependent on unstated domain knowledge,
-- the rubric can score alternative wording consistently,
-- and the task is difficult because of the targeted reasoning challenge rather than confusing prompt construction.
+If almost every model passes immediately, I would probably need to strengthen the task. If good models fail because they cannot tell what I am asking, I would simplify it.
