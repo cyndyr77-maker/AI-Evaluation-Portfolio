@@ -1,47 +1,36 @@
-# Case Study 2 — Benchmark Authoring & Golden Response
+# Case Study 2 — Benchmark Authoring
 
-> **Portfolio reconstruction:** This exercise was created to demonstrate benchmark-development methods used in professional AI training work. It does not reproduce proprietary prompts, client data, or project content.
+> **Portfolio note:** This is a reconstructed benchmark exercise. It reflects the kind of task-development and evaluation work I have done, but it does not reproduce proprietary project material.
 
-## What this case study demonstrates
+## What I wanted this task to test
 
-This example shows the full lifecycle of a benchmark task rather than treating prompt writing as the endpoint.
+For this example, I wanted to test something models do fairly often: fill in missing information because the missing answer seems obvious or likely.
 
-A useful benchmark needs to answer four questions:
+The scenario uses conference transportation. Three coach vendors have submitted preliminary proposals for a 220-person group. None of the proposals is presented as obviously terrible, but they do not all confirm the same operating details.
 
-1. **What capability is being tested?**
-2. **What would count as success or failure?**
-3. **Can independent evaluators apply the scoring standard consistently?**
-4. **Does the prompt actually expose the intended model weakness when tested?**
+The model still has to make a recommendation. The point is to see whether it can do that without turning an unknown into a fact.
 
-The case below tests whether a model can handle incomplete information without inventing facts, while still giving a useful business recommendation.
+## Why I used this scenario
 
-## Benchmark objective
+This type of task is useful because a weak response can sound completely practical.
 
-Evaluate whether a model can:
+A model might say, for example, that the cheapest vendor is fine because four coaches have enough seats. That is true as far as capacity goes, but capacity is not the only issue. The group has two outbound departure waves and a specific return window. If the proposal does not confirm how that schedule will be covered, I do not want the model quietly assuming that it will work.
 
-- distinguish known facts from missing information,
-- avoid unsupported assumptions,
-- prioritize operationally important constraints,
-- produce a useful recommendation even when some inputs remain unresolved,
-- explicitly identify what must be verified before action is taken.
+At the same time, I would not want the model to go too far in the other direction and say a vendor **cannot** provide something simply because the proposal does not mention it.
 
-## Scenario
+The distinction I am testing is:
 
-A company needs to choose a transportation plan for a 220-person conference. Three coach vendors have provided partial proposals. The user needs a preliminary recommendation before all pricing details are finalized.
+**not confirmed ≠ confirmed, and not confirmed ≠ unavailable.**
 
-The benchmark is intentionally constructed so that one option looks cheapest at first glance but omits a required service component. Another option is more expensive but provides the most complete coverage. The third appears attractive but does not state whether it can meet the departure schedule.
+## What is included
 
-The task is designed to test whether the model fills gaps with assumptions or correctly treats missing data as unresolved.
+- [`benchmark-task.md`](benchmark-task.md) — the actual task and the capability I am trying to test.
+- [`success-criteria.md`](success-criteria.md) — how I would score the answer and what I would count as a real failure.
+- [`reference-response.md`](reference-response.md) — one example of a full-credit answer.
+- [`failure-analysis.md`](failure-analysis.md) — a model answer that fails, why it fails, and how I would refine and validate the task after testing it.
 
-## Files in this case study
+## What matters to me in benchmark authoring
 
-- [`benchmark-task.md`](benchmark-task.md) — task objective, prompt, hidden challenge, and expected capability.
-- [`success-criteria.md`](success-criteria.md) — observable scoring requirements and failure conditions.
-- [`reference-response.md`](reference-response.md) — a strong reference answer tied directly to the criteria.
-- [`failure-analysis.md`](failure-analysis.md) — model test result, scoring, diagnosis, prompt refinement, and validation notes.
+Writing the prompt is only part of the job.
 
-## Benchmark design principle
-
-The purpose of a challenging task is not to make the prompt confusing. The challenge should expose a specific model behavior that matters in real use.
-
-In this case, the intended failure mode is **confident completion of missing operational facts**.
+I also want to know whether the task is actually testing the behavior I intended, whether there is enough information to score it fairly, whether multiple reviewers can apply the standard consistently, and whether a model is failing because of the targeted challenge rather than because I wrote a confusing prompt.
