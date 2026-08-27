@@ -72,11 +72,9 @@ That is the difference between just recording "wrong answer" and actually analyz
 
 I also worked with questions where the model had to count **distinct people across the full video**, not just count whoever was visible at one moment.
 
-For example:
+A prompt for that type of task could be:
 
 > **Over the full video, how many distinct people appear on screen at any point? Count each person only once, even if they leave and come back.**
-
-The ground truth in one of those tasks was **4 — 3 panelists and 1 interviewee**.
 
 The wording matters a lot here. If I only ask "How many people are in the video?" I have created my own ambiguity. Does that mean at one time? Across the whole video? Do I count someone twice if they leave and come back?
 
