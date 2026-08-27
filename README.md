@@ -30,8 +30,8 @@ A business scenario with several competing constraints. I build the rubric first
 ### [02 — Benchmark Authoring & Recalibration](02-benchmark-authoring/)
 A research benchmark using public FAA aircraft data. It follows the prompt → success criteria/rubric → golden response → model test → recalibration workflow, including what I do when the model gets the first version right and the task needs a stronger edge case.
 
-### 03 — Model Stumping & Edge Cases
-Planned: a realistic scenario where the difficulty comes from conflicting constraints and assumptions rather than from making the prompt unnecessarily complicated.
+### [03 — Multimodal Model Stumping](03-model-stumping/)
+A reconstructed video-stumping example centered on a bride and several other people. The questions require visual identification, speaker attribution, temporal tracking, identity persistence, and cross-modal reasoning rather than simple frame-level recognition. I also explain how I determine whether a miss is a legitimate model failure or a problem with the question itself.
 
 ### [04 — Calibration & Reviewer QA](04-calibration-and-reviewer-qa/)
 Two evaluators score the same output differently. I work through whether the disagreement comes from reviewer error, an unclear guideline, or both, and then revise the guideline.
