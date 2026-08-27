@@ -1,84 +1,100 @@
-# Model Test, Failure Analysis & Task Refinement
+# Model Testing & Recalibration
 
-## Model test output
+This example is a little different from a standard failure analysis because the **first model response passes**.
 
-> I recommend Vendor A because it is the most cost-effective choice and still provides enough capacity for all 220 attendees. Since the proposal includes round-trip transportation, it is reasonable to assume the same coaches can handle both departure waves and return for pickup later in the evening. The company would save $1,400 compared with Vendor B without sacrificing the core transportation need.
->
-> The tradeoff is that gratuity is not listed, so there may be an extra charge. Before signing, I would confirm the gratuity amount.
+That is intentional. It reflects an important part of benchmark authoring: sometimes the model gets the task right, and the next question is whether the task is still doing enough useful work.
 
-## My score
+## Test 1 — Model passes
+
+Assume the model uses the FAA Aircraft Registry, returns the correct N-number, manufacturer, model, serial number, manufacture year, registration status, and expiration field, identifies the FAA source, leaves an unavailable field blank rather than inventing it, and does not include owner information.
+
+### Example score
 
 | Area | Score | Max |
 |---|---:|---:|
-| Recommendation | 7 | 20 |
-| Evidence use | 8 | 25 |
-| Operational reasoning | 8 | 20 |
-| Instruction following | 17 | 20 |
-| Uncertainty handling | 5 | 15 |
-| **Total** | **45** | **100** |
+| FAA source use | 20 | 20 |
+| Field accuracy | 35 | 35 |
+| Missing-data handling | 15 | 15 |
+| Instruction following | 15 | 15 |
+| Source-to-claim traceability | 15 | 15 |
+| **Total** | **100** | **100** |
 
-**Result: Fail**
+**Result: Pass**
 
-## Where the answer goes wrong
+There is nothing to "find wrong" with the response just because I am building a benchmark. If it meets the criteria, it passes.
 
-At first glance, this is not a terrible response. It checks capacity, compares the price, gives a tradeoff, and identifies something to confirm.
+## What I would do next
 
-The problem is this sentence:
+I would look at the purpose of the task and the results across multiple model runs.
 
-> "it is reasonable to assume the same coaches can handle both departure waves and return for pickup later in the evening"
+If one model passes once, that does not automatically mean the task is too easy.
 
-That is exactly the information the proposal did **not** confirm.
+If several capable models consistently retrieve the fields correctly with little variation, however, I would ask whether the item is mostly testing database lookup rather than the harder evaluation capability I want.
 
-The model has taken an unknown and resolved it in A's favor. It then uses that assumption to justify choosing the cheapest vendor.
+That is where I would recalibrate.
 
-I would treat that as a material failure because the assumption changes the recommendation.
+## Recalibration decision
 
-### It also focuses on the wrong unknown
+I would keep the FAA research requirement but add evidence interpretation.
 
-The model notices that gratuity is not listed. That is worth confirming, but it is not the most important missing detail.
+The revised task asks the model to separate:
 
-The bigger question is whether A's service plan actually covers the two outbound waves and the return schedule the group needs.
+- the current aircraft registration record;
+- FAA make/model and engine reference information;
+- and conclusions that the available data does or does not support.
 
-This is a good example of why simply saying "I would confirm X" does not automatically mean the model handled uncertainty well. It has to identify the uncertainty that matters to the decision.
+I also add a blank-field edge case based on the FAA's own documentation. The FAA notes that some permissible data may be blank and that those blanks should not automatically be considered errors.
 
-## Why this matters in practice
+That creates a better reasoning test without making the prompt artificially confusing.
 
-I am not saying Vendor A cannot do the job. It may be able to.
+---
 
-The issue is that the proposal, as written, does not establish that yet. A model should not erase that distinction just because the cheaper option looks attractive.
+# Test 2 — Example failure after recalibration
 
-## How I refined the task
+A model could retrieve all of the visible aircraft fields correctly and still fail the harder version with reasoning like this:
 
-An earlier version of the prompt was basically:
+> The FAA reference record lists engine model X for this aircraft model, so the individual aircraft currently has engine model X installed. The blank supplemental field also appears to be a database error because a complete registration record should contain a value in every field.
 
-> Which vendor is best and why?
+The response may look well researched because it uses the FAA and gets the basic aircraft identity right.
 
-That was too loose. A model could write a generic vendor comparison and I would have a harder time telling whether it actually understood the evidence issue.
+I would still flag two problems.
 
-I tightened the final version by adding:
+## Failure 1 — Reference data is overstated
 
-> Base the recommendation only on the information provided.
+The model has moved from **reference information associated with an aircraft make/model** to a claim about the exact physical engine currently installed on one individual aircraft.
 
-I also required a recommendation, two reasons, a tradeoff, and one item to confirm.
+Unless the source used in the task establishes that fact, the conclusion goes beyond the evidence.
 
-Those requirements give me more observable behavior to score. In particular, the confirmation item shows whether the model understands what is still unresolved.
+This is a more interesting failure than simply using the wrong website because the model has the right source but uses the source incorrectly.
 
-I did **not** add more vendors or pages of contract details just to make the prompt harder. More complexity is not automatically a better benchmark. I want the difficulty to come from the reasoning problem I am testing.
+## Failure 2 — Blank field is treated as an error
 
-## How I would validate it
+The FAA's database documentation explains that some permissible fields may be blank. The model therefore should not declare the record erroneous just because one of those fields has no value.
 
-Before using this in a real benchmark set, I would run it against several models and look at the range of failures.
+This tests whether the model actually read and applied the source documentation rather than assuming every blank is a data-quality problem.
 
-Useful variation might include models that:
+## Example Version 2 score
 
-- choose B for the right reasons;
-- choose A mainly because of price;
-- choose C and incorrectly treat its missing schedule confirmation as either harmless or disqualifying;
-- refuse to choose anyone because information is incomplete;
-- or invent standard transportation practices.
+| Area | Score | Max |
+|---|---:|---:|
+| Current-record accuracy | 20 | 20 |
+| Reference-data use | 6 | 15 |
+| Evidence-check reasoning | 12 | 30 |
+| Source discipline | 15 | 15 |
+| Missing/blank-field handling | 2 | 10 |
+| Instruction following | 10 | 10 |
+| **Total** | **65** | **100** |
 
-I would also have more than one reviewer score the same outputs.
+**Result: Borderline / does not meet the strong-pass standard**
 
-If reviewers keep disagreeing, I would look at whether they are applying different assumptions or whether my rubric is not clear enough. If nearly every model gives the same correct answer immediately, I would question whether the item is actually challenging enough to be useful.
+The important point is that I would not erase the work the model got right. It still receives full credit for current-record accuracy and source discipline. The failure is specifically in interpretation.
 
-For me, that testing is part of benchmark authoring. The task is not finished just because the prompt and reference answer exist.
+## What I would learn from the second test
+
+If this type of error appears across models, the revised item is exposing the behavior I intended: the difference between **finding authoritative information** and **reasoning correctly about what that information proves**.
+
+If reviewers disagree about the engine-reference question, I would revisit the rubric and FAA field documentation before blaming the reviewers. The answer key needs to be just as defensible as the model score.
+
+If every model also passes Version 2, I could build another edge case. If nearly every model fails because the task requires undocumented aviation expertise, I have gone too far and would revise it back.
+
+That back-and-forth is part of the work. Recalibration is not about making sure the model eventually fails. It is about getting the task to measure the capability I actually intended to test.
