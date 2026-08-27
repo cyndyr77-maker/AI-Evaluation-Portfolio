@@ -10,7 +10,7 @@ Sometimes the model is just wrong. Those are usually pretty easy to identify. Th
 
 The model found a shortcut, guessed the right answer, used information in a way it wasn't supposed to or met the wording of the task without actually doing what I was trying to test.
 
-There are more technical terms for this, including shortcutting, specification gaming and reward hacking. I usually just call it cheating because that is what it looks like when I am evaluating it.
+There are more technical ways to describe some of this, including shortcutting or specification gaming. I usually just call it cheating because that is what it looks like when I am evaluating it.
 
 Here are three examples of the kinds of failures I mean.
 
