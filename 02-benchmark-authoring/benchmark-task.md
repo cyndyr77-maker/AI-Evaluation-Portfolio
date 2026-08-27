@@ -72,7 +72,8 @@ This task creates a realistic situation in which a model can fail by:
 
 - optimizing for lowest visible price,
 - treating missing details as if they are favorable,
-- interpreting "not confirmed" as "not available,"n- inventing common industry practices,
+- interpreting "not confirmed" as "not available,"
+- inventing common industry practices,
 - failing to distinguish a preliminary recommendation from a final decision.
 
 The benchmark measures whether the model can remain useful **without becoming overconfident**.
