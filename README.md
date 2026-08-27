@@ -45,13 +45,16 @@ An astronaut-folding-towels video example showing the full iteration loop: build
 ### [07 — Domain Expert Evaluation: Does the Answer Actually Work?](07-domain-expert-evaluation/)
 Examples of how I use real business experience when evaluating AI output. The main example is a formula-based spreadsheet that looks finished but breaks when the assumptions change. I also cover executive presentations, large-scale event feasibility, business sequencing and whether documents are actually usable as working materials.
 
+### [08 — ATC Transcription & Research-Based Verification](08-atc-transcription-research/)
+ATC work that started as transcription but required a lot of research to get the transcription right. I show how I used call signs, waypoints, STARs, airport diagrams, FAA information, historic flight data and the surrounding audio to verify unclear sections instead of guessing. I also touch on how that work progressed into reviewing other ATC submissions.
+
 ## Background I bring to the work
 
 In addition to AI evaluation experience, I have approximately 30 years of corporate/business experience, including executive support, operations, business communication, prioritization, cross-functional coordination and building the documents, spreadsheets and presentations people actually use to run the work.
 
 Sixteen of those years included event management, eventually working on large-scale and global events with multimillion-dollar budgets. That experience is useful in domain-expert evaluation because I can spot the difference between an answer that uses the right terminology and one that would actually hold up in a real business situation.
 
-My AI evaluation work has included LLM response evaluation, preference ranking, rubric-based scoring, task and benchmark development, reference responses, hallucination and factuality review, reviewer QA, calibration, transcription QA, and multimodal image/video evaluation.
+My AI evaluation work has included LLM response evaluation, preference ranking, rubric-based scoring, task and benchmark development, reference responses, hallucination and factuality review, reviewer QA, calibration, transcription QA, research-based audio verification, and multimodal image/video evaluation.
 
 ## One rule I come back to often
 
