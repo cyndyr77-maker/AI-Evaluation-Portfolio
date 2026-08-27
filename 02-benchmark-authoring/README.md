@@ -1,36 +1,45 @@
-# Case Study 2 — Benchmark Authoring
+# Case Study 2 — Benchmark Authoring & Recalibration
 
-> **Portfolio note:** This is a reconstructed benchmark exercise. It reflects the kind of task-development and evaluation work I have done, but it does not reproduce proprietary project material.
+> **Portfolio note:** This is a clean-room reconstruction of the type of benchmark-authoring work I have done. The workflow reflects my actual experience with prompt development, success criteria, rubrics, golden responses, model testing, and recalibration, but the task itself is newly created from public FAA information.
 
-## What I wanted this task to test
+## The type of work I wanted to show here
 
-For this example, I wanted to test something models do fairly often: fill in missing information because the missing answer seems obvious or likely.
+Some of my benchmark work involved prompts where the answer could not be produced from the prompt alone. The model had to research public sources, pull the right records, and use those records correctly.
 
-The scenario uses conference transportation. Three coach vendors have submitted preliminary proposals for a 220-person group. None of the proposals is presented as obviously terrible, but they do not all confirm the same operating details.
+For this portfolio example I used FAA aircraft data because it recreates that workflow well without exposing any proprietary task.
 
-The model still has to make a recommendation. The point is to see whether it can do that without turning an unknown into a fact.
+The FAA publishes a releasable Aircraft Registration Database that includes the registration master file and aircraft reference data. The downloadable data is refreshed daily, and the FAA also provides Aircraft Inquiry tools for public searches.
 
-## Why I used this scenario
+## The benchmark workflow
 
-This type of task is useful because a weak response can sound completely practical.
+This case follows the same basic process I used in task authoring:
 
-A model might say, for example, that the cheapest vendor is fine because four coaches have enough seats. That is true as far as capacity goes, but capacity is not the only issue. The group has two outbound departure waves and a specific return window. If the proposal does not confirm how that schedule will be covered, I do not want the model quietly assuming that it will work.
+1. Define what the model is being tested on.
+2. Write the prompt.
+3. Build success criteria and a scoring rubric before judging the output.
+4. Research the answer independently and create a golden/reference response.
+5. Run the model against the task.
+6. Score the response against the rubric.
+7. If the model gets the task right too easily, do not automatically call the benchmark finished. Look at whether the task needs to be recalibrated to expose a harder but still fair capability.
+8. Test the revised version again.
 
-At the same time, I would not want the model to go too far in the other direction and say a vendor **cannot** provide something simply because the proposal does not mention it.
+That last step is important. In this kind of work, a model passing a task was sometimes the beginning of another round of authoring rather than the end of the task.
 
-The distinction I am testing is:
+## What this example tests
 
-**not confirmed ≠ confirmed, and not confirmed ≠ unavailable.**
+The first version asks the model to research an aircraft using FAA records and report specific fields with source support.
 
-## What is included
+That version is intentionally straightforward. A capable model should be able to pass it.
 
-- [`benchmark-task.md`](benchmark-task.md) — the actual task and the capability I am trying to test.
-- [`success-criteria.md`](success-criteria.md) — how I would score the answer and what I would count as a real failure.
-- [`reference-response.md`](reference-response.md) — one example of a full-credit answer.
-- [`failure-analysis.md`](failure-analysis.md) — a model answer that fails, why it fails, and how I would refine and validate the task after testing it.
+The second version adds an evidence-reconciliation problem: the model has to distinguish current registration information from reference information about the aircraft make/model and explain what can and cannot be concluded from each source. The difficulty comes from using the data correctly, not from obscure aviation trivia.
 
-## What matters to me in benchmark authoring
+## Files
 
-Writing the prompt is only part of the job.
+- [`benchmark-task.md`](benchmark-task.md) — the initial prompt and the recalibrated version.
+- [`success-criteria.md`](success-criteria.md) — the rubric and the rules I would use to score research quality, source use, and unsupported conclusions.
+- [`reference-response.md`](reference-response.md) — the golden-response approach and what I would verify before locking the answer key.
+- [`failure-analysis.md`](failure-analysis.md) — how I would handle an initial model pass, why I would recalibrate, and what I would look for in the second test.
 
-I also want to know whether the task is actually testing the behavior I intended, whether there is enough information to score it fairly, whether multiple reviewers can apply the standard consistently, and whether a model is failing because of the targeted challenge rather than because I wrote a confusing prompt.
+## Public data used for the reconstruction
+
+This example is built around the FAA Aircraft Registry and its public data/documentation. I intentionally avoid owner names, street addresses, or other personal information because those details are not needed to demonstrate the evaluation method.
