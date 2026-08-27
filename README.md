@@ -1,82 +1,60 @@
 # AI Evaluation Portfolio
 
-This repository demonstrates practical AI evaluation methods across rubric design, benchmark authoring, model-failure analysis, reviewer calibration, domain-expert evaluation, and multimodal quality assessment.
+I work in AI evaluation and training across text, image, audio, and video. My work has ranged from annotation and response evaluation to rubric development, benchmark/task authoring, golden responses, reviewer QA, calibration, and model-failure analysis.
 
-The focus is not basic annotation or generic prompt writing. The work here is designed to show how model behavior can be evaluated against explicit standards, how failure modes can be identified and explained, and how real-world professional judgment improves evaluation quality.
+I built this portfolio to show more of the judgment behind that work. Most AI evaluation cannot be explained very well by saying that I "rated responses" or "reviewed annotations." What matters is how the standard was applied: what the model was asked to do, what counted as a real failure, how missing information was handled, and whether another reviewer could reasonably reach the same result.
 
-## What This Portfolio Demonstrates
+The examples here are reconstructed for the portfolio. They are based on the types of evaluation work I have done, but they do not reproduce proprietary prompts, client information, model outputs, or project guidelines.
 
-- Rubric design with observable criteria and explicit scoring anchors
-- Benchmark and task authoring
-- Golden/reference response development
-- Model-stumping and edge-case design
-- Hallucination and instruction-following analysis
-- Reviewer QA and calibration
-- Missing-data and ambiguity handling
-- Domain-expert evaluation in business operations and event planning
-- Multimodal image and video evaluation
-- Structured failure analysis and actionable feedback
+## What I focus on when I evaluate a model
 
-## Evaluation Approach
+A response can be well written and still be wrong. It can be factually correct and still miss the instruction. An image can match a prompt and still have unrealistic details. A video can look good overall but contain one action that breaks the physical continuity of the scene.
 
-Strong AI evaluation requires more than deciding whether an answer “looks good.” Different dimensions should be assessed independently.
+Those are different problems, and I try to score them as different problems rather than letting one overall impression drive the evaluation.
 
-For example:
+Across the case studies, I look at things such as:
 
-- A response can be factually correct but fail the user’s instructions.
-- A response can be polished but rely on unsupported assumptions.
-- An image can satisfy the prompt while containing unrealistic physical details.
-- A video can look visually strong but contain temporal inconsistencies or unnatural object interactions.
-- Two evaluators can disagree because of evaluator error, rubric ambiguity, or both.
+- whether the model actually followed the instruction;
+- whether claims are supported by the information available;
+- how the model handles ambiguity or missing data;
+- whether a rubric has clear enough anchors to be applied consistently;
+- whether a failure is minor or changes the usefulness of the answer;
+- where reviewer disagreement is legitimate versus a calibration problem;
+- and, in domain-specific work, whether an answer is only plausible-sounding or would actually work in practice.
 
-The case studies in this repository are built to make those distinctions explicit.
-
-## Portfolio Structure
+## Case studies
 
 ### [01 — Rubric Design & Model Evaluation](01-rubric-design/)
-**Completed.** Flagship case study showing a realistic evaluation problem, weighted scoring rubric, explicit anchors, partial-credit logic, failure conditions, two model responses, scored analysis, and calibration guidance.
+A business scenario with several competing constraints. I build the rubric first, then use it to score two different model responses. The point of the exercise is to show how I separate writing quality from the quality of the actual decision.
 
 ### [02 — Benchmark Authoring](02-benchmark-authoring/)
-**Completed.** Full benchmark lifecycle: capability definition, task prompt, success criteria, reference response, model test, failure analysis, task refinement, and validation considerations.
+A benchmark-style task built around incomplete information. This section includes the task, success criteria, reference response, a model failure, and the changes I would make after testing the item.
 
 ### 03 — Model Stumping & Edge Cases
-**In development.** A realistic challenge scenario designed to expose instruction-following, assumption, prioritization, and reasoning failures.
+Planned: a realistic scenario where the difficulty comes from conflicting constraints and assumptions rather than from making the prompt unnecessarily complicated.
 
 ### [04 — Calibration & Reviewer QA](04-calibration-and-reviewer-qa/)
-**Completed.** Reviewer disagreement case showing how calibration separates evaluator error from guideline ambiguity and turns disagreement into clearer scoring guidance.
+Two evaluators score the same output differently. I work through whether the disagreement comes from reviewer error, an unclear guideline, or both, and then revise the guideline.
 
 ### 05 — Model Failure Analysis
-**In development.** Focused examples of hallucination, unsupported assumptions, incomplete reasoning, and instruction-following failure.
+Planned: focused examples of failures such as hallucination, instruction-following errors, unsupported assumptions, and incomplete reasoning.
 
 ### 06 — Multimodal Evaluation
-**In development.** Image and video evaluation focused on prompt adherence, realism, visual consistency, temporal consistency, motion, and artifact identification.
+Planned: image and video evaluation covering prompt adherence, realism, artifacts, motion, object interaction, and temporal consistency.
 
 ### 07 — Domain Expert Evaluation
-**In development.** Business operations and event-planning cases demonstrating the difference between plausible-sounding output and operationally sound output.
+Planned: business operations and event-planning examples where a model response can sound completely reasonable while still creating an operational problem.
 
-### About
-**In development.** Background on evaluation methodology, professional experience, and the principles used throughout the portfolio.
+## Background I bring to the work
 
-## Confidentiality
+In addition to AI evaluation experience, I have approximately 30 years of corporate/business experience, including executive support, operations, business communication, prioritization, and cross-functional coordination. I also have extensive practical event-planning knowledge.
 
-The portfolio does not reproduce proprietary prompts, model outputs, client information, or confidential project material.
+That background is especially useful in domain-expert evaluation. It helps me spot the difference between an answer that uses the right terminology and one that would actually hold up in a real business situation.
 
-Case studies are reconstructed portfolio exercises designed to demonstrate evaluation methods used in professional AI training and quality-review work.
+My AI evaluation work has included LLM response evaluation, preference ranking, rubric-based scoring, task and benchmark development, reference responses, hallucination and factuality review, reviewer QA, calibration, transcription QA, and multimodal image/video evaluation.
 
-## Professional Focus
+## One rule I come back to often
 
-This portfolio is intended to support work in areas such as:
+If the evidence is not there, I do not fill it in for the model.
 
-- AI Evaluation
-- AI Training
-- AI Quality Review
-- Rubric Writing
-- Benchmark / Task Authoring
-- Domain-Expert Evaluation
-- Multimodal Evaluation
-- Prompt / Response Evaluation
-- AI QA and Model Evaluation
-
-## Core Principle
-
-The objective is not simply to label an output as good or bad. The objective is to define quality clearly enough that model behavior can be assessed consistently, failures can be isolated precisely, and evaluation decisions can be defended with evidence.
+Something can be plausible and still be unsupported. That distinction comes up repeatedly in evaluation work, especially when a model gives a confident, polished answer that goes beyond what the prompt or source actually establishes.
