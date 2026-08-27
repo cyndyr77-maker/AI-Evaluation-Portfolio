@@ -1,6 +1,6 @@
 # Model Response Analysis
 
-Here I use the rubric on two different answers to the same venue task. I made the second answer intentionally polished because that is often where evaluation gets interesting: bad answers are not always badly written.
+Here I use the rubric on two answers to the same venue task. I made the second one intentionally polished because those are sometimes the more interesting answers to evaluate. Something can sound completely reasonable and still be wrong.
 
 ## Model Response A
 
@@ -22,13 +22,13 @@ Here I use the rubric on two different answers to the same venue task. I made th
 
 ### Why I would give it full credit
 
-The answer gets to B for the right reasons. It does not just say that B is "best overall"; it connects the recommendation to the room layout and parking, which are two of the requirements that matter most for this event.
+It gets to B for the right reasons. It doesn't just call B the "best overall." It points to the room layout and parking, which are two things that actually matter for this group.
 
-It also handles the unknowns correctly. The model does not pretend it knows the final service-charge total or exactly how the parking re-entry works. It tells the planner to confirm those items before signing.
+It also doesn't make up the missing pieces. We don't know the final service-charge total or exactly how parking re-entry works, so the model says to confirm them before signing.
 
-The response is short, but nothing important is missing. It has the recommendation, two reasons, the cost tradeoff, and a practical contracting check.
+The answer is short, but I don't think it needs to be longer. It gave the recommendation, two reasons, the tradeoff and something useful to verify.
 
-I would rather see an answer this short and well supported than a much longer comparison that introduces information the user never provided.
+I would rather have this than a long comparison that starts filling in information the user never gave us.
 
 ---
 
@@ -54,42 +54,44 @@ The raw score is already below the score caps, so I would leave it at 32.
 
 ### What I would flag
 
-The biggest problem is not the writing. The writing is actually pretty good.
+The biggest problem isn't the writing. The writing is actually pretty good.
 
-The problem is that the answer builds its recommendation around things it does not know.
+The problem is that the recommendation is built around things the model doesn't know.
 
 It assumes:
 
-- the hotel will negotiate away enough of the $12,000 overage to solve the budget problem;
+- the hotel will negotiate enough of the $12,000 overage away to fix the budget problem;
 - Proposal C probably has better parking;
 - Proposal C has upgraded AV because it is the premium option.
 
-None of those facts are in the prompt.
+None of that is in the prompt.
 
-The response also makes the guestrooms the deciding factor even though the room block is paid separately and the user has given much more specific requirements around the meeting space, parking, and event budget.
+It also makes the guestrooms the deciding factor even though those rooms are paid separately and the user gave much more specific requirements for the actual meeting: room layout, parking and budget.
 
-There is another smaller issue in the way it compares A and B. Saying they provide the "same basic meeting function" ignores a difference that the user specifically cared about: B keeps the meeting rooms together and A does not.
+There is another issue with the way it compares A and B. Saying they provide the "same basic meeting function" skips over the exact difference the user cared about. B keeps the rooms together. A doesn't.
 
-### Why the score is low even though the answer sounds reasonable
+### Why I would still score the writing well
 
-If I only read this for tone and fluency, it could pass as a professional recommendation. If someone acted on it, however, they could spend time pursuing a venue that is already over budget based on the model's assumption that a large discount will happen.
+If I only looked at tone and fluency, this could easily sound like a professional recommendation.
 
-That is why I separate communication from the rest of the score. I still gave the answer 7/10 for writing. It just does not get to use good writing to make up for weak evidence and a bad decision.
+But if someone actually followed it, they could spend time pursuing a venue that is already over budget because the model decided a big discount would probably happen.
+
+So I still give it 7/10 for communication. I just don't let good writing make up for made-up information and a bad decision.
 
 ---
 
-## A calibration issue I would expect
+## Where reviewers could disagree
 
-Suppose one reviewer gives Response B **32/100** and another gives it **48/100**.
+Say one reviewer gives Response B **32/100** and another gives it **48/100** because they think Proposal C is still reasonable since "hotels negotiate all the time."
 
-The second reviewer says that Proposal C is still a reasonable choice because "hotels negotiate all the time."
+That is where I would push back.
 
-That is where I would stop the calibration discussion. Whether hotels sometimes negotiate is not the question. The task specifically says to use the information provided, and the prompt never says C will reduce its price.
+Hotels may negotiate all the time. I know that from experience too. But the model wasn't given a negotiated price. I can't give it credit for a price reduction that doesn't exist in the task.
 
-The reviewer can use domain knowledge to understand why an issue matters. The reviewer cannot use it to supply evidence that the model did not have.
+Domain knowledge can help me understand why something matters. It shouldn't be used to fill in evidence for the model.
 
-If this disagreement came up repeatedly, I would add a guideline note along these lines:
+If I saw reviewers doing this repeatedly, I would add something simple to the guideline:
 
 > Score against the information in the task. Do not increase a score because an unsupported model claim seems plausible based on personal or professional experience.
 
-That gives reviewers a clearer boundary without trying to eliminate judgment altogether.
+That gives reviewers a clearer line without trying to remove judgment completely.
