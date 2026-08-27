@@ -1,14 +1,16 @@
 # Golden / Reference Response
 
-For a research benchmark like this, I would not write the golden answer from memory or from a general web search. I would research it independently from the same authoritative source family required by the task and lock the evidence used for scoring.
+For this type of research task, I would build the golden answer myself from the same approved sources I expect the model to use.
 
-## How I would build the golden response
+I wouldn't write it from memory and I wouldn't grab an answer from a random Google result just because it looked right.
 
-### 1. Select the aircraft record
+## How I would build it
 
-Choose a public FAA aircraft record that gives enough information to make the task scoreable without requiring personal owner information.
+### 1. Pick the aircraft record
 
-I would record:
+I would choose a public FAA aircraft record that gives me enough information to make the task scoreable without needing the owner's personal information.
+
+I would save the fields I need, including:
 
 - N-number
 - serial number
@@ -17,72 +19,68 @@ I would record:
 - manufacture year if available
 - registration status
 - certificate expiration date if available
-- aircraft reference code/data needed for the task
+- aircraft reference information needed for the task
 - engine reference information needed for the task
-- date the FAA information was retrieved
+- the date I pulled the FAA information
 
-### 2. Verify the field definitions
+### 2. Check what the fields actually mean
 
-I would check the FAA database documentation rather than assuming that a field name means what I think it means.
+I would also read the FAA documentation for the fields instead of assuming I know what every label means.
 
-That matters in the recalibrated task because the model is being tested on whether it understands the limits of the data, not just whether it can repeat the values.
+That becomes especially important in the harder version because I am testing whether the model understands what the data does and doesn't prove.
 
-### 3. Write the reference answer from the locked evidence
+If I am going to mark a model wrong for overstating a field, I need to be sure my own interpretation is right first.
 
-The answer would follow this structure:
+### 3. Build the answer from the saved record
+
+My answer key would include something like this:
 
 ## Part A — Current aircraft record
 
 | Field | Golden value |
 |---|---|
-| N-number | `[locked FAA value]` |
-| Manufacturer | `[locked FAA value]` |
-| Model | `[locked FAA value]` |
-| Serial number | `[locked FAA value]` |
-| Year manufactured | `[locked FAA value or Not available]` |
-| Registration status | `[locked FAA value]` |
-| Certificate expiration | `[locked FAA value or Not available]` |
+| N-number | `[saved FAA value]` |
+| Manufacturer | `[saved FAA value]` |
+| Model | `[saved FAA value]` |
+| Serial number | `[saved FAA value]` |
+| Year manufactured | `[saved FAA value or Not available]` |
+| Registration status | `[saved FAA value]` |
+| Certificate expiration | `[saved FAA value or Not available]` |
 
 ## Part B — FAA reference information
 
-Report the relevant aircraft and engine reference values exactly as supported by the FAA reference data used for the benchmark.
+I would save the aircraft and engine reference values that are actually supported by the FAA data.
 
-I would be careful with the wording here. The reference file can support a statement about the reference data associated with a make/model. I would not automatically rewrite that as "this individual aircraft currently has this exact engine installed" unless the evidence used in the task actually proves that.
+I would be careful about how I word the engine information. If the reference file tells me what is associated with a make/model, I don't automatically turn that into "this exact aircraft currently has this exact engine installed." Those are not necessarily the same claim.
 
-## Part C — Evidence check
+## Part C — Evidence questions
 
 ### Statement 1: The aircraft is currently registered in the United States.
 
-**Expected label:** Based on the locked current registration record.
-
-The golden rationale should point directly to the registration status/current record.
+The expected answer comes from the current registration record.
 
 ### Statement 2: The aircraft was manufactured in the same year its current registration certificate was issued.
 
-**Expected label:** Determined by comparing the actual locked values.
-
-The key is that the model must compare the fields. It should not assume registration date and manufacture year are related.
+I would compare the actual saved values. I wouldn't assume the dates are connected.
 
 ### Statement 3: The engine reference proves the exact engine currently installed on this individual aircraft.
 
-**Expected label:** **Cannot Determine from the FAA data used** unless the selected evidence specifically establishes the installed engine.
-
-The reference information should not be stretched beyond what it supports.
+The expected answer would normally be **Cannot Determine from the FAA data used** unless the specific evidence in the task actually proves the installed engine.
 
 ### Statement 4: A blank permissible field means the FAA record is erroneous.
 
-**Expected label:** **Not Supported.**
+**Not Supported.** A permissible field can be blank without the record being wrong.
 
-FAA documentation explains that permissible fields may be blank and should not automatically be considered errors.
+## Why there isn't a live N-number in this portfolio
 
-## Why I am not putting a live N-number and current values into this portfolio file
+FAA records can change. If I put a live aircraft and all of its current values here, eventually the portfolio could look wrong just because the registry was updated.
 
-FAA registration information is updated regularly. A live aircraft record could change after the benchmark is published, which would make the visible golden answer look stale even though the evaluation process was correct when it was created.
+In a real benchmark, I would save the exact record and retrieval date used for scoring.
 
-In an actual benchmark workflow I would lock the record and retrieval date internally. For the portfolio, the important part is showing how I build and validate the answer key rather than turning the page into a permanently maintained aircraft lookup.
+For the portfolio, I am trying to show **how I build and validate the golden answer**, not maintain a live aircraft lookup forever.
 
-## What counts as an acceptable model answer
+## What I would accept from the model
 
-The model does not need to match the golden response word for word.
+The model doesn't have to sound like me or copy the golden response word for word.
 
-I would score whether it retrieved the same facts from the approved source, interpreted the fields correctly, reached the same evidence-based conclusions, and clearly identified anything the FAA data could not establish.
+I am looking for the same facts, the right FAA sources, the right interpretation of the fields and a clear answer when the data doesn't actually let us know something.
