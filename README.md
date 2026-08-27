@@ -36,8 +36,8 @@ A reconstructed video-stumping example centered on a bride and several other peo
 ### [04 — Calibration & Reviewer QA](04-calibration-and-reviewer-qa/)
 Two evaluators score the same output differently. I work through whether the disagreement comes from reviewer error, an unclear guideline, or both, and then revise the guideline.
 
-### 05 — Model Failure Analysis
-Planned: focused examples of failures such as hallucination, instruction-following errors, unsupported assumptions, and incomplete reasoning.
+### [05 — Model Failure Analysis: Hallucination & Cheating](05-model-failure-analysis/)
+Three short failure patterns: a model inventing a fact, a citation that does not actually support the claim, and a model that technically reaches the right answer while cheating the capability the benchmark was supposed to test. I also show how I would change the success criteria when the rubric accidentally rewards the shortcut.
 
 ### 06 — Multimodal Evaluation
 Planned: image and video evaluation covering prompt adherence, realism, artifacts, motion, object interaction, and temporal consistency.
