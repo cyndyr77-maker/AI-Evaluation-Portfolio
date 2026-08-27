@@ -1,12 +1,10 @@
 # Benchmark Task
 
-## Capability under test
+## What I am testing
 
-**Evidence-bounded recommendation under incomplete information**
+Can the model make a useful recommendation when some information is missing **without filling in the missing pieces itself**?
 
-The model must make the strongest preliminary recommendation supported by the available information without treating missing operational details as known facts.
-
-## User prompt
+## Prompt
 
 A company is arranging round-trip coach transportation for **220 conference attendees** between a downtown hotel and an off-site dinner venue.
 
@@ -50,30 +48,14 @@ The planner asks:
 
 > Which vendor would you recommend at this stage? Give one recommendation, explain the two most important reasons, identify one tradeoff, and state what still needs to be confirmed before contracting. Base the recommendation only on the information provided.
 
-## Intended challenge
+## What makes the task tricky
 
-The lowest-price option is not automatically the best-supported choice because Vendor A leaves important operating details unresolved.
+All three vendors have enough seats on paper, so a simple capacity check does not solve the problem.
 
-Vendor C is more complete but does not confirm that it can meet the required two-wave departure pattern.
+A is the cheapest, but its proposal leaves part of the operating plan unclear. C includes gratuity but does not confirm the two outbound waves. B costs more, but it is the only proposal that clearly confirms the schedule the planner described.
 
-Vendor B is the only proposal that explicitly confirms the operating schedule most closely aligned with the stated transportation plan.
+I would expect the strongest answer to recommend **Vendor B for now** because more of the required service is actually confirmed.
 
-The model should therefore recognize that **completeness of confirmed operational coverage** may justify a higher preliminary price.
+What I do **not** want the model to do is turn the gaps in A or C into facts. It should not say A will charge an extra fee, C cannot support two waves, or either vendor will negotiate unless the prompt gives that information.
 
-## Expected answer direction
-
-A strong response should recommend **Vendor B at this stage**, while recognizing that this is a preliminary recommendation rather than a final contracting decision.
-
-The answer should not claim that Vendor A requires an extra fee, that Vendor C cannot support two waves, or that any vendor will negotiate unless those facts are provided.
-
-## Why this task is useful
-
-This task creates a realistic situation in which a model can fail by:
-
-- optimizing for lowest visible price,
-- treating missing details as if they are favorable,
-- interpreting "not confirmed" as "not available,"
-- inventing common industry practices,
-- failing to distinguish a preliminary recommendation from a final decision.
-
-The benchmark measures whether the model can remain useful **without becoming overconfident**.
+That is the real test: make a decision, but do not become more certain than the evidence allows.
