@@ -1,52 +1,32 @@
 # Reference Response
 
-> I would recommend **Vendor B at this stage**. It is the only proposal that explicitly confirms both required outbound departure waves and the full 9:30–10:15 PM return window, which reduces schedule risk. It also confirms that the coaches remain on-site and that driver gratuity is included, so more of the operating plan and cost is known before contracting.
+> I would recommend **Vendor B at this stage**. It is the only proposal that clearly confirms both outbound departure waves and the full 9:30–10:15 PM return window, so there is less uncertainty around whether the schedule can actually be executed. It also confirms that the coaches remain on-site and that gratuity is included.
 >
-> The tradeoff is price: Vendor B is $1,400 more than Vendor A and $800 more than Vendor C.
+> The tradeoff is cost. B is $1,400 more than Vendor A and $800 more than Vendor C.
 >
-> Before contracting, I would still confirm the final all-in price and any cancellation, overtime, or change-order terms that are not included in the preliminary proposal.
+> Before contracting, I would confirm the final all-in price and any cancellation, overtime, or change-order terms that are not included in the preliminary proposal.
 
-## Why this is a strong reference response
+## Why I would use this as the reference
 
-This answer is not treated as "golden" because its wording is ideal. It is strong because it satisfies the evaluation standard.
+I am not looking for models to copy this wording. I am using it to show what a full-credit answer needs to accomplish.
 
-### 1. It makes the best-supported recommendation
+The answer chooses B because B has the most complete confirmed operating plan. It does not claim that A is incapable of doing the job or that C cannot support two waves. Those things are not known from the proposals.
 
-Vendor B is selected because its proposal confirms more of the required operating schedule than the other two options.
+It also does not avoid the decision just because there are still contract details to confirm. The user asked for a recommendation **at this stage**, so the response makes one and then identifies what still needs to be checked.
 
-### 2. It uses the evidence boundary correctly
+The cost comparison is supported directly by the numbers in the prompt:
 
-The response does not say:
+- B is **$1,400 more than A**.
+- B is **$800 more than C**.
 
-- Vendor A will charge for standby time,
-- Vendor C cannot support the two departure waves,
-- or either lower-priced vendor is incapable of meeting the schedule.
+## Other answers could still get full credit
 
-Those facts are unknown.
+I would not require the same final confirmation item.
 
-### 3. It identifies a real tradeoff
+For example, a response could reasonably say to confirm:
 
-The price premium is stated using only arithmetic supported by the prompt:
+- whether A can cover the required return schedule without another charge;
+- whether C can support both outbound waves;
+- or whether B has any additional fees not shown in the preliminary quote.
 
-- $9,200 − $7,800 = **$1,400** more than Vendor A
-- $9,200 − $8,400 = **$800** more than Vendor C
-
-### 4. It remains useful despite incomplete information
-
-The answer does not avoid making a recommendation simply because every contract term is not known. It makes a **preliminary** recommendation and separates that decision from the remaining contracting checks.
-
-## Acceptable variation
-
-A model does not need to match this wording to receive full credit.
-
-For example, a strong answer could choose as its verification item:
-
-- whether Vendor A can cover the return window without additional cost,
-- whether Vendor C can support both outbound waves,
-- or whether Vendor B has any fees not shown in the preliminary quote.
-
-Any of those can be valid if the answer clearly distinguishes confirmed information from unresolved information.
-
-## Reference-response principle
-
-A reference response should define the **quality bar**, not create a hidden wording-matching test.
+The wording can vary. The important part is that the model does not pretend an unresolved detail has already been answered.
