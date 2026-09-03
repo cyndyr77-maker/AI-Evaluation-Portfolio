@@ -12,13 +12,13 @@ The examples are reconstructed from the types of work I have done. They do not r
 
 If you are short on time, I would start here:
 
-### [02 — Benchmark Authoring & Recalibration](02-benchmark-authoring/)
+### [02 — Benchmark Authoring & Recalibration](02-benchmark-authoring-and-recalibration/)
 I build a research benchmark using public FAA aircraft data, define the success criteria, create the golden response and test the model. When the model gets the first version right, I look at whether the task is actually testing enough and recalibrate it rather than changing the standard just to make the model fail.
 
-### [04 — Calibration & Reviewer QA](04-calibration-and-reviewer-qa/)
+### [04 — Calibration & Reviewer QA](04-reviewer-qa-and-calibration/)
 Two evaluators score the same model output differently. I work through whether the disagreement comes from reviewer error, an unclear guideline or both, then tighten the guideline so the same issue is easier to score consistently the next time.
 
-### [08 — ATC Transcription & Research-Based Verification](08-atc-transcription-research/)
+### [08 — ATC Transcription & Research-Based Verification](08-atc-transcription-and-research-verification/)
 ATC work that looked like transcription from the outside but required a lot of research to get right. I used call signs, waypoints, STARs, airport diagrams, FAA information, historic flight data and the surrounding audio to verify unclear sections rather than guessing. The work later progressed into reviewing other ATC submissions as well.
 
 ## What I bring to evaluation
@@ -42,16 +42,16 @@ That experience helps when an AI output is technically complete but doesn't make
 
 ## All case studies
 
-### [01 — Rubric Design & Model Evaluation](01-rubric-design/)
+### [01 — Rubric Design & Model Evaluation](01-rubric-design-and-model-evaluation/)
 A business scenario with several competing constraints. I build the rubric first and then score two different model responses, including one that sounds polished but makes a weak recommendation based on unsupported assumptions.
 
-### [02 — Benchmark Authoring & Recalibration](02-benchmark-authoring/)
+### [02 — Benchmark Authoring & Recalibration](02-benchmark-authoring-and-recalibration/)
 A research benchmark using public FAA aircraft data. It follows the prompt → success criteria/rubric → golden response → model test → recalibration process and shows what I do when the model gets the first version right.
 
-### [03 — Multimodal Model Stumping](03-model-stumping/)
+### [03 — Multimodal Model Stumping](03-multimodal-model-stumping/)
 A reconstructed video-stumping example centered on a bride and several other people. I build questions that require the model to identify the right person, connect speech to the correct speaker, follow people across the video and use both visual and audio information without making the question itself ambiguous.
 
-### [04 — Calibration & Reviewer QA](04-calibration-and-reviewer-qa/)
+### [04 — Calibration & Reviewer QA](04-reviewer-qa-and-calibration/)
 Two evaluators score the same output differently. I work through the disagreement, decide where the scoring went wrong and revise the guideline where it leaves too much room for interpretation.
 
 ### [05 — Model Failure Analysis: Hallucination & Cheating](05-model-failure-analysis/)
@@ -63,7 +63,7 @@ An astronaut-folding-towels video showing the full iteration loop: build the pro
 ### [07 — Domain Expert Evaluation: Does the Answer Actually Work?](07-domain-expert-evaluation/)
 Examples of how I use real business experience when evaluating AI output. The main example is a formula-based spreadsheet that looks finished but breaks when the assumptions change. I also cover executive presentations, large-scale event feasibility, business sequencing and working documents.
 
-### [08 — ATC Transcription & Research-Based Verification](08-atc-transcription-research/)
+### [08 — ATC Transcription & Research-Based Verification](08-atc-transcription-and-research-verification/)
 ATC transcription that required research into call signs, flight numbers, waypoints, STARs, airport diagrams, FAA information, historic flight data and aviation terminology. I also show how that work progressed into reviewing other submissions and verifying corrections rather than relying on what sounded plausible.
 
 ## The range of work represented here
