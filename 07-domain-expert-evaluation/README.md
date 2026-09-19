@@ -1,38 +1,34 @@
-# Business financial-model evaluation
+# Evaluating an event financial model
 
-**Evidence status:** Synthetic demonstration created for this portfolio with AI assistance. The figures, scenarios, and deliberately defective model are illustrative—not client data, historical savings, or captured AI output.
+An international event's attendance forecast falls from 2,000 to 1,600. Leadership needs to know whether it can still meet a 25% margin target.
 
-## Decision
-An international event's attendance forecast falls from 2,000 to 1,600. Does the event still meet a 25% operating-margin target, and which program adjustment should leadership approve?
+This is a fictional example built for the portfolio with AI assistance. The inputs and flawed calculations were created for the exercise; they are not client data or a captured model response.
 
-The corrected model shows **21.67% margin in the downside**, below target. A proposed cost plan restores **25.34% at the budget exchange rate**, but only **19.80% under the FX stress case**. The recommendation is conditional, not an unconditional approval.
+## What I found
+The corrected downside forecast produces a **21.67% margin**. A proposed cost plan brings it to **25.34% at the budget exchange rate**, but the margin falls to **19.80% if the exchange rate moves against the event**.
 
-## Why this reflects my domain
-My event work included multimillion-dollar forecasts, registration and sponsorship revenue, margins, break-even points, pegged currency rates, vendor negotiations, and operational changes during a downturn. Here, that experience guides which assumptions to test and which errors matter.
+That means the cost plan needs further checks before approval. The budget exchange rate alone isn't enough to justify the decision.
 
-## Inspect the demonstration
-- [Decision memo and calculated results](decision-memo.md) — start here; no coding required.
-- [Inputs and assumptions](assumptions.md) — currencies, revenue drivers, cost behavior, and exclusions.
-- [Evaluation findings](evaluation-findings.md) — two planted errors and their decision impact.
-- [Scenario data](scenarios.json), [calculation model](financial-model.mjs), and [automated checks](test-model.mjs).
+## Why I chose this example
+I built and used event forecasts covering registration revenue, sponsorships, expenses, margins, and break-even points. During an economic downturn, I used those models to recommend program changes while protecting the attendee experience.
 
-The model is a small JavaScript calculation demonstration, not an Excel workbook or a claim of production software engineering. It makes the same dependency checks I would apply to a spreadsheet inspectable.
+This example shows the checks I would apply to a working budget: change the attendance, reconcile the cost categories, test the currency assumption, and see whether the recommendation still holds.
 
-## Reproduce the numbers
-With Node.js installed, from the repository root:
+## Start here
+- [Decision memo](decision-memo.md) — the results and recommendation.
+- [Inputs and assumptions](assumptions.md) — what the model includes and leaves out.
+- [Evaluation findings](evaluation-findings.md) — the two errors and how they change the decision.
+
+## Check the calculations
+The [scenario data](scenarios.json), [JavaScript model](financial-model.mjs), and [tests](test-model.mjs) are included so the numbers can be reproduced. This is a small calculation example rather than an Excel workbook.
+
+With Node.js installed, run these commands from the repository folder:
 
 ```sh
 node 07-domain-expert-evaluation/run-model.mjs
 node 07-domain-expert-evaluation/test-model.mjs
 ```
 
-No external packages or network calls are required. The first command prints corrected and deliberately flawed results; the second checks totals, boundary conditions, sensitivities, and the planted errors.
-
-## Other business outputs I evaluate
-- Executive presentations: Is the decision clear, and do the figures match the underlying model?
-- Event plans: Does usable capacity include staging, circulation, breaks, and production needs?
-- Operational documents: Are owners, deadlines, approvals, and dependencies explicit?
-
-These are inspection questions, not reasons to override a task's stated rubric.
+The first prints both the corrected and deliberately flawed results. The second checks the totals, break-even boundary, changes in assumptions, and planted errors. No extra packages are needed.
 
 [Return to portfolio](../README.md)
