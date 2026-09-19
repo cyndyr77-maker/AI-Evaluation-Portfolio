@@ -1,34 +1,33 @@
 # Cindy Rosado
-## AI Evaluation · Business Operations · Financial Modeling
+**AI evaluation, business operations, and financial modeling**
 
-I combine hands-on AI evaluation with 30 years of experience in executive operations, international events, aviation, and customer management. My work includes benchmark and rubric design, golden responses, multimodal evaluation, preference ranking, and reviewer QA.
+I work on AI evaluation, benchmark tasks, rubrics, and reviewer QA. Before moving into AI work, I spent years running international events, supporting executive leadership, and managing aviation operations.
 
-My business background includes financial forecasting for multimillion-dollar events, programs serving up to 10,000 attendees, international team leadership, and aircraft operations. That experience helps me identify when an AI answer is accurate on the surface but unreliable in practice.
+That background shapes what I check. If a model builds a budget, I change the assumptions and see whether the formulas still work. If it recommends a venue, I look beyond the capacity number. If it cites a source, I check whether the source actually supports the answer.
 
-[Experience summary](EXPERIENCE.md) · [Contact Cindy](mailto:cyndyr77@gmail.com)
+[My experience](EXPERIENCE.md) · [Get in touch](mailto:cyndyr77@gmail.com)
 
-## Start with these three examples
+## Three examples to start with
 
-| Example | What you can inspect | Skills demonstrated |
-|---|---|---|
-| [Business financial-model evaluation](07-domain-expert-evaluation/) | Synthetic event inputs, a runnable model, flawed calculations, test cases, and a decision memo | Forecasting, margin analysis, currency assumptions, error diagnosis |
-| [Benchmark design and evidence boundaries](02-benchmark-authoring-and-recalibration/) | A complete synthetic aircraft record, two task versions, answer key, and scored illustrative responses | Task authoring, rubric design, source grounding, recalibration |
-| [Reviewer QA and calibration](04-reviewer-qa-and-calibration/) | Reviewer disagreement, evidence-based feedback, and a revised guideline | Quality review, severity judgment, calibration |
+### [Evaluating an event financial model](07-domain-expert-evaluation/)
+An attendance forecast drops, but a flawed model still shows a healthy margin. This example traces the errors, corrects the calculations, and explains what leadership needs to know before approving the plan. Start with the decision memo; you don't need to read the code.
 
-These examples show how I define success, inspect the evidence, identify consequential errors, and explain what needs to change.
+### [Building a benchmark and answer key](02-benchmark-authoring-and-recalibration/)
+A fictional aircraft record provides a small, complete example of task design. The first task asks for facts. The second asks what those facts actually establish. Both include scoring rules and a finished answer key.
 
-## More examples
+### [Resolving a reviewer disagreement](04-reviewer-qa-and-calibration/)
+Two reviewers disagree about a policy summary. I explain the unsupported claim, why it matters, and how I would clarify the guideline and give feedback.
 
-- [Venue recommendation and rubric scoring](01-rubric-design-and-model-evaluation/) — a self-contained event decision with transparent scoring.
-- [Multimodal question design](03-multimodal-model-stumping/) — a process narrative about identity, speaker attribution, and temporal reasoning.
-- [Model failure analysis](05-model-failure-analysis/) — unsupported claims, citation mismatch, and insufficient evidence of a comparison.
-- [Generative video evaluation](06-generative-video-evaluation/) — a process narrative connecting observed defects to prompt revisions and re-evaluation.
-- [ATC transcription and verification](08-atc-transcription-and-research-verification/) — a process narrative about checking ambiguous aviation audio without inventing certainty.
+## More of my work
 
-## How to read the evidence
+- [Venue selection and rubric scoring](01-rubric-design-and-model-evaluation/)
+- [Writing fair questions about video](03-multimodal-model-stumping/)
+- [Analyzing unsupported claims and incomplete answers](05-model-failure-analysis/)
+- [Reviewing generated video and revising prompts](06-generative-video-evaluation/)
+- [Researching and verifying ATC transcription](08-atc-transcription-and-research-verification/)
 
-This is a portfolio of demonstrations and reconstructed workflows, not client deliverables. Synthetic data, authored response examples, and process narratives are labeled in each case. Illustrative scores are not measured model-performance results. The video and ATC narratives do not include the original media and cannot be independently replayed.
+## About these examples
 
-AI assistance was used to draft and organize portfolio text and implement the synthetic demonstration. These materials illustrate my evaluation approach and domain experience; they are not a claim of unaided software development. No proprietary prompts, client records, or employer documents are included.
+The examples use fictional data or reconstruct the kinds of work I've done. They contain no client records or employer materials. Sample responses and scores are illustrative unless stated otherwise; the video and audio write-ups do not include the original media.
 
-My standard: an evaluation should explain both what the evidence supports and what it does not.
+I used AI to help edit and organize this portfolio and build the financial-model demonstration. My work experience is summarized separately in [My experience](EXPERIENCE.md).
