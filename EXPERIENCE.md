@@ -1,7 +1,7 @@
 # Experience summary
 
 ## AI training and evaluation projects | 2025–Present
-Independent contract assignments across benchmark design, rubric development, golden responses, RLHF preference ranking, multimodal evaluation, and reviewer QA. My source resume records 75–100 benchmark tasks and QA review of hundreds of submissions. The portfolio demonstrations are separate from those historical counts.
+Independent contract assignments across benchmark design, rubric development, golden responses, RLHF preference ranking, multimodal evaluation, and reviewer QA. Designed 75–100 benchmark tasks and reviewed hundreds of submissions across projects. The examples in this portfolio were created separately to illustrate that work.
 
 ## Executive operations | 2020–Present
 Executive presentations, leadership meeting materials, team updates, action tracking, global scheduling, travel, and expenses. Worked with a new travel-management partner and internal teams to improve booking workflows, communication, and escalation handling.
