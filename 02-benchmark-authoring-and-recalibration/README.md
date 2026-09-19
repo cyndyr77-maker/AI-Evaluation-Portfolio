@@ -1,20 +1,20 @@
-# Benchmark design and evidence boundaries
+# Building a benchmark and answer key
 
-**Evidence status:** A complete synthetic demonstration with authored responses. No real aircraft, FAA extract, or live model run is represented.
+This example uses a fictional aircraft record and sample responses written for the portfolio. It includes everything needed to follow the scoring, without relying on a live database or private project materials.
 
-This replaces an earlier template that described an FAA lookup but left the answer key unfilled. A fixed synthetic source lets readers check every answer without relying on changing live records.
+## The task
+The first version asks the model to retrieve fields accurately. The second asks what those fields establish. An engine reference, for example, does not confirm which engine is currently installed on a particular aircraft.
 
-## What this tests
-Version 1 tests accurate retrieval from a supplied record. Version 2 tests whether an answer stays within the evidence: a registry status is not an inspection, a reference entry is not a current installed-engine confirmation, and an allowed blank is not automatically an error.
+That distinction is what I want the second task to test: can the answer stay within the evidence?
 
-## Inspect the complete example
-1. [Task and frozen source packet](benchmark-task.md)
+## Read the example
+1. [Task and source packet](benchmark-task.md)
 2. [Scoring rules](success-criteria.md)
-3. [Completed reference response](reference-response.md)
-4. [Authored response examples and scoring](failure-analysis.md)
+3. [Completed answer key](reference-response.md)
+4. [Sample responses and scores](failure-analysis.md)
 
-The scores illustrate applying a rubric. They do not establish benchmark difficulty or any model's failure rate. Those claims would require recorded runs with model/version, date, settings, source packet, and unedited outputs.
+The responses illustrate how the rubric works. They are not results from a recorded model test.
 
-My evaluation principle is to write the criteria before scoring and preserve version-specific results when revising the task.
+I write the scoring criteria before evaluating a response. If I revise the task, I keep the original results attached to the original version so the two don't get confused.
 
 [Return to portfolio](../README.md)
