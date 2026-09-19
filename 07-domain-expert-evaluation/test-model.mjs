@@ -1,0 +1,31 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {evaluate,evaluateFlawed} from './financial-model.mjs';
+const rows=JSON.parse(await readFile(new URL('./scenarios.json',import.meta.url),'utf8'));
+export function checkModel(rows) {
+ const [base,down,mit,fx]=rows.map(evaluate);
+ const near=(a,b)=>assert.ok(Math.abs(a-b)<0.000001, a+' != '+b);
+ near(base.revenueUsd,2400000); near(base.costUsd,1730000); near(base.profitUsd,670000);
+ near(down.profitUsd,442000); assert.equal(down.meetsTarget,false);
+ near(mit.profitUsd,517000); assert.equal(mit.meetsTarget,true);
+ near(fx.profitUsd,404000); assert.equal(fx.meetsTarget,false);
+ assert.equal(base.breakEvenAttendees,825);
+ assert.equal(mit.breakEvenAttendees,693);
+ const at=evaluate({...rows[0],attendance:825});
+ const below=evaluate({...rows[0],attendance:824});
+ assert.ok(at.profitUsd>=0 && below.profitUsd<0);
+ const extra=evaluate({...rows[0],attendance:2001});
+ near(extra.revenueUsd-base.revenueUsd,900); near(extra.costUsd-base.costUsd,330);
+ near(extra.profitUsd-base.profitUsd,570);
+ const sponsor=evaluate({...rows[0],sponsorshipUsd:500000});
+ near(base.profitUsd-sponsor.profitUsd,100000);
+ assert.equal(evaluate({...rows[0],attendance:0,sponsorshipUsd:0}).margin,null);
+ assert.equal(evaluate({...rows[0],ticketUsd:0}).breakEvenAttendees,null);
+ assert.throws(()=>evaluate({...rows[0],attendance:-1}));
+ assert.throws(()=>evaluate({...rows[0],usdPerLocal:0}));
+ assert.throws(()=>evaluate({...rows[0],targetMargin:1}));
+ assert.equal(evaluateFlawed(rows[1]).meetsTarget,true);
+ near(evaluateFlawed(rows[1]).profitUsd-down.profitUsd,460000);
+ return 'Passed: expected totals, target decisions, break-even boundary, input sensitivity, invalid inputs, and planted defects.';
+}
+console.log(checkModel(rows));

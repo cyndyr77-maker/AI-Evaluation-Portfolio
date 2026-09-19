@@ -1,0 +1,50 @@
+[
+  {
+    "id": "baseline",
+    "attendance": 2000,
+    "ticketUsd": 900,
+    "sponsorshipUsd": 600000,
+    "fixedLocal": 700000,
+    "variableLocalPerAttendee": 300,
+    "usdPerLocal": 1.1,
+    "marketingUsd": 200000,
+    "sponsorFulfillmentUsd": 100000,
+    "targetMargin": 0.25
+  },
+  {
+    "id": "attendance-downside",
+    "attendance": 1600,
+    "ticketUsd": 900,
+    "sponsorshipUsd": 600000,
+    "fixedLocal": 700000,
+    "variableLocalPerAttendee": 300,
+    "usdPerLocal": 1.1,
+    "marketingUsd": 200000,
+    "sponsorFulfillmentUsd": 100000,
+    "targetMargin": 0.25
+  },
+  {
+    "id": "mitigation",
+    "attendance": 1600,
+    "ticketUsd": 900,
+    "sponsorshipUsd": 600000,
+    "fixedLocal": 650000,
+    "variableLocalPerAttendee": 300,
+    "usdPerLocal": 1.1,
+    "marketingUsd": 180000,
+    "sponsorFulfillmentUsd": 100000,
+    "targetMargin": 0.25
+  },
+  {
+    "id": "mitigation-fx-stress",
+    "attendance": 1600,
+    "ticketUsd": 900,
+    "sponsorshipUsd": 600000,
+    "fixedLocal": 650000,
+    "variableLocalPerAttendee": 300,
+    "usdPerLocal": 1.2,
+    "marketingUsd": 180000,
+    "sponsorFulfillmentUsd": 100000,
+    "targetMargin": 0.25
+  }
+]

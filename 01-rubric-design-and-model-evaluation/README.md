@@ -1,56 +1,27 @@
-# Case Study 1 — Rubric Design & Model Evaluation
+# Venue recommendation and rubric scoring
 
-> **Portfolio note:** I reconstructed this example to show the type of evaluation work I have done without using proprietary project content.
+**Evidence status:** Fully synthetic scenario and authored response examples. Scores demonstrate rubric application, not measured model performance.
 
-## The setup
+## Task inputs
+Select a venue for a one-day, 180-person leadership summit. All 180 attend the general session and then split into three concurrent groups of 60.
 
-For this example, a company is choosing a venue for a one-day leadership summit for **180 people**. The model gets three proposals and has to recommend one to senior leadership.
+The event budget is $95,000. Totals below include venue, food and beverage, AV, tax, service charges, and parking for 45 cars. Each proposal has a general session capacity of 180 and three breakout rooms of 60, after production and aisle allowances. A separate 45-room hotel block is paid outside this budget and is available at all three properties.
 
-The details that matter are:
+| Proposal | All-in event total | Meeting-room layout | Parking |
+|---|---:|---|---|
+| A | $84,000 | Breakouts on two floors | Included; same-day re-entry confirmed |
+| B | $92,000 | General session and breakouts together | Complimentary; same-day re-entry unconfirmed |
+| C | $107,000 | General session and breakouts together | Included; same-day re-entry confirmed |
 
-- The event budget is **$95,000** and has to cover venue, F&B, AV, parking and service charges.
-- The program needs a general session for 180 plus **three concurrent breakouts for 50 people each**.
-- More than 40 attendees will be driving in and need parking with in-and-out access.
-- The meeting rooms should be together. Some attendees may leave during the day and come back, so spreading sessions across a large property is not ideal.
-- There is also a 45-room hotel block, but those rooms are being paid separately and are **not part of the $95,000 event budget**.
-- Proposal A is the least expensive, but the breakout rooms are on two floors.
-- Proposal B is $8,000 more than A, but the general session and breakouts are together and parking is complimentary.
-- Proposal C has the strongest guestrooms, but it is already $12,000 over the event budget before parking.
+C has higher-rated guestrooms. The event prioritizes meeting-room proximity, budget compliance, and convenient parking with re-entry. No discounts or additional concessions are offered in the task.
 
-The model is asked for **one recommendation, two reasons, one tradeoff and one thing to confirm before contracting**, using only the information provided.
+## Prompt
+Using only these inputs, give one provisional recommendation, exactly two reasons, one tradeoff, and exactly one item to confirm before contracting. Do not imply that an unresolved requirement is already satisfied.
 
-## Why I used this example
+## Expected decision
+B is the best provisional choice: it meets the budget and room-layout priorities. Confirm parking re-entry before contracting; if that cannot be secured, reassess the options rather than pretending the requirement is met.
 
-None of the facts are especially hard. The harder part is figuring out which ones should actually drive the decision.
+- [Rubric](evaluation-rubric.md)
+- [Illustrative responses and scores](model-response-analysis.md)
 
-A model can give a really polished answer and still make a bad recommendation. It could pick A because it is cheapest and ignore the room layout. It could pick C because the guestrooms are better even though the guestrooms aren't part of the event budget. Or it could decide that C will probably negotiate the price down even though nobody said that.
-
-Those are the kinds of things I want the rubric to catch.
-
-I wouldn't score this as one overall "good answer/bad answer" decision because then it is too easy for strong writing to hide weak reasoning.
-
-## How I would score it
-
-I separated the score into six areas:
-
-1. **Recommendation** — Did the model make the best-supported choice?
-2. **Constraint handling** — Did it use the budget, room layout, parking and guestroom information correctly?
-3. **Evidence / assumptions** — Did it stick to what was actually provided?
-4. **Instruction following** — Did it give me the recommendation, reasons, tradeoff and confirmation item I asked for?
-5. **Business judgment** — Did it understand which issues would actually affect the event?
-6. **Communication** — Is the answer clear enough to send to senior leadership?
-
-I keep communication separate on purpose. A response can be very well written and still be wrong.
-
-## Files
-
-- [`evaluation-rubric.md`](evaluation-rubric.md) — the scoring rubric, partial-credit rules and score caps.
-- [`model-response-analysis.md`](model-response-analysis.md) — two model responses and how I would score them.
-
-## What I am really looking for
-
-The question for me isn't just, "Does this sound like a good recommendation?"
-
-It is more like: **Can I see how the model got there, and does that decision actually come from the information it was given?**
-
-That matters because sometimes the weaker answer is the one that sounds better.
+[Return to portfolio](../README.md)
